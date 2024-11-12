@@ -50,4 +50,20 @@ extension ViewController {
             return tdee
         }
     }
+    
+    func calculateNutritionalNeeds(weight: Double, calorieNeedsForGoal: Double) -> (protein: Double, fat: Double, carbs: Double) {
+ 
+        // Распределение макронутриентов:
+        let proteinCalories = weight * 2.0 * 4.0 // 2 г белка на кг массы тела, 1 г белка = 4 ккал
+        let fatCalories = weight * 1.0 * 9.0   // 1 г жира на кг массы тела, 1 г жира = 9 ккал
+        
+        // Углеводы — оставшиеся калории
+        let carbsCalories = calorieNeedsForGoal - proteinCalories - fatCalories
+        
+        // Преобразуем углеводы в граммы
+        let carbsGrams = carbsCalories / 4.0 // 1 г углеводов = 4 ккал
+        
+        return (protein: proteinCalories / 4.0, fat: fatCalories / 9.0, carbs: carbsGrams)
+    }
+
 }

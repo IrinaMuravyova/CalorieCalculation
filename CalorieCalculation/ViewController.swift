@@ -9,12 +9,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var profiles: [Profile]!
     let deficitCalorie = 0.2 // 20%
     let overageCalorie = 0.2 // 20%
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        profiles = StorageManager.shared.fetchProfiles()
+        if profiles.count == 0 {
+            
+        }
     }
 
 

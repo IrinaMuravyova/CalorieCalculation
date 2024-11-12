@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         
         profiles = StorageManager.shared.fetchProfiles()
         if profiles.count == 0 {
-            
+            performSegue(withIdentifier: "greeting", sender: self)
         }
     }
 

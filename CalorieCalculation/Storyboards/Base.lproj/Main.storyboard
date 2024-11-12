@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="heM-Th-sX0">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0aq-kx-rrh">
-                                <rect key="frame" x="20" y="60" width="280" height="300.5"/>
+                                <rect key="frame" x="20" y="104" width="280" height="300.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мои настройки:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxB-Ay-cVl">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="26.5"/>
@@ -144,7 +144,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="5xA-LY-yUt">
-                                <rect key="frame" x="20" y="400.5" width="280" height="175.5"/>
+                                <rect key="frame" x="20" y="444.5" width="280" height="175.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мой расчет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NJ-XL-bjj">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
@@ -300,33 +300,36 @@
                             <constraint firstItem="cKx-Pe-neO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kCs-jh-Mrh"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="7bh-4u-CEb">
+                        <barButtonItem key="rightBarButtonItem" title="Правка" id="kBE-mG-GW9"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Tyh-hz-ycC" kind="presentation" identifier="greeting" modalPresentationStyle="fullScreen" id="7F6-nM-xpb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75.572519083969468" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="1069" y="-2"/>
         </scene>
-        <!--View Controller-->
+        <!--Greeting View Contoller-->
         <scene sceneID="eq2-nQ-eca">
             <objects>
-                <viewController id="Tyh-hz-ycC" sceneMemberID="viewController">
+                <viewController id="Tyh-hz-ycC" customClass="greetingViewContoller" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1bi-UQ-OGH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zBS-Wc-1Ed">
-                                <rect key="frame" x="20" y="60" width="280" height="431.5"/>
+                                <rect key="frame" x="20" y="60" width="2078" height="2229.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Давай знакомиться !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39c-EP-0bG">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="gAg-Ng-R2x"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="2078" height="33.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GNk-4t-UAV">
-                                        <rect key="frame" x="0.0" y="53.5" width="280" height="34"/>
+                                        <rect key="frame" x="0.0" y="53.5" width="2078" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введи имя:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lz1-nS-oMf">
                                                 <rect key="frame" x="0.0" y="0.0" width="102.5" height="34"/>
@@ -335,44 +338,44 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="74d-2H-no1">
-                                                <rect key="frame" x="122.5" y="0.0" width="157.5" height="34"/>
+                                                <rect key="frame" x="122.5" y="0.0" width="1955.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выбери иконку:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iR-a2-Lhv">
-                                        <rect key="frame" x="0.0" y="107.5" width="280" height="24"/>
+                                        <rect key="frame" x="0.0" y="107.5" width="2078" height="24"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-0p-Caa">
-                                        <rect key="frame" x="0.0" y="151.5" width="280" height="280"/>
+                                        <rect key="frame" x="0.0" y="151.5" width="2078" height="2078"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SwE-fA-wNk">
-                                                <rect key="frame" x="0.0" y="0.0" width="280" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="2078" height="512"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jp1-IY-UBs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man-4825015" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jp1-IY-UBs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Jp1-IY-UBs" secondAttribute="height" multiplier="1:1" id="s5g-5b-yMl"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Dp-dY-RVX">
-                                                        <rect key="frame" x="72.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825031" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Dp-dY-RVX">
+                                                        <rect key="frame" x="522" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="7Dp-dY-RVX" secondAttribute="height" multiplier="1:1" id="D1o-vM-wF5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nmv-co-jv0">
-                                                        <rect key="frame" x="145" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man-4825038" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nmv-co-jv0">
+                                                        <rect key="frame" x="1044" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="nmv-co-jv0" secondAttribute="height" multiplier="1:1" id="ew7-mv-kqQ"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JNu-Ed-FbU">
-                                                        <rect key="frame" x="217.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825047" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JNu-Ed-FbU">
+                                                        <rect key="frame" x="1566" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="JNu-Ed-FbU" secondAttribute="height" multiplier="1:1" id="PtU-z8-27J"/>
                                                         </constraints>
@@ -380,28 +383,28 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HS8-bE-9at">
-                                                <rect key="frame" x="0.0" y="72.5" width="280" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="522" width="2078" height="512"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2S8-hz-yhd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825051" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2S8-hz-yhd">
+                                                        <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="2S8-hz-yhd" secondAttribute="height" multiplier="1:1" id="kxE-zr-QtH"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xqo-BH-MPb">
-                                                        <rect key="frame" x="72.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man-4825044" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xqo-BH-MPb">
+                                                        <rect key="frame" x="522" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="xqo-BH-MPb" secondAttribute="height" multiplier="1:1" id="tdr-hC-fY3"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dej-3C-1H2">
-                                                        <rect key="frame" x="145" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825057" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dej-3C-1H2">
+                                                        <rect key="frame" x="1044" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="dej-3C-1H2" secondAttribute="height" multiplier="1:1" id="agY-w2-PtC"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-G5-WTc">
-                                                        <rect key="frame" x="217.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man-4825062" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s6E-G5-WTc">
+                                                        <rect key="frame" x="1566" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="s6E-G5-WTc" secondAttribute="height" multiplier="1:1" id="BdR-qc-QIC"/>
                                                         </constraints>
@@ -409,28 +412,28 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oue-NV-f9I">
-                                                <rect key="frame" x="0.0" y="145" width="280" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="1044" width="2078" height="512"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n3f-XD-VJ4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man-4825072" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n3f-XD-VJ4">
+                                                        <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="n3f-XD-VJ4" secondAttribute="height" multiplier="1:1" id="PTq-JZ-Qf5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6uh-Dh-Cy7">
-                                                        <rect key="frame" x="72.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825076" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6uh-Dh-Cy7">
+                                                        <rect key="frame" x="522" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="6uh-Dh-Cy7" secondAttribute="height" multiplier="1:1" id="Vlb-WJ-Rsy"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RO8-HO-dqw">
-                                                        <rect key="frame" x="145" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man-4825123" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RO8-HO-dqw">
+                                                        <rect key="frame" x="1044" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="RO8-HO-dqw" secondAttribute="height" multiplier="1:1" id="D9B-lY-SLr"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s3T-Pf-zV1">
-                                                        <rect key="frame" x="217.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825082" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s3T-Pf-zV1">
+                                                        <rect key="frame" x="1566" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="s3T-Pf-zV1" secondAttribute="height" multiplier="1:1" id="sBy-Np-zPJ"/>
                                                         </constraints>
@@ -438,28 +441,28 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oKV-Hf-Rm4">
-                                                <rect key="frame" x="0.0" y="217.5" width="280" height="62.5"/>
+                                                <rect key="frame" x="0.0" y="1566" width="2078" height="512"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-rE-ryp">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825108" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-rE-ryp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="v0Q-rE-ryp" secondAttribute="height" multiplier="1:1" id="Mb1-EX-y7E"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Qn-rX-4QU">
-                                                        <rect key="frame" x="72.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="student-5266961" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Qn-rX-4QU">
+                                                        <rect key="frame" x="522" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="1Qn-rX-4QU" secondAttribute="height" multiplier="1:1" id="CGS-ad-rOX"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9c0-NK-e13">
-                                                        <rect key="frame" x="145" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woman-4825112" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9c0-NK-e13">
+                                                        <rect key="frame" x="1044" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="9c0-NK-e13" secondAttribute="height" multiplier="1:1" id="Srz-I9-41z"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Km-bs-4yx">
-                                                        <rect key="frame" x="217.5" y="0.0" width="62.5" height="62.5"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-8137001" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Km-bs-4yx">
+                                                        <rect key="frame" x="1566" y="0.0" width="512" height="512"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="8Km-bs-4yx" secondAttribute="height" multiplier="1:1" id="I49-Nc-U47"/>
                                                         </constraints>
@@ -480,7 +483,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQS-sj-9zK">
                                 <rect key="frame" x="50" y="503.5" width="220" height="34.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Готово !"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Идем дальше "/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OYt-aF-jZJ"/>
@@ -491,10 +494,14 @@
                             <constraint firstItem="OYt-aF-jZJ" firstAttribute="bottom" secondItem="zQS-sj-9zK" secondAttribute="bottom" constant="30" id="yp9-Lw-e8a"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="FBU-uA-m1a"/>
+                    <connections>
+                        <segue destination="JPT-HG-x0T" kind="presentation" identifier="parameters" modalPresentationStyle="fullScreen" id="LV0-WY-hY1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIJ-I2-E7c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="-203.87323943661971"/>
+            <point key="canvasLocation" x="1896" y="-172"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Dzu-gX-upj">
@@ -505,7 +512,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Cf5-vr-2ej">
-                                <rect key="frame" x="20" y="60" width="280" height="307.5"/>
+                                <rect key="frame" x="20" y="40" width="280" height="307.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Теперь введи свои параметры:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydc-Jg-sZt">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
@@ -654,16 +661,51 @@
                             <constraint firstItem="Cf5-vr-2ej" firstAttribute="leading" secondItem="UQY-Wy-2Y4" secondAttribute="leading" constant="20" id="v6d-gr-iUp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aED-fr-TJ4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNf-xh-qsz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1665" y="-204"/>
+            <point key="canvasLocation" x="2691" y="-172"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Zyi-WD-svT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="heM-Th-sX0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vrt-fV-V28">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bCx-Z0-zmi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0R9-wB-eWU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="291" y="-2"/>
         </scene>
     </scenes>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>
+        <image name="man-4825015" width="512" height="512"/>
+        <image name="man-4825038" width="512" height="512"/>
+        <image name="man-4825044" width="512" height="512"/>
+        <image name="man-4825062" width="512" height="512"/>
+        <image name="man-4825072" width="512" height="512"/>
+        <image name="man-4825123" width="512" height="512"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
+        <image name="student-5266961" width="512" height="512"/>
+        <image name="user-8137001" width="512" height="512"/>
+        <image name="woman-4825031" width="512" height="512"/>
+        <image name="woman-4825047" width="512" height="512"/>
+        <image name="woman-4825051" width="512" height="512"/>
+        <image name="woman-4825057" width="512" height="512"/>
+        <image name="woman-4825076" width="512" height="512"/>
+        <image name="woman-4825082" width="512" height="512"/>
+        <image name="woman-4825108" width="512" height="512"/>
+        <image name="woman-4825112" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

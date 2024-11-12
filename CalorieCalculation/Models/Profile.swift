@@ -10,6 +10,7 @@ import Foundation
 struct Profile: Codable {
     let person: String
     let icon: String
+    let age: Int
     let sex: Sex
     let height: Double
     let weight: Double

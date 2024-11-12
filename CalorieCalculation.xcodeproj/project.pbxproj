@@ -14,6 +14,7 @@
 		88D5EF982CE3013D0024E2CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D5EF972CE3013D0024E2CC /* Assets.xcassets */; };
 		88D5EF9B2CE3013D0024E2CC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 88D5EF9A2CE3013D0024E2CC /* Base */; };
 		88D5EFA32CE301910024E2CC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EFA22CE301910024E2CC /* Profile.swift */; };
+		88D5EFA72CE336020024E2CC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EFA62CE336020024E2CC /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		88D5EF9A2CE3013D0024E2CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		88D5EF9C2CE3013D0024E2CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D5EFA22CE301910024E2CC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		88D5EFA62CE336020024E2CC /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				88D5EFA42CE3019A0024E2CC /* Models */,
+				88D5EFA82CE336070024E2CC /* Storage */,
 				88D5EFA52CE301BC0024E2CC /* Storyboards */,
 				88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */,
 				88D5EF902CE3013C0024E2CC /* SceneDelegate.swift */,
@@ -84,6 +87,14 @@
 				88D5EF992CE3013D0024E2CC /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		88D5EFA82CE336070024E2CC /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				88D5EFA62CE336020024E2CC /* StorageManager.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 			files = (
 				88D5EF932CE3013C0024E2CC /* ViewController.swift in Sources */,
 				88D5EFA32CE301910024E2CC /* Profile.swift in Sources */,
+				88D5EFA72CE336020024E2CC /* StorageManager.swift in Sources */,
 				88D5EF8F2CE3013C0024E2CC /* AppDelegate.swift in Sources */,
 				88D5EF912CE3013C0024E2CC /* SceneDelegate.swift in Sources */,
 			);

@@ -5,7 +5,9 @@
 //  Created by Irina Muravyeva on 12.11.2024.
 //
 
-struct Profile {
+import Foundation
+
+struct Profile: Codable {
     let person: String
     let icon: String
     let sex: Sex
@@ -18,17 +20,17 @@ struct Profile {
     
 }
 
-enum Sex {
+enum Sex: Codable {
     case male
     case female
 }
 
-enum Goals {
+enum Goals: Codable {
     case weightLoss
     case savingWeight
     case weightGain
 }
-enum ActivityLevel: Double {
+enum ActivityLevel: Double, Codable {
     case sedentary = 1.2
     case lightActivity = 1.375
     case normalActivity = 1.55

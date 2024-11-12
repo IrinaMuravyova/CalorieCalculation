@@ -17,3 +17,6 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: - Calculation according to the Harris-Benedict formula
+extension ViewController {
+}

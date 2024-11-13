@@ -361,28 +361,25 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Идем дальше "/>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
                                 <rect key="frame" x="20" y="191.5" width="280" height="292"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vex-P0-YvD">
-                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="itemSize" width="76" height="85"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="rSp-Jg-l1Q" customClass="ImageCollectionViewCell" customModule="CalorieCalculation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XNS-do-efg">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="76" height="85"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eOP-bz-4Ed">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="eOP-bz-4Ed" secondAttribute="height" multiplier="1:1" id="nO2-IL-5pR"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="0.0" width="76" height="85"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -392,6 +389,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="eOP-bz-4Ed" secondAttribute="trailing" id="z5Y-gR-t4a"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="76" height="85"/>
                                         <connections>
                                             <outlet property="imageView" destination="eOP-bz-4Ed" id="DBE-SW-0Pf"/>
                                         </connections>

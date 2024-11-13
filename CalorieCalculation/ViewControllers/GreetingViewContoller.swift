@@ -12,7 +12,7 @@ class GreetingViewController: UIViewController {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     
     
-    var icons: [UIImage] = []
+    let icons = (1...16).map { "icon\($0)" }
 
     let itemsPerRow: CGFloat = 4
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Отступы
@@ -22,8 +22,7 @@ class GreetingViewController: UIViewController {
         
         imagesCollectionView.dataSource = self
         imagesCollectionView.delegate = self
-        
-        loadImagesFromAssets()
+    
     }
 }
 
@@ -39,21 +38,13 @@ class GreetingViewController: UIViewController {
 //MARK: - UICollectionView для ячеек с иконками
 extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-    func loadImagesFromAssets() {
-        for i in 1...16 {
-            if let image = UIImage(named: "icon\(i)") {
-                icons.append(image)
-            }
-        }
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return icons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
-        cell.imageView.image = icons[indexPath.row]
+        cell.imageView.image = UIImage(named: icons[indexPath.row])
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.clipsToBounds = true
         return cell

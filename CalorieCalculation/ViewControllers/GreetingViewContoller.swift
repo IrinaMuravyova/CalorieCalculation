@@ -44,8 +44,6 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = UIImage(named: icons[indexPath.row])
-//        cell.imageView.contentMode = .scaleAspectFill
-//        cell.imageView.clipsToBounds = true
         return cell
     }
     

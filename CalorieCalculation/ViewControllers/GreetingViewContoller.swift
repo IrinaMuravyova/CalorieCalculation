@@ -11,7 +11,6 @@ class GreetingViewController: UIViewController {
     
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     
-    
     let icons = (1...16).map { "icon\($0)" }
 
     let itemsPerRow: CGFloat = 4
@@ -22,7 +21,7 @@ class GreetingViewController: UIViewController {
         
         imagesCollectionView.dataSource = self
         imagesCollectionView.delegate = self
-    
+
     }
 }
 
@@ -45,8 +44,8 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = UIImage(named: icons[indexPath.row])
-        cell.imageView.contentMode = .scaleAspectFill
-        cell.imageView.clipsToBounds = true
+//        cell.imageView.contentMode = .scaleAspectFill
+//        cell.imageView.clipsToBounds = true
         return cell
     }
     

@@ -18,12 +18,18 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         profiles = StorageManager.shared.fetchProfiles()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         if profiles.count == 0 {
             performSegue(withIdentifier: "greeting", sender: self)
+            // сохраняем данные в UserDefaults
+            // сохраняем активного юзера
         }
     }
-
-
 }
 
 // MARK: - Calculation according to the Harris-Benedict formula

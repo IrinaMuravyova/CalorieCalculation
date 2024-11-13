@@ -15,6 +15,8 @@
 		88D5EF9B2CE3013D0024E2CC /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 88D5EF9A2CE3013D0024E2CC /* Base */; };
 		88D5EFA32CE301910024E2CC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EFA22CE301910024E2CC /* Profile.swift */; };
 		88D5EFA72CE336020024E2CC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EFA62CE336020024E2CC /* StorageManager.swift */; };
+		88D5EFAB2CE367620024E2CC /* GreetingViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EFAA2CE367620024E2CC /* GreetingViewContoller.swift */; };
+		88D5EFAF2CE37A880024E2CC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EFAE2CE37A880024E2CC /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		88D5EF9C2CE3013D0024E2CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88D5EFA22CE301910024E2CC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		88D5EFA62CE336020024E2CC /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		88D5EFAA2CE367620024E2CC /* GreetingViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetingViewContoller.swift; sourceTree = "<group>"; };
+		88D5EFAE2CE37A880024E2CC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,12 +66,13 @@
 			children = (
 				88D5EFA42CE3019A0024E2CC /* Models */,
 				88D5EFA82CE336070024E2CC /* Storage */,
+				88D5EFA92CE367410024E2CC /* ViewControllers */,
 				88D5EFA52CE301BC0024E2CC /* Storyboards */,
 				88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */,
 				88D5EF902CE3013C0024E2CC /* SceneDelegate.swift */,
-				88D5EF922CE3013C0024E2CC /* ViewController.swift */,
 				88D5EF972CE3013D0024E2CC /* Assets.xcassets */,
 				88D5EF9C2CE3013D0024E2CC /* Info.plist */,
+				88D5EFAE2CE37A880024E2CC /* ImageCollectionViewCell.swift */,
 			);
 			path = CalorieCalculation;
 			sourceTree = "<group>";
@@ -95,6 +100,15 @@
 				88D5EFA62CE336020024E2CC /* StorageManager.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		88D5EFA92CE367410024E2CC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				88D5EF922CE3013C0024E2CC /* ViewController.swift */,
+				88D5EFAA2CE367620024E2CC /* GreetingViewContoller.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,8 +182,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D5EFAB2CE367620024E2CC /* GreetingViewContoller.swift in Sources */,
 				88D5EF932CE3013C0024E2CC /* ViewController.swift in Sources */,
 				88D5EFA32CE301910024E2CC /* Profile.swift in Sources */,
+				88D5EFAF2CE37A880024E2CC /* ImageCollectionViewCell.swift in Sources */,
 				88D5EFA72CE336020024E2CC /* StorageManager.swift in Sources */,
 				88D5EF8F2CE3013C0024E2CC /* AppDelegate.swift in Sources */,
 				88D5EF912CE3013C0024E2CC /* SceneDelegate.swift in Sources */,

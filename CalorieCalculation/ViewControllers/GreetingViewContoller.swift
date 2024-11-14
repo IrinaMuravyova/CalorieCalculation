@@ -13,9 +13,10 @@ class GreetingViewController: UIViewController {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     
     let icons = (1...16).map { "icon\($0)" }
-
     let itemsPerRow: CGFloat = 4
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Отступы
+    
+    var selectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,18 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = UIImage(named: icons[indexPath.row])
+//        if indexPath == selectedIndexPath {
+//            cell.backgroundColor = .lightGray // Цвет для выбранной ячейки
+//        } else {
+//            cell.backgroundColor = collectionView.backgroundColor // Цвет по умолчанию для невыбранных ячеек
+//        }
+        if indexPath == selectedIndexPath {
+            setShadow(for: cell.imageView)
+        } else {
+            deleteShadow(for: cell.imageView)
+        }
+        
+        
         return cell
     }
     
@@ -67,7 +80,38 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
         }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected sell \(indexPath.item)")
+        // Получаем предыдущий индекс выделенной ячейки, если он существует
+        let previousIndexPath = selectedIndexPath
+
+        // Обновляем индекс новой выделенной ячейки
+        selectedIndexPath = indexPath
+
+        // Собираем массив ячеек для перезагрузки
+        var indexPathsToReload = [indexPath]
+        if let previousIndexPath = previousIndexPath, previousIndexPath != indexPath {
+            indexPathsToReload.append(previousIndexPath)
+        }
+
+        // Перезагружаем только текущую и предыдущую ячейки
+        collectionView.reloadItems(at: indexPathsToReload)
+    }
+    
+    func setShadow(for object: Any?) {
+        if let imageView = object as? UIImageView {
+            imageView.layer.shadowColor = UIColor(.black).cgColor
+            imageView.layer.shadowRadius = 5
+            imageView.layer.shadowOffset = CGSize(width: 3, height: 3)
+            imageView.layer.shadowOpacity = 0.6
+            
+            imageView.layer.cornerRadius = imageView.frame.width / 2
+        }
+    }
+    
+    func deleteShadow(for object: Any?) {
+        if let imageView = object as? UIImageView {
+            imageView.layer.shadowRadius = 0
+            imageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
     }
 }
 

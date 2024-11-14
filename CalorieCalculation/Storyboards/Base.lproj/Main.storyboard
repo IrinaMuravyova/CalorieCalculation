@@ -356,7 +356,7 @@
                                     <constraint firstItem="6iR-a2-Lhv" firstAttribute="top" secondItem="GNk-4t-UAV" secondAttribute="bottom" constant="20" id="FwN-xA-YcV"/>
                                 </constraints>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
+                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
                                 <rect key="frame" x="20" y="191.5" width="280" height="292"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vex-P0-YvD">

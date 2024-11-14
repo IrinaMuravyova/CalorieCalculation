@@ -11,6 +11,7 @@ class GreetingViewController: UIViewController {
     
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var continueButton: UIButton!
     
     let icons = (1...16).map { "icon\($0)" }
     let itemsPerRow: CGFloat = 4
@@ -24,9 +25,9 @@ class GreetingViewController: UIViewController {
         imagesCollectionView.dataSource = self
         imagesCollectionView.delegate = self
         nicknameTextField.delegate = self
-
+        
+        continueButton.isEnabled = false
     }
-}
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "greeting" {
@@ -36,7 +37,7 @@ class GreetingViewController: UIViewController {
 //            }
 //        }
 //    }
-
+}
 //MARK: - UICollectionView для ячеек с иконками
 extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
@@ -85,9 +86,22 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
 
         // Перезагружаем только текущую и предыдущую ячейки
         collectionView.reloadItems(at: indexPathsToReload)
+        checkContinueButtonEnable()
     }
-    
-    func setShadow(for object: Any?) {
+}
+
+extension GreetingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        checkContinueButtonEnable()
+        
+        return true
+    }
+}
+
+//MARK: - Private methods
+extension GreetingViewController {
+    private func setShadow(for object: Any?) {
         if let imageView = object as? UIImageView {
             imageView.layer.shadowColor = UIColor(.black).cgColor
             imageView.layer.shadowRadius = 5
@@ -98,17 +112,21 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
         }
     }
     
-    func deleteShadow(for object: Any?) {
+    private func deleteShadow(for object: Any?) {
         if let imageView = object as? UIImageView {
             imageView.layer.shadowRadius = 0
             imageView.layer.shadowOffset = CGSize(width: 0, height: 0)
         }
     }
-}
-
-extension GreetingViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    
+    private func checkContinueButtonEnable(){
+        guard let nickname =  nicknameTextField.text else { return }
+        
+        if selectedIndexPath != nil && !nickname.isEmpty
+            {
+                continueButton.isEnabled = true
+            } else {
+                continueButton.isEnabled = false
+            }
     }
 }

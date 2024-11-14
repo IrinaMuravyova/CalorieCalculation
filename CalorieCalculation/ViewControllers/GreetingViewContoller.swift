@@ -18,6 +18,7 @@ class GreetingViewController: UIViewController {
     let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Отступы
     
     var selectedIndexPath: IndexPath?
+    var icon: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +30,13 @@ class GreetingViewController: UIViewController {
         continueButton.isEnabled = false
     }
 
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "greeting" {
-//            if let greetingVC = segue.destination as? greetingViewController {
-//                // Передача данных во второй ViewController, если нужно
-//                greetingVC.someProperty = "Some data"
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let parametersVC = segue.destination as? ParametersViewController {
+            parametersVC.person = nicknameTextField.text
+            parametersVC.icon = icon
+
+        }
+    }
 }
 //MARK: - UICollectionView для ячеек с иконками
 extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -49,7 +49,12 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = UIImage(named: icons[indexPath.row])
         
-        indexPath == selectedIndexPath ? setShadow(for: cell.imageView) : deleteShadow(for: cell.imageView)
+        if indexPath == selectedIndexPath  {
+            setShadow(for: cell.imageView)
+            icon = icons[indexPath.item]
+        } else {
+            deleteShadow(for: cell.imageView)
+        }
         
         return cell
     }

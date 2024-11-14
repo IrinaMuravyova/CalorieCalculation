@@ -421,19 +421,19 @@
             </objects>
             <point key="canvasLocation" x="1926" y="-172"/>
         </scene>
-        <!--View Controller-->
+        <!--Parameters View Controller-->
         <scene sceneID="Dzu-gX-upj">
             <objects>
-                <viewController id="JPT-HG-x0T" sceneMemberID="viewController">
+                <viewController id="JPT-HG-x0T" customClass="ParametersViewController" customModule="CalorieCalculation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hJ5-IW-3sl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Cf5-vr-2ej">
-                                <rect key="frame" x="20" y="40" width="280" height="307.5"/>
+                                <rect key="frame" x="20" y="40" width="280" height="341.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Теперь введи свои параметры:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydc-Jg-sZt">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нужно больше подробностей:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydc-Jg-sZt">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="67.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="aX0-sX-Mrz"/>
                                         </constraints>
@@ -442,7 +442,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mIC-sT-pwD">
-                                        <rect key="frame" x="0.0" y="53.5" width="280" height="254"/>
+                                        <rect key="frame" x="0.0" y="87.5" width="280" height="254"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eac-A2-gkm">
                                                 <rect key="frame" x="0.0" y="0.0" width="111" height="254"/>
@@ -528,17 +528,17 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dk2-Z5-d29">
                                                         <rect key="frame" x="0.0" y="44" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="joB-Ps-CcO">
                                                         <rect key="frame" x="0.0" y="88" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tL8-6X-WC5">
                                                         <rect key="frame" x="0.0" y="132" width="159" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ooi-gU-4kT">
                                                         <rect key="frame" x="0.0" y="176" width="159" height="34"/>
@@ -577,6 +577,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aED-fr-TJ4"/>
+                    <connections>
+                        <outlet property="activityLevelTextField" destination="ooi-gU-4kT" id="mcR-Xu-Qwp"/>
+                        <outlet property="ageTextField" destination="Dk2-Z5-d29" id="GUL-8u-pnv"/>
+                        <outlet property="femaleButton" destination="cca-yT-ScW" id="F2X-RB-rYr"/>
+                        <outlet property="goalTextField" destination="2Og-qq-vcc" id="uYk-6W-NXy"/>
+                        <outlet property="heightTextField" destination="joB-Ps-CcO" id="v7G-fI-w8x"/>
+                        <outlet property="maleButton" destination="xKx-2N-pLn" id="lrl-Pv-qPW"/>
+                        <outlet property="weighTextField" destination="tL8-6X-WC5" id="QEt-mV-Juq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNf-xh-qsz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

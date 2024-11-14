@@ -9,6 +9,7 @@ import UIKit
 
 class GreetingViewController: UIViewController {
     
+    @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     
     let icons = (1...16).map { "icon\($0)" }
@@ -21,6 +22,7 @@ class GreetingViewController: UIViewController {
         
         imagesCollectionView.dataSource = self
         imagesCollectionView.delegate = self
+        nicknameTextField.delegate = self
 
     }
 }
@@ -66,5 +68,12 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You selected sell \(indexPath.item)")
+    }
+}
+
+extension GreetingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

@@ -410,6 +410,7 @@
                     <navigationItem key="navigationItem" id="FBU-uA-m1a"/>
                     <connections>
                         <outlet property="imagesCollectionView" destination="lQy-yL-bw4" id="VBd-qq-kLW"/>
+                        <outlet property="nicknameTextField" destination="74d-2H-no1" id="8jP-YE-2kt"/>
                         <segue destination="JPT-HG-x0T" kind="presentation" identifier="parameters" modalPresentationStyle="fullScreen" id="LV0-WY-hY1"/>
                     </connections>
                 </viewController>

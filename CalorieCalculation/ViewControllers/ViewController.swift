@@ -15,10 +15,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         profiles = StorageManager.shared.fetchProfiles()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

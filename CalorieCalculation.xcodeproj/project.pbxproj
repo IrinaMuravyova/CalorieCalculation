@@ -47,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88B80CDF2CE612C200290F2D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				88D5EFAE2CE37A880024E2CC /* ImageCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		88D5EF822CE3013C0024E2CC = {
 			isa = PBXGroup;
 			children = (
@@ -69,12 +77,12 @@
 				88D5EFA42CE3019A0024E2CC /* Models */,
 				88D5EFA82CE336070024E2CC /* Storage */,
 				88D5EFA92CE367410024E2CC /* ViewControllers */,
+				88B80CDF2CE612C200290F2D /* Cells */,
 				88D5EFA52CE301BC0024E2CC /* Storyboards */,
 				88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */,
 				88D5EF902CE3013C0024E2CC /* SceneDelegate.swift */,
 				88D5EF972CE3013D0024E2CC /* Assets.xcassets */,
 				88D5EF9C2CE3013D0024E2CC /* Info.plist */,
-				88D5EFAE2CE37A880024E2CC /* ImageCollectionViewCell.swift */,
 			);
 			path = CalorieCalculation;
 			sourceTree = "<group>";

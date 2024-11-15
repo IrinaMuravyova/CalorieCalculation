@@ -23,8 +23,6 @@ class ViewController: UIViewController {
         
         if profiles.count == 0 {
             performSegue(withIdentifier: "greeting", sender: self)
-            // сохраняем данные в UserDefaults
-            // сохраняем активного юзера
         }
     }
 }

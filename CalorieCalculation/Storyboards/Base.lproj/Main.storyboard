@@ -144,7 +144,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="5xA-LY-yUt">
+                            <stackView opaque="NO" tag="1" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="5xA-LY-yUt">
                                 <rect key="frame" x="20" y="444.5" width="280" height="175.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мой расчет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NJ-XL-bjj">
@@ -305,6 +305,18 @@
                         <barButtonItem key="rightBarButtonItem" title="Правка" id="kBE-mG-GW9"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityLevelTextField" destination="EAG-L8-El7" id="Wln-uc-0FY"/>
+                        <outlet property="ageTextField" destination="PsM-zv-mbL" id="4xq-Qf-9Js"/>
+                        <outlet property="caloriesLabel" destination="TXy-cD-Mbp" id="kuf-Ux-2gu"/>
+                        <outlet property="carbLabel" destination="edU-Tx-DVc" id="KZv-JC-an2"/>
+                        <outlet property="fatLabel" destination="Lov-lD-QXx" id="1Ly-Ed-nCv"/>
+                        <outlet property="femaleButton" destination="FXJ-o7-HRP" id="J8G-wV-1jS"/>
+                        <outlet property="goalTextField" destination="mTA-bc-yJs" id="k7c-6Z-Dem"/>
+                        <outlet property="heightTextField" destination="wwl-YP-WFn" id="YAO-pW-XON"/>
+                        <outlet property="maleButton" destination="Yho-sa-f05" id="IWp-Cj-VYh"/>
+                        <outlet property="proteinLabel" destination="ieG-Hg-mHP" id="2RL-zx-pNG"/>
+                        <outlet property="settingsStackView" destination="5xA-LY-yUt" id="oUU-eK-lsn"/>
+                        <outlet property="weightTextField" destination="FC3-Lz-DCM" id="h2e-th-R25"/>
                         <segue destination="Tyh-hz-ycC" kind="presentation" identifier="greeting" modalPresentationStyle="fullScreen" id="7F6-nM-xpb"/>
                     </connections>
                 </viewController>

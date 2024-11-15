@@ -24,6 +24,15 @@ class StorageManager {
         return profiles
     }
     
+    func fetchIndexActiveProfile() -> Int {
+        let profiles = fetchProfiles()
+        
+        guard let data = defaults.data(forKey: activeProfileKey) else { return 0 }
+        let decoder = JSONDecoder()
+        guard let index = try? decoder.decode(Int.self, from: data) else { return 0 }
+        return index
+    }
+    
     func add(newProfile: Profile) {
         var profiles = fetchProfiles()
         profiles.append(newProfile)

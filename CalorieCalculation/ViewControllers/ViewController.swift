@@ -13,9 +13,30 @@ class ViewController: UIViewController {
     let deficitCalorie = 0.2 // 20%
     let overageCalorie = 0.2 // 20%
     
+    @IBOutlet weak var maleButton: UIButton!
+    @IBOutlet weak var femaleButton: UIButton!
+    @IBOutlet weak var ageTextField: UITextField!
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var activityLevelTextField: UITextField!
+    @IBOutlet weak var goalTextField: UITextField!
+    
+    @IBOutlet weak var caloriesLabel: UILabel!
+    @IBOutlet weak var proteinLabel: UILabel!
+    @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var carbLabel: UILabel!
+    
+    @IBOutlet weak var settingsStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         profiles = StorageManager.shared.fetchProfiles()
+        let index = StorageManager.shared.fetchIndexActiveProfile()
+        let activeProfile = profiles[index]
+        
+        fillFields(for: activeProfile)
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,4 +94,35 @@ extension ViewController {
         return (protein: proteinCalories / 4.0, fat: fatCalories / 9.0, carbs: carbsGrams)
     }
 
+    func fillFields(for profile: Profile) {
+        fillSettings(for: profile)
+        fillNutritions(for: profile)
+    }
+    
+    func fillSettings(for profile: Profile) {
+        if profile.sex == .male {
+            maleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
+        } else {
+            femaleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
+        }
+        
+        ageTextField.text = profile.age.formatted()
+        heightTextField.text = profile.height.formatted()
+        weightTextField.text = profile.weight.formatted()
+        activityLevelTextField.text = profile.activityLevel.rawValue
+        goalTextField.text = profile.goal.rawValue
+    }
+    
+    func fillNutritions(for profile: Profile){
+        let bmt = calculateBMR(weight: profile.weight, height: profile.height, age: profile.age, sex: profile.sex)
+        let caloriesTDEE = calculateTDEE(bmr: bmt, activityLevel: profile.activityLevel.value)
+        let caloriesTDEEForGoal = calculateTDEEForGoal(tdee: caloriesTDEE, goal: profile.goal)
+        let nutritional = calculateNutritionalNeeds(weight: profile.weight, calorieNeedsForGoal: caloriesTDEEForGoal)
+        
+        caloriesLabel.text = caloriesTDEEForGoal.formatted()
+        proteinLabel.text = nutritional.protein.formatted()
+        fatLabel.text = nutritional.fat.formatted()
+        carbLabel.text = nutritional.carbs.formatted()
+    }
 }
+

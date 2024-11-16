@@ -271,14 +271,14 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tc-ig-OcW">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tc-ig-OcW">
                                                 <rect key="frame" x="230" y="0.0" width="50" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9sX-ga-sxC"/>
                                                     <constraint firstAttribute="width" secondItem="3tc-ig-OcW" secondAttribute="height" multiplier="1:1" id="sf5-Oi-LmP"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="person.crop.circle.fill" catalog="system" title="Profile"/>
+                                                <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -324,6 +324,7 @@
                         <outlet property="goalTextField" destination="mTA-bc-yJs" id="k7c-6Z-Dem"/>
                         <outlet property="heightTextField" destination="wwl-YP-WFn" id="YAO-pW-XON"/>
                         <outlet property="maleButton" destination="Yho-sa-f05" id="IWp-Cj-VYh"/>
+                        <outlet property="profileButton" destination="3tc-ig-OcW" id="d3c-ln-GoJ"/>
                         <outlet property="proteinLabel" destination="ieG-Hg-mHP" id="2RL-zx-pNG"/>
                         <outlet property="resultStackView" destination="5xA-LY-yUt" id="oUU-eK-lsn"/>
                         <outlet property="titleForParametersLabel" destination="uxB-Ay-cVl" id="s62-Od-F9S"/>
@@ -465,7 +466,6 @@
     </scenes>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>
-        <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

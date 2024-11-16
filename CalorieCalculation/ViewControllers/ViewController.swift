@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var resultStackView: UIStackView!
     @IBOutlet weak var calculateButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
     
     var activeTextField: UITextField?
     var activityLevelPickerView = UIPickerView()
@@ -46,6 +47,18 @@ class ViewController: UIViewController {
 //        StorageManager.shared.deleteProfile(at: 0) // для тестирования
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
+        
+        let resizedImage = resizeImage(image: UIImage(named: profile.icon)!, targetSize: CGSize(width: 50, height: 50))
+            
+        // Настраиваем конфигурацию
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = resizedImage
+        configuration.imagePlacement = .leading
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .large)
+
+        // Применяем конфигурацию
+        profileButton.configuration = configuration
+        
         
         if profile.age == nil {
             titleForParametersLabel.text = "Добавим подробностей:"
@@ -144,6 +157,18 @@ class ViewController: UIViewController {
         }
     }
     
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+    }
+
+    if let originalImage = UIImage(named: profile.icon) {
+        let resizedImage = resizeImage(image: originalImage, targetSize: CGSize(width: 50, height: 50))
+        configuration.image = resizedImage
+    }
+        
     func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
         pickerView.delegate = self
         pickerView.dataSource = self

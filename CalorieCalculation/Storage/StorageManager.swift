@@ -63,9 +63,10 @@ class StorageManager {
         
         let index = profiles.firstIndex {$0.nickname == changedProfile.nickname}
         guard let index = index else { return }
-        profiles.remove(at: index)
-        profiles.append(changedProfile)
-        
+        profiles[index] = changedProfile
+//        profiles.remove(at: index)
+//        profiles.append(changedProfile)
+//        
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(profiles) else { return }
         defaults.set(data, forKey: profilesKey)

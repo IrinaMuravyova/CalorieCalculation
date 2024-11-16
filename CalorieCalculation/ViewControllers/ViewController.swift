@@ -112,7 +112,6 @@ class ViewController: UIViewController {
         profiles = StorageManager.shared.fetchProfiles()
         
         if profiles == nil || profiles.isEmpty || profile == nil {
-            print("Переход на GreetingViewController")
             performSegue(withIdentifier: "greetingSegue", sender: self)
         } 
     }
@@ -142,6 +141,8 @@ class ViewController: UIViewController {
         profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
         
         StorageManager.shared.save(changedProfile: profile)
+        StorageManager.shared.set(activeProfile: profile)
+
         showResults(for: profile)
     }
     

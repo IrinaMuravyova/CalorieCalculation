@@ -47,6 +47,8 @@ class ViewController: UIViewController {
 //        StorageManager.shared.deleteProfile(at: 0) // для тестирования
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
+        print(profiles!)
+        print(profile!)
         
         let resizedImage = resizeImage(image: UIImage(named: profile.icon)!, targetSize: CGSize(width: 50, height: 50))
             
@@ -58,6 +60,18 @@ class ViewController: UIViewController {
 
         // Применяем конфигурацию
         profileButton.configuration = configuration
+        
+        func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { _ in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+        }
+
+        if let originalImage = UIImage(named: profile.icon) {
+            let resizedImage = resizeImage(image: originalImage, targetSize: CGSize(width: 50, height: 50))
+            configuration.image = resizedImage
+        }
         
         
         if profile.age == nil {
@@ -97,7 +111,7 @@ class ViewController: UIViewController {
         
         profiles = StorageManager.shared.fetchProfiles()
         
-        if profiles.count == 0 {
+        if profiles == nil || profiles.isEmpty {
             performSegue(withIdentifier: "greetingSegue", sender: self)
         } 
     }
@@ -157,17 +171,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
-        return renderer.image { _ in
-            image.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-    }
-
-    if let originalImage = UIImage(named: profile.icon) {
-        let resizedImage = resizeImage(image: originalImage, targetSize: CGSize(width: 50, height: 50))
-        configuration.image = resizedImage
-    }
+    
         
     func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
         pickerView.delegate = self

@@ -8,16 +8,16 @@
 import Foundation
 
 struct Profile: Codable {
-    let person: String
+    let nickname: String
     let icon: String
-    let age: Int
-    let sex: Sex
-    let height: Double
-    let weight: Double
-    let activityLevel: ActivityLevel
-    let goal: Goals
-    let caloriesBMT: Int?
-    let caloriesTDEEForGoal: [ActivityLevel: Int]?
+    var age: Int?
+    var sex: Sex?
+    var height: Double?
+    var weight: Double?
+    var activityLevel: ActivityLevel?
+    var goal: Goals?
+    var caloriesBMT: Double?
+    var caloriesTDEEForGoal: Double?
 }
 
 enum Sex: Codable {

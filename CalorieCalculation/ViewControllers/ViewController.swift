@@ -10,9 +10,11 @@ import UIKit
 class ViewController: UIViewController {
 
     var profiles: [Profile]!
+    var profile: Profile! // activeUser
     let deficitCalorie = 0.2 // 20%
     let overageCalorie = 0.2 // 20%
     
+    // profile's parameters for calculate B-H formula
     @IBOutlet weak var maleButton: UIButton!
     @IBOutlet weak var femaleButton: UIButton!
     @IBOutlet weak var ageTextField: UITextField!
@@ -26,25 +28,146 @@ class ViewController: UIViewController {
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var carbLabel: UILabel!
     
-    @IBOutlet weak var settingsStackView: UIStackView!
+    @IBOutlet weak var titleForParametersLabel: UILabel!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var resultStackView: UIStackView!
+    @IBOutlet weak var calculateButton: UIButton!
+    
+    var activeTextField: UITextField?
+    var activityLevelPickerView = UIPickerView()
+    var goalPickerView = UIPickerView()
+    var selectedActivityLevel: ActivityLevel?
+    var selectedGoal: Goals?
+    var selectedSex: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        StorageManager.shared.deleteProfile(at: 0) // для тестирования
         profiles = StorageManager.shared.fetchProfiles()
-        let index = StorageManager.shared.fetchIndexActiveProfile()
-        let activeProfile = profiles[index]
+        profile = StorageManager.shared.fetchActiveProfile()
         
-        fillFields(for: activeProfile)
+        if profile.age == nil {
+            titleForParametersLabel.text = "Добавим подробностей:"
+            editButton.isHidden = true
+            resultStackView.isHidden = true
+        } else {
+            fillFields(for: profile)
+        }
+        
        
+        maleButton.addTarget(self, action: #selector(sexDidChoose(_:)), for: .touchUpInside)
+        femaleButton.addTarget(self, action: #selector(sexDidChoose(_:)), for: .touchUpInside)
+        
+        setupPickerView(activityLevelPickerView, tag: 1)
+        setupPickerView(goalPickerView, tag: 2)
+        activityLevelTextField.inputView = activityLevelPickerView
+        goalTextField.inputView = goalPickerView
+        
+        // Добавляем распознаватель жестов для скрытия клавиатуры по нажатию на экран
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
+        view.addGestureRecognizer(tapGesture)
+        
+        // Добавляем кнопку "OK" на панели инструментов
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "OK", style: .done, target: self, action: #selector(doneButtonTapped))
+        toolbar.setItems([doneButton], animated: true)
+        
+        ageTextField.inputAccessoryView = toolbar
+        heightTextField.inputAccessoryView = toolbar
+        weightTextField.inputAccessoryView = toolbar
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        profiles = StorageManager.shared.fetchProfiles()
+        
         if profiles.count == 0 {
-            performSegue(withIdentifier: "greeting", sender: self)
+            performSegue(withIdentifier: "greetingSegue", sender: self)
+        } 
+    }
+    
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        guard let age = ageTextField.text,
+            let height = heightTextField.text,
+            let weight = weightTextField.text,
+            let activityLevel = selectedActivityLevel ,
+            let goal = selectedGoal else { return }
+        guard let age = Int(age),
+            let height = Double(height),
+            let weight = Double(weight) else { return }
+        guard let selectedSex = selectedSex else { return }
+        
+        let sex: Sex = selectedSex == maleButton ? .male : .female
+        
+        profile.age = age
+        profile.sex = sex
+        profile.height = height
+        profile.weight = weight
+        profile.activityLevel = activityLevel
+        profile.goal = goal
+        profile.caloriesBMT = calculateBMR(weight: weight, height: height, age: age, sex: sex)
+        guard let bmt = profile.caloriesBMT  else { return }
+        let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
+        profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
+        
+        StorageManager.shared.save(changedProfile: profile)
+        showResults(for: profile)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "greetingSegue" { // Убедитесь, что идентификатор совпадает
+            if let greetingVC = segue.destination as? GreetingViewController {
+                greetingVC.delegate = self
+            }
         }
+    }
+    
+    @objc func sexDidChoose(_ sender: UIButton) {
+
+        let selectedButtonImage = UIImage(systemName: "circle.circle.fill")
+        let defaultButtonImage = UIImage(systemName: "circle")
+
+        if selectedSex == sender {
+            // Если та же кнопка нажата снова, убираем картинку
+            sender.setImage(defaultButtonImage, for: .normal)
+            selectedSex = nil // Сбрасываем выбранную кнопку
+        } else {
+            // Если другая кнопка была выбрана ранее, сбрасываем ее
+            selectedSex?.setImage(defaultButtonImage, for: .normal)
+
+            // Устанавливаем картинку на текущую кнопку
+            sender.setImage(selectedButtonImage, for: .normal)
+            selectedSex = sender // Обновляем выбранную кнопку
+        }
+    }
+    
+    func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.tag = tag
+    }
+        
+    @objc func dismissPicker() {
+        view.endEditing(true) // Скрывает клавиатуру и PickerView
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    @objc func doneButtonTapped() {
+        // Скрываем клавиатуру
+        activeTextField?.resignFirstResponder()
+    }
+    
+    // Функция для показа предупреждения
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -93,6 +216,29 @@ extension ViewController {
         
         return (protein: proteinCalories / 4.0, fat: fatCalories / 9.0, carbs: carbsGrams)
     }
+    
+    func showResults(for profile: Profile) {
+        resultStackView.isHidden = false
+        editButton.isHidden = false
+        
+        caloriesLabel.text = profile.caloriesTDEEForGoal?.formatted()
+        guard let weight = profile.weight, let tdee = profile.caloriesTDEEForGoal else { return }
+        let nutritions = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: tdee)
+        proteinLabel.text = nutritions.protein.formatted()
+        fatLabel.text = nutritions.fat.formatted()
+        carbLabel.text = nutritions.carbs.formatted()
+        
+        titleForParametersLabel.text = "Мои параметры: "
+        maleButton.isEnabled = false
+        femaleButton.isEnabled = false
+        ageTextField.isEnabled = false
+        weightTextField.isEnabled = false
+        heightTextField.isEnabled = false
+        weightTextField.isEnabled = false
+        activityLevelTextField.isEnabled = false
+        goalTextField.isEnabled = false
+        calculateButton.isHidden = true
+    }
 
     func fillFields(for profile: Profile) {
         fillSettings(for: profile)
@@ -100,24 +246,42 @@ extension ViewController {
     }
     
     func fillSettings(for profile: Profile) {
+        
         if profile.sex == .male {
             maleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
         } else {
             femaleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
         }
+        guard
+            let age = profile.age,
+            let height = profile.height,
+            let weight = profile.weight,
+            let activityLevel = profile.activityLevel?.rawValue,
+            let goal = profile.goal?.rawValue
+        else { return }
         
-        ageTextField.text = profile.age.formatted()
-        heightTextField.text = profile.height.formatted()
-        weightTextField.text = profile.weight.formatted()
-        activityLevelTextField.text = profile.activityLevel.rawValue
-        goalTextField.text = profile.goal.rawValue
+        ageTextField.text = age.formatted()
+        heightTextField.text = height.formatted()
+        weightTextField.text = weight.formatted()
+        activityLevelTextField.text = activityLevel
+        goalTextField.text = goal
     }
     
     func fillNutritions(for profile: Profile){
-        let bmt = calculateBMR(weight: profile.weight, height: profile.height, age: profile.age, sex: profile.sex)
-        let caloriesTDEE = calculateTDEE(bmr: bmt, activityLevel: profile.activityLevel.value)
-        let caloriesTDEEForGoal = calculateTDEEForGoal(tdee: caloriesTDEE, goal: profile.goal)
-        let nutritional = calculateNutritionalNeeds(weight: profile.weight, calorieNeedsForGoal: caloriesTDEEForGoal)
+        
+        guard
+            let sex = profile.sex,
+            let age = profile.age,
+            let height = profile.height,
+            let weight = profile.weight,
+            let activityLevel = profile.activityLevel?.value,
+            let goal = profile.goal
+        else { return }
+        
+        let bmt = calculateBMR(weight: weight, height: height, age: age, sex: sex)
+        let caloriesTDEE = calculateTDEE(bmr: bmt, activityLevel: activityLevel)
+        let caloriesTDEEForGoal = calculateTDEEForGoal(tdee: caloriesTDEE, goal: goal)
+        let nutritional = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: caloriesTDEEForGoal)
         
         caloriesLabel.text = caloriesTDEEForGoal.formatted()
         proteinLabel.text = nutritional.protein.formatted()
@@ -126,3 +290,60 @@ extension ViewController {
     }
 }
 
+// MARK: - UIPickerViewDataSource,UIPickerViewDelegate
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // UIPickerViewDataSource
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1 {
+            return ActivityLevel.allCases.count
+        } else if pickerView.tag == 2 {
+            return Goals.allCases.count
+        }
+        return 0
+    }
+    
+    // UIPickerViewDelegate
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.tag == 1 {
+            return ActivityLevel.allCases[row].description
+        } else if pickerView.tag == 2 {
+            return Goals.allCases[row].rawValue
+        }
+        return nil
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView.tag == 1 {
+            activityLevelTextField.text = ActivityLevel.allCases[row].rawValue
+            selectedActivityLevel = ActivityLevel.allCases[row]
+        } else if pickerView.tag == 2 {
+            goalTextField.text = Goals.allCases[row].rawValue
+            selectedGoal = Goals.allCases[row]
+        }
+    }
+}
+
+//MARK: - GreetingViewControllerDelegate
+extension ViewController: GreetingViewControllerDelegate {
+    func didUpdateProfile(nickname: String, icon: String) {
+        let newProfile = Profile(
+            nickname: nickname,
+            icon: icon,
+            age: nil,
+            sex: nil,
+            height: nil,
+            weight: nil,
+            activityLevel: nil,
+            goal: nil,
+            caloriesBMT: nil,
+            caloriesTDEEForGoal: nil
+        )
+        StorageManager.shared.add(newProfile: newProfile)
+        StorageManager.shared.set(activeProfile: newProfile)
+    }
+}

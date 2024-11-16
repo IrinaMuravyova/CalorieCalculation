@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol GreetingViewControllerDelegate: AnyObject {
+    func didUpdateProfile(nickname: String, icon: String)
+}
+
 class GreetingViewController: UIViewController {
     
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var continueButton: UIButton!
+    
+    weak var delegate: GreetingViewControllerDelegate?
     
     let icons = (1...16).map { "icon\($0)" }
     let itemsPerRow: CGFloat = 4
@@ -29,15 +35,20 @@ class GreetingViewController: UIViewController {
         
         continueButton.isEnabled = false
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let parametersVC = segue.destination as? ParametersViewController {
-            parametersVC.person = nicknameTextField.text
-            parametersVC.icon = icon
-
+    
+    @IBAction func continueButtonTapped(_ sender: UIButton) {
+            guard let nickname = nicknameTextField.text,
+                  let icon = icon,
+                  !nickname.isEmpty else { return }
+      
+            // Передача данных через делегат
+            delegate?.didUpdateProfile(nickname: nickname, icon: icon)
+            
+            // Закрытие модального экрана
+            dismiss(animated: true, completion: nil)
         }
-    }
 }
+
 //MARK: - UICollectionView для ячеек с иконками
 extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     

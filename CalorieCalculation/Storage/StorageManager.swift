@@ -24,13 +24,30 @@ class StorageManager {
         return profiles
     }
     
-    func fetchIndexActiveProfile() -> Int {
-        let profiles = fetchProfiles()
-        
-        guard let data = defaults.data(forKey: activeProfileKey) else { return 0 }
+//    func fetchIndexActiveProfile() -> Int {
+//        guard let data = defaults.data(forKey: activeProfileKey) else { return 0 }
+//        let decoder = JSONDecoder()
+//        guard let index = try? decoder.decode(Int.self, from: data) else { return 0 }
+//        return index
+//    }
+    
+    func fetchActiveProfile() -> Profile {
+        let newProfile = Profile( //TODO: Как то иначе обработать ошибку
+            nickname: "User",
+            icon: "icon1",
+            age: nil,
+            sex: nil,
+            height: nil,
+            weight: nil,
+            activityLevel: nil,
+            goal: nil,
+            caloriesBMT: nil,
+            caloriesTDEEForGoal: nil
+        )
+        guard let data = defaults.data(forKey: activeProfileKey) else { return newProfile }
         let decoder = JSONDecoder()
-        guard let index = try? decoder.decode(Int.self, from: data) else { return 0 }
-        return index
+        guard let profile = try? decoder.decode(Profile.self, from: data) else { return newProfile }
+        return profile
     }
     
     func add(newProfile: Profile) {
@@ -44,7 +61,7 @@ class StorageManager {
     func save(changedProfile: Profile) {
         var profiles = fetchProfiles()
         
-        let index = profiles.firstIndex {$0.person == changedProfile.person}
+        let index = profiles.firstIndex {$0.nickname == changedProfile.nickname}
         guard let index = index else { return }
         profiles.remove(at: index)
         profiles.append(changedProfile)
@@ -52,6 +69,17 @@ class StorageManager {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(profiles) else { return }
         defaults.set(data, forKey: profilesKey)
+    }
+    
+    func saveIndexOf(activeProfile: Profile) {
+        let profiles = fetchProfiles()
+        
+        let index = profiles.firstIndex {$0.nickname == activeProfile.nickname}
+        guard let index = index else { return }
+        
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(index) else { return }
+        defaults.set(data, forKey: activeProfileKey)
     }
     
     func deleteProfile(at index: Int){
@@ -62,14 +90,12 @@ class StorageManager {
         defaults.set(data, forKey: profilesKey)
     }
     
-    func saveIndexOf(activeProfile: Profile) {
+    func set(activeProfile: Profile) {
         let profiles = fetchProfiles()
-        
-        let index = profiles.firstIndex {$0.person == activeProfile.person}
-        guard let index = index else { return }
-        
+        let profile = profiles.first{$0.nickname == activeProfile.nickname}
+
         let encoder = JSONEncoder()
-        guard let data = try? encoder.encode(index) else { return }
+        guard let data = try? encoder.encode(profile) else { return }
         defaults.set(data, forKey: activeProfileKey)
     }
 }

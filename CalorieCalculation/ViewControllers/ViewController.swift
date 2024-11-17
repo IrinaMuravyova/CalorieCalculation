@@ -73,6 +73,7 @@ class ViewController: UIViewController {
             configuration.image = resizedImage
         }
         
+        calculateButton.isHidden = true
         
         if profile.age == nil {
             titleForParametersLabel.text = "Добавим подробностей:"
@@ -236,8 +237,8 @@ extension ViewController {
     func calculateNutritionalNeeds(weight: Double, calorieNeedsForGoal: Double) -> (protein: Double, fat: Double, carbs: Double) {
  
         // Распределение макронутриентов:
-        let proteinCalories = weight * 2.0 * 4.0 // 2 г белка на кг массы тела, 1 г белка = 4 ккал
-        let fatCalories = weight * 1.0 * 9.0   // 1 г жира на кг массы тела, 1 г жира = 9 ккал
+        let proteinCalories = weight * 1.8 * 4.0 // 2 г белка на кг массы тела, 1 г белка = 4 ккал
+        let fatCalories = weight * 0.8 * 9.0   // 1 г жира на кг массы тела, 1 г жира = 9 ккал
         
         // Углеводы — оставшиеся калории
         let carbsCalories = calorieNeedsForGoal - proteinCalories - fatCalories
@@ -314,10 +315,10 @@ extension ViewController {
         let caloriesTDEEForGoal = calculateTDEEForGoal(tdee: caloriesTDEE, goal: goal)
         let nutritional = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: caloriesTDEEForGoal)
         
-        caloriesLabel.text = caloriesTDEEForGoal.formatted()
-        proteinLabel.text = nutritional.protein.formatted()
-        fatLabel.text = nutritional.fat.formatted()
-        carbLabel.text = nutritional.carbs.formatted()
+        caloriesLabel.text = String(format: "%.0f", caloriesTDEEForGoal)
+        proteinLabel.text = String(format: "%.0f", nutritional.protein)
+        fatLabel.text = String(format: "%.0f", nutritional.fat)
+        carbLabel.text = String(format: "%.0f", nutritional.carbs)
     }
 }
 

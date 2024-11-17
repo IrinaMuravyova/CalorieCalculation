@@ -236,9 +236,19 @@ extension ViewController {
     
     func calculateNutritionalNeeds(weight: Double, calorieNeedsForGoal: Double) -> (protein: Double, fat: Double, carbs: Double) {
  
+        var proteinRate = 1.5
+        var fatRate = 1.0
+        
+        if profile.goal == .weightLoss {
+            proteinRate = 1.8
+            fatRate = 0.8
+        } else if profile.goal == .weightGain {
+            proteinRate = 1.2
+            fatRate = 1
+        }
         // Распределение макронутриентов:
-        let proteinCalories = weight * 1.8 * 4.0 // 2 г белка на кг массы тела, 1 г белка = 4 ккал
-        let fatCalories = weight * 0.8 * 9.0   // 1 г жира на кг массы тела, 1 г жира = 9 ккал
+        let proteinCalories = weight * proteinRate * 4.0 // 2 г белка на кг массы тела, 1 г белка = 4 ккал
+        let fatCalories = weight * fatRate * 9.0   // 1 г жира на кг массы тела, 1 г жира = 9 ккал
         
         // Углеводы — оставшиеся калории
         let carbsCalories = calorieNeedsForGoal - proteinCalories - fatCalories

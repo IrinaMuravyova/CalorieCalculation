@@ -47,33 +47,11 @@ class ViewController: UIViewController {
 //        StorageManager.shared.deleteProfile(at: 0) // для тестирования
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
-        print(profiles!)
-        print(profile!)
+//        print(profiles!)
+//        print(profile!)
         
-        let resizedImage = resizeImage(image: UIImage(named: profile.icon)!, targetSize: CGSize(width: 50, height: 50))
-            
-        // Настраиваем конфигурацию
-        var configuration = UIButton.Configuration.plain()
-        configuration.image = resizedImage
-        configuration.imagePlacement = .leading
-        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .large)
-
-        // Применяем конфигурацию
-        profileButton.configuration = configuration
-        
-        func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
-            let renderer = UIGraphicsImageRenderer(size: targetSize)
-            return renderer.image { _ in
-                image.draw(in: CGRect(origin: .zero, size: targetSize))
-            }
-        }
-
-        if let originalImage = UIImage(named: profile.icon) {
-            let resizedImage = resizeImage(image: originalImage, targetSize: CGSize(width: 50, height: 50))
-            configuration.image = resizedImage
-        }
-        
-        calculateButton.isHidden = true
+        profileIconConfiguring()
+        calculateButton.isHidden = true // для тестирования
         
         if profile.age == nil {
             titleForParametersLabel.text = "Добавим подробностей:"
@@ -146,6 +124,9 @@ class ViewController: UIViewController {
 
         showResults(for: profile)
     }
+    @IBAction func editBarButtonTapped(_ sender: UIBarButtonItem) {
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "greetingSegue" { // Убедитесь, что идентификатор совпадает
@@ -200,6 +181,83 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+//MARK: - Setup methods
+extension ViewController {
+    func profileIconConfiguring() {
+        let resizedImage = resizeImage(image: UIImage(named: profile.icon)!, targetSize: CGSize(width: 50, height: 50))
+            
+        // Настраиваем конфигурацию
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = resizedImage
+        configuration.imagePlacement = .leading
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .large)
+
+        // Применяем конфигурацию
+        profileButton.configuration = configuration
+        
+        func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { _ in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+        }
+
+        if let originalImage = UIImage(named: profile.icon) {
+            let resizedImage = resizeImage(image: originalImage, targetSize: CGSize(width: 50, height: 50))
+            configuration.image = resizedImage
+        }
+    }
+    
+    func fillFields(for profile: Profile) {
+        fillSettings(for: profile)
+        fillNutritions(for: profile)
+    }
+    
+    func fillSettings(for profile: Profile) {
+        
+        if profile.sex == .male {
+            maleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
+        } else {
+            femaleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
+        }
+        guard
+            let age = profile.age,
+            let height = profile.height,
+            let weight = profile.weight,
+            let activityLevel = profile.activityLevel?.rawValue,
+            let goal = profile.goal?.rawValue
+        else { return }
+        
+        ageTextField.text = age.formatted()
+        heightTextField.text = height.formatted()
+        weightTextField.text = weight.formatted()
+        activityLevelTextField.text = activityLevel
+        goalTextField.text = goal
+    }
+    
+    func fillNutritions(for profile: Profile){
+        
+        guard
+            let sex = profile.sex,
+            let age = profile.age,
+            let height = profile.height,
+            let weight = profile.weight,
+            let activityLevel = profile.activityLevel?.value,
+            let goal = profile.goal
+        else { return }
+        
+        let bmt = calculateBMR(weight: weight, height: height, age: age, sex: sex)
+        let caloriesTDEE = calculateTDEE(bmr: bmt, activityLevel: activityLevel)
+        let caloriesTDEEForGoal = calculateTDEEForGoal(tdee: caloriesTDEE, goal: goal)
+        let nutritional = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: caloriesTDEEForGoal)
+        
+        caloriesLabel.text = String(format: "%.0f", caloriesTDEEForGoal)
+        proteinLabel.text = String(format: "%.0f", nutritional.protein)
+        fatLabel.text = String(format: "%.0f", nutritional.fat)
+        carbLabel.text = String(format: "%.0f", nutritional.carbs)
     }
 }
 
@@ -280,55 +338,6 @@ extension ViewController {
         activityLevelTextField.isEnabled = false
         goalTextField.isEnabled = false
         calculateButton.isHidden = true
-    }
-
-    func fillFields(for profile: Profile) {
-        fillSettings(for: profile)
-        fillNutritions(for: profile)
-    }
-    
-    func fillSettings(for profile: Profile) {
-        
-        if profile.sex == .male {
-            maleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
-        } else {
-            femaleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
-        }
-        guard
-            let age = profile.age,
-            let height = profile.height,
-            let weight = profile.weight,
-            let activityLevel = profile.activityLevel?.rawValue,
-            let goal = profile.goal?.rawValue
-        else { return }
-        
-        ageTextField.text = age.formatted()
-        heightTextField.text = height.formatted()
-        weightTextField.text = weight.formatted()
-        activityLevelTextField.text = activityLevel
-        goalTextField.text = goal
-    }
-    
-    func fillNutritions(for profile: Profile){
-        
-        guard
-            let sex = profile.sex,
-            let age = profile.age,
-            let height = profile.height,
-            let weight = profile.weight,
-            let activityLevel = profile.activityLevel?.value,
-            let goal = profile.goal
-        else { return }
-        
-        let bmt = calculateBMR(weight: weight, height: height, age: age, sex: sex)
-        let caloriesTDEE = calculateTDEE(bmr: bmt, activityLevel: activityLevel)
-        let caloriesTDEEForGoal = calculateTDEEForGoal(tdee: caloriesTDEE, goal: goal)
-        let nutritional = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: caloriesTDEEForGoal)
-        
-        caloriesLabel.text = String(format: "%.0f", caloriesTDEEForGoal)
-        proteinLabel.text = String(format: "%.0f", nutritional.protein)
-        fatLabel.text = String(format: "%.0f", nutritional.fat)
-        carbLabel.text = String(format: "%.0f", nutritional.carbs)
     }
 }
 

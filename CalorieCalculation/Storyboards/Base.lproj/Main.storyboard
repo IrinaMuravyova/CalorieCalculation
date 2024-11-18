@@ -310,7 +310,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7bh-4u-CEb">
-                        <barButtonItem key="rightBarButtonItem" title="Правка" id="kBE-mG-GW9"/>
+                        <barButtonItem key="rightBarButtonItem" title="Правка" id="kBE-mG-GW9">
+                            <connections>
+                                <action selector="editBarButtonTapped:" destination="BYZ-38-t0r" id="f05-Wc-J8B"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityLevelTextField" destination="EAG-L8-El7" id="byV-UC-q4R"/>

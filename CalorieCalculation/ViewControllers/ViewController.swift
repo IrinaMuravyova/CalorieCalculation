@@ -213,18 +213,8 @@ extension ViewController {
         carbLabel.text = String(format: "%.0f", nutritional.carbs)
     }
     
-    func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        pickerView.tag = tag
-    }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
-    }
-    
-    @objc func dismissPicker() {
-        view.endEditing(true) // Скрывает клавиатуру и PickerView
     }
     
     @objc func doneButtonTapped() {
@@ -374,6 +364,16 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             goalTextField.text = Goals.allCases[row].rawValue
             selectedGoal = Goals.allCases[row]
         }
+    }
+    
+    @objc func dismissPicker() {
+        view.endEditing(true) // Скрывает клавиатуру и PickerView
+    }
+    
+    func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.tag = tag
     }
 }
 

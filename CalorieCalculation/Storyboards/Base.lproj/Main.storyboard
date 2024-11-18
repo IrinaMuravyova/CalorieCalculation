@@ -80,15 +80,15 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="170" height="34"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="4bS-TZ-vhy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="121.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yho-sa-f05">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="20.5" height="34"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="мужской" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oB-7F-Qda">
-                                                                        <rect key="frame" x="50" y="0.0" width="71.5" height="34"/>
+                                                                        <rect key="frame" x="20.5" y="0.0" width="29.5" height="34"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -96,15 +96,15 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="61E-E7-rM3">
-                                                                <rect key="frame" x="121.5" y="0.0" width="48.5" height="34"/>
+                                                                <rect key="frame" x="50" y="0.0" width="120" height="34"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXJ-o7-HRP">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="34"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
                                                                         <state key="normal" title="Button"/>
                                                                         <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
                                                                     </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="женский" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPN-Ud-VNJ">
-                                                                        <rect key="frame" x="20" y="0.0" width="28.5" height="34"/>
+                                                                        <rect key="frame" x="50" y="0.0" width="70" height="34"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -248,20 +248,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKx-Pe-neO">
                                 <rect key="frame" x="20" y="468" width="280" height="100"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="1vL-mf-cTz">
+                                    <stackView opaque="NO" contentMode="right" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="1vL-mf-cTz">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7op-t7-5lm">
-                                                <rect key="frame" x="0.0" y="0.0" width="168" height="51"/>
-                                                <segments>
-                                                    <segment title="Популярный расчет"/>
-                                                    <segment title="Самый точный расчет"/>
-                                                </segments>
-                                            </segmentedControl>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rft-Le-oW6">
-                                                <rect key="frame" x="174" y="0.0" width="50" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rft-Le-oW6" userLabel="QuestionButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="50"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuX-3G-hp9" userLabel="SettingsButton">
+                                                <rect key="frame" x="172.5" y="0.0" width="51.5" height="50"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="gear" catalog="system"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tc-ig-OcW">
                                                 <rect key="frame" x="230" y="0.0" width="50" height="50"/>
@@ -273,10 +271,6 @@
                                                 <buttonConfiguration key="configuration" style="plain"/>
                                             </button>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="Rft-Le-oW6" firstAttribute="height" secondItem="3tc-ig-OcW" secondAttribute="height" id="ScA-Rd-hkb"/>
-                                            <constraint firstItem="Rft-Le-oW6" firstAttribute="width" secondItem="3tc-ig-OcW" secondAttribute="height" multiplier="1:1" id="eqy-RC-kJI"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -321,7 +315,9 @@
                         <outlet property="maleButton" destination="Yho-sa-f05" id="IWp-Cj-VYh"/>
                         <outlet property="profileButton" destination="3tc-ig-OcW" id="d3c-ln-GoJ"/>
                         <outlet property="proteinLabel" destination="ieG-Hg-mHP" id="2RL-zx-pNG"/>
+                        <outlet property="questionButton" destination="Rft-Le-oW6" id="m8Z-bB-dhx"/>
                         <outlet property="resultStackView" destination="5xA-LY-yUt" id="oUU-eK-lsn"/>
+                        <outlet property="settingsButton" destination="uuX-3G-hp9" id="tKI-fA-Nlm"/>
                         <outlet property="settingsStackView" destination="0aq-kx-rrh" id="Gh3-uL-76B"/>
                         <outlet property="titleForParametersLabel" destination="uxB-Ay-cVl" id="s62-Od-F9S"/>
                         <outlet property="weightTextField" destination="FC3-Lz-DCM" id="h2e-th-R25"/>
@@ -462,6 +458,7 @@
     </scenes>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

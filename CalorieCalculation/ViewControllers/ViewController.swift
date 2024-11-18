@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var resultStackView: UIStackView!
     @IBOutlet weak var settingsStackView: UIStackView!
+    @IBOutlet weak var questionButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     
     var activeTextField: UITextField?
@@ -50,7 +52,9 @@ class ViewController: UIViewController {
 //        print(profiles!)
 //        print(profile!)
         
-        profileIconConfiguring()
+        configuring(button: profileButton, withImage: UIImage(named: profile.icon) )
+        configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
+        configuring(button: questionButton, withImage: UIImage(systemName: "questionmark.circle"))
         
         if profile.age == nil {
             titleForParametersLabel.text = "Добавим подробностей:"
@@ -126,8 +130,8 @@ class ViewController: UIViewController {
 
 //MARK: - Setup methods
 extension ViewController {
-    func profileIconConfiguring() {
-        let resizedImage = resizeImage(image: UIImage(named: profile.icon)!, targetSize: CGSize(width: 50, height: 50))
+    func configuring(button: UIButton, withImage: UIImage!) {
+        var resizedImage = resizeImage(image: withImage, targetSize: CGSize(width: 50, height: 50))
             
         // Настраиваем конфигурацию
         var configuration = UIButton.Configuration.plain()
@@ -136,7 +140,8 @@ extension ViewController {
         configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .large)
 
         // Применяем конфигурацию
-        profileButton.configuration = configuration
+        button.configuration = configuration
+        let withImage = withImage
         
         func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
             let renderer = UIGraphicsImageRenderer(size: targetSize)
@@ -144,8 +149,8 @@ extension ViewController {
                 image.draw(in: CGRect(origin: .zero, size: targetSize))
             }
         }
-
-        if let originalImage = UIImage(named: profile.icon) {
+        
+        if let originalImage = withImage {
             let resizedImage = resizeImage(image: originalImage, targetSize: CGSize(width: 50, height: 50))
             configuration.image = resizedImage
         }

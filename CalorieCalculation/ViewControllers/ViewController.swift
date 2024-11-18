@@ -135,53 +135,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    @objc func sexDidChoose(_ sender: UIButton) {
-
-        let selectedButtonImage = UIImage(systemName: "circle.circle.fill")
-        let defaultButtonImage = UIImage(systemName: "circle")
-
-        if selectedSex == sender {
-            // Если та же кнопка нажата снова, убираем картинку
-            sender.setImage(defaultButtonImage, for: .normal)
-            selectedSex = nil // Сбрасываем выбранную кнопку
-        } else {
-            // Если другая кнопка была выбрана ранее, сбрасываем ее
-            selectedSex?.setImage(defaultButtonImage, for: .normal)
-
-            // Устанавливаем картинку на текущую кнопку
-            sender.setImage(selectedButtonImage, for: .normal)
-            selectedSex = sender // Обновляем выбранную кнопку
-        }
-    }
-    
-    
-        
-    func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        pickerView.tag = tag
-    }
-        
-    @objc func dismissPicker() {
-        view.endEditing(true) // Скрывает клавиатуру и PickerView
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeTextField = textField
-    }
-    
-    @objc func doneButtonTapped() {
-        // Скрываем клавиатуру
-        activeTextField?.resignFirstResponder()
-    }
-    
-    // Функция для показа предупреждения
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
 }
 
 //MARK: - Setup methods
@@ -259,6 +212,51 @@ extension ViewController {
         fatLabel.text = String(format: "%.0f", nutritional.fat)
         carbLabel.text = String(format: "%.0f", nutritional.carbs)
     }
+    
+    func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.tag = tag
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    @objc func dismissPicker() {
+        view.endEditing(true) // Скрывает клавиатуру и PickerView
+    }
+    
+    @objc func doneButtonTapped() {
+        // Скрываем клавиатуру
+        activeTextField?.resignFirstResponder()
+    }
+    
+    @objc func sexDidChoose(_ sender: UIButton) {
+
+        let selectedButtonImage = UIImage(systemName: "circle.circle.fill")
+        let defaultButtonImage = UIImage(systemName: "circle")
+
+        if selectedSex == sender {
+            // Если та же кнопка нажата снова, убираем картинку
+            sender.setImage(defaultButtonImage, for: .normal)
+            selectedSex = nil // Сбрасываем выбранную кнопку
+        } else {
+            // Если другая кнопка была выбрана ранее, сбрасываем ее
+            selectedSex?.setImage(defaultButtonImage, for: .normal)
+
+            // Устанавливаем картинку на текущую кнопку
+            sender.setImage(selectedButtonImage, for: .normal)
+            selectedSex = sender // Обновляем выбранную кнопку
+        }
+    }
+    
+    // Функция для показа предупреждения
+//    func showAlert(message: String) {
+//        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        present(alert, animated: true, completion: nil)
+//    }
 }
 
 // MARK: - Calculation according to the Harris-Benedict formula

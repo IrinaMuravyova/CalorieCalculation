@@ -73,6 +73,13 @@ class ViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
         view.addGestureRecognizer(tapGesture)
         
+        // Создаем распознаватель долгого нажатия
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.5 // Время, после которого считается длительное нажатие (в секундах)
+        
+        // Добавляем распознаватель к кнопке
+        profileButton.addGestureRecognizer(longPressGesture)
+        
         // Добавляем кнопку "OK" на панели инструментов
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -221,6 +228,14 @@ extension ViewController {
             // Устанавливаем картинку на текущую кнопку
             sender.setImage(selectedButtonImage, for: .normal)
             selectedSex = sender // Обновляем выбранную кнопку
+        }
+    }
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        // Проверяем состояние распознавателя
+        if gesture.state == .began {
+            print("Long press began")
+            // Добавить код, который выполняется при начале длительного нажатия
         }
     }
     

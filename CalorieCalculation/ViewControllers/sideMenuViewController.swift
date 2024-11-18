@@ -36,15 +36,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     
-    @IBOutlet weak var menuButton: UIBarButtonItem!
-    @IBOutlet weak var nicknameButton: UIBarButtonItem!
-    
     var activeTextField: UITextField?
     var activityLevelPickerView = UIPickerView()
     var goalPickerView = UIPickerView()
     var selectedActivityLevel: ActivityLevel?
     var selectedGoal: Goals?
     var selectedSex: UIButton?
+    
+    var sideMenu: UIView!
+    var isMenuOpen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +95,14 @@ class ViewController: UIViewController {
         ageTextField.inputAccessoryView = toolbar
         heightTextField.inputAccessoryView = toolbar
         weightTextField.inputAccessoryView = toolbar
+        
+        // Создаем меню
+        sideMenu = UIView(frame: CGRect(x: -250, y: 0, width: 250, height: view.frame.height))
+        sideMenu.backgroundColor = .gray
+        
+        // Добавляем меню в главный контроллер
+        view.addSubview(sideMenu)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -118,6 +126,14 @@ class ViewController: UIViewController {
             sender.style = .plain
             sender.title = "Правка" //Edit
             disableEditingMode()
+            }
+    }
+    
+    @IBAction func settingsButtonTapped(_ sender: UIButton) {
+        
+        isMenuOpen.toggle()
+            UIView.animate(withDuration: 0.3) {
+                self.sideMenu.frame.origin.x = self.isMenuOpen ? 0 : -250
             }
     }
     
@@ -414,6 +430,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     @objc func dismissPicker() {
         view.endEditing(true) // Скрывает клавиатуру и PickerView
+        guard isMenuOpen else { return }
+        settingsButtonTapped(settingsButton)
     }
     
     func setupPickerView(_ pickerView: UIPickerView, tag: Int) {

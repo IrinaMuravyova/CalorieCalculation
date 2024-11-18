@@ -124,6 +124,7 @@ class ViewController: UIViewController {
 
         showResults(for: profile)
     }
+    
     @IBAction func editBarButtonTapped(_ sender: UIBarButtonItem) {
         
     }
@@ -167,6 +168,7 @@ extension ViewController {
     func fillFields(for profile: Profile) {
         fillSettings(for: profile)
         fillNutritions(for: profile)
+        settingsFieldsAvailableToggle()
     }
     
     func fillSettings(for profile: Profile) {
@@ -189,6 +191,8 @@ extension ViewController {
         weightTextField.text = weight.formatted()
         activityLevelTextField.text = activityLevel
         goalTextField.text = goal
+        
+        
     }
     
     func fillNutritions(for profile: Profile){
@@ -316,16 +320,19 @@ extension ViewController {
         fatLabel.text = nutritions.fat.formatted()
         carbLabel.text = nutritions.carbs.formatted()
         
+        settingsFieldsAvailableToggle()
+    }
+    
+    func settingsFieldsAvailableToggle() {
         titleForParametersLabel.text = "Мои параметры: "
-        maleButton.isEnabled = false
-        femaleButton.isEnabled = false
-        ageTextField.isEnabled = false
-        weightTextField.isEnabled = false
-        heightTextField.isEnabled = false
-        weightTextField.isEnabled = false
-        activityLevelTextField.isEnabled = false
-        goalTextField.isEnabled = false
-        calculateButton.isHidden = true
+        maleButton.isEnabled.toggle()
+        femaleButton.isEnabled.toggle()
+        ageTextField.isEnabled.toggle()
+        weightTextField.isEnabled.toggle()
+        heightTextField.isEnabled.toggle()
+        activityLevelTextField.isEnabled.toggle()
+        goalTextField.isEnabled.toggle()
+        calculateButton.isHidden.toggle()
     }
 }
 

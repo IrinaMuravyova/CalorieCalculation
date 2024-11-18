@@ -36,6 +36,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var nicknameButton: UIBarButtonItem!
+    
     var activeTextField: UITextField?
     var activityLevelPickerView = UIPickerView()
     var goalPickerView = UIPickerView()
@@ -64,7 +67,6 @@ class ViewController: UIViewController {
             fillFields(for: profile)
         }
         
-       
         maleButton.addTarget(self, action: #selector(sexDidChoose(_:)), for: .touchUpInside)
         femaleButton.addTarget(self, action: #selector(sexDidChoose(_:)), for: .touchUpInside)
         

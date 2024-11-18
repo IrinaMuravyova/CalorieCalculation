@@ -96,12 +96,7 @@ class ViewController: UIViewController {
         heightTextField.inputAccessoryView = toolbar
         weightTextField.inputAccessoryView = toolbar
         
-        // Создаем меню
-        sideMenu = UIView(frame: CGRect(x: -250, y: 0, width: 250, height: view.frame.height))
-        sideMenu.backgroundColor = .gray
-        
-        // Добавляем меню в главный контроллер
-        view.addSubview(sideMenu)
+        sideMenuConfigure()
         
     }
     
@@ -304,6 +299,26 @@ extension ViewController {
         guard let bmt = profile.caloriesBMT  else { return }
         let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
         profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
+    }
+    
+    func sideMenuConfigure() {
+        
+        let menuViewController = ViewController as? SideMenuViewController
+        // Настраиваем меню
+//        sideMenuViewController.view.frame = CGRect(x: -250, y: 0, width: 250, height: view.frame.height)
+//        addChild(menuViewController)
+//        view.addSubview(menuViewController.view)
+//        menuViewController.didMove(toParent: self)
+        
+        
+        // Создаем меню
+//        sideMenu = UIView(frame: CGRect(x: -250, y: 0, width: 250, height: view.frame.height))
+//        sideMenu.backgroundColor = .gray
+        
+        // Добавляем меню в главный контроллер
+//        view.addSubview(sideMenu)
+        
+        
     }
 }
 

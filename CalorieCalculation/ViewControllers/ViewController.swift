@@ -267,13 +267,6 @@ extension ViewController {
         let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
         profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
     }
-    
-    // Функция для показа предупреждения
-//    func showAlert(message: String) {
-//        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        present(alert, animated: true, completion: nil)
-//    }
 }
 
 // MARK: - Calculation according to the Harris-Benedict formula
@@ -425,5 +418,14 @@ extension ViewController: GreetingViewControllerDelegate {
         )
         StorageManager.shared.add(newProfile: newProfile)
         StorageManager.shared.set(activeProfile: newProfile)
+    }
+}
+
+extension ViewController: StorageManagerDelegate {
+    // Функция для показа предупреждения
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

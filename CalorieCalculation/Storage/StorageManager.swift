@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol StorageManagerDelegate {
+    func showAlert(message: String)
+}
+
 class StorageManager {
     
     static let shared = StorageManager()
@@ -14,6 +18,7 @@ class StorageManager {
     private var defaults = UserDefaults.standard
     private let profilesKey = "profiles"
     private let activeProfileKey = "activeProfile"
+    var delegate: StorageManagerDelegate?
     
     private init() {}
     
@@ -52,6 +57,7 @@ class StorageManager {
     
     func add(newProfile: Profile) {
         var profiles = fetchProfiles()
+        if !nickmaneIsUnique(nickname: newProfile.nickname) { return }
         profiles.append(newProfile)
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(profiles) else { return }
@@ -98,5 +104,15 @@ class StorageManager {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(profile) else { return }
         defaults.set(data, forKey: activeProfileKey)
+    }
+    
+    func nickmaneIsUnique(nickname : String) -> Bool {
+        // Проверяем, существует ли уже профиль с таким nickname
+        if StorageManager.shared.fetchProfiles().contains(where: { $0.nickname == nickname }) {
+            delegate?.showAlert(message: "Этот пользователь уже существует.") // Error: Nickname already exists
+            return false // Возвращаем, что сохранение не удалось
+        } else {
+            return true
+        }
     }
 }

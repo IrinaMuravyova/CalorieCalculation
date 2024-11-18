@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0aq-kx-rrh">
-                                <rect key="frame" x="20" y="64" width="280" height="355"/>
+                                <rect key="frame" x="20" y="64" width="280" height="300.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мои настройки:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxB-Ay-cVl">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="26.5"/>
@@ -142,18 +142,10 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKR-0C-j4w">
-                                        <rect key="frame" x="0.0" y="320.5" width="280" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Рассчитать"/>
-                                        <connections>
-                                            <action selector="calculateButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H55-e9-M9E"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" tag="1" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5xA-LY-yUt">
-                                <rect key="frame" x="20" y="459" width="280" height="155.5"/>
+                                <rect key="frame" x="20" y="404.5" width="280" height="155.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мой расчет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7NJ-XL-bjj">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
@@ -319,7 +311,6 @@
                     <connections>
                         <outlet property="activityLevelTextField" destination="EAG-L8-El7" id="byV-UC-q4R"/>
                         <outlet property="ageTextField" destination="PsM-zv-mbL" id="4xq-Qf-9Js"/>
-                        <outlet property="calculateButton" destination="tKR-0C-j4w" id="bdX-fX-39y"/>
                         <outlet property="caloriesLabel" destination="TXy-cD-Mbp" id="kuf-Ux-2gu"/>
                         <outlet property="carbLabel" destination="edU-Tx-DVc" id="KZv-JC-an2"/>
                         <outlet property="editButton" destination="kBE-mG-GW9" id="T5n-pS-6ky"/>
@@ -331,6 +322,7 @@
                         <outlet property="profileButton" destination="3tc-ig-OcW" id="d3c-ln-GoJ"/>
                         <outlet property="proteinLabel" destination="ieG-Hg-mHP" id="2RL-zx-pNG"/>
                         <outlet property="resultStackView" destination="5xA-LY-yUt" id="oUU-eK-lsn"/>
+                        <outlet property="settingsStackView" destination="0aq-kx-rrh" id="Gh3-uL-76B"/>
                         <outlet property="titleForParametersLabel" destination="uxB-Ay-cVl" id="s62-Od-F9S"/>
                         <outlet property="weightTextField" destination="FC3-Lz-DCM" id="h2e-th-R25"/>
                         <segue destination="Tyh-hz-ycC" kind="presentation" identifier="greetingSegue" modalPresentationStyle="fullScreen" id="7F6-nM-xpb"/>

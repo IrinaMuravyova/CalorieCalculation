@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var titleForParametersLabel: UILabel!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var resultStackView: UIStackView!
-    @IBOutlet weak var calculateButton: UIButton!
+    @IBOutlet weak var settingsStackView: UIStackView!
     @IBOutlet weak var profileButton: UIButton!
     
     var activeTextField: UITextField?
@@ -51,7 +51,6 @@ class ViewController: UIViewController {
 //        print(profile!)
         
         profileIconConfiguring()
-        calculateButton.isHidden = true // для тестирования
         
         if profile.age == nil {
             titleForParametersLabel.text = "Добавим подробностей:"
@@ -95,38 +94,18 @@ class ViewController: UIViewController {
         } 
     }
     
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        guard let age = ageTextField.text,
-            let height = heightTextField.text,
-            let weight = weightTextField.text,
-            let activityLevel = selectedActivityLevel ,
-            let goal = selectedGoal else { return }
-        guard let age = Int(age),
-            let height = Double(height),
-            let weight = Double(weight) else { return }
-        guard let selectedSex = selectedSex else { return }
-        
-        let sex: Sex = selectedSex == maleButton ? .male : .female
-        
-        profile.age = age
-        profile.sex = sex
-        profile.height = height
-        profile.weight = weight
-        profile.activityLevel = activityLevel
-        profile.goal = goal
-        profile.caloriesBMT = calculateBMR(weight: weight, height: height, age: age, sex: sex)
-        guard let bmt = profile.caloriesBMT  else { return }
-        let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
-        profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
-        
-        StorageManager.shared.save(changedProfile: profile)
-        StorageManager.shared.set(activeProfile: profile)
-
-        showResults(for: profile)
-    }
-    
     @IBAction func editBarButtonTapped(_ sender: UIBarButtonItem) {
-        
+        if sender.style == .plain {
+            // Переход в режим редактирования
+            sender.style = .done
+            sender.title = "ОК" //Done
+            enableEditingMode()
+            } else {
+            // Завершение редактирования
+            sender.style = .plain
+            sender.title = "Правка" //Edit
+            disableEditingMode()
+            }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -245,6 +224,50 @@ extension ViewController {
         }
     }
     
+    func enableEditingMode() {
+        settingsFieldsAvailableToggle()
+        settingsStackView.alpha = 1
+        resultStackView.alpha = 0.6
+    }
+    
+    func disableEditingMode() {
+        settingsFieldsAvailableToggle()
+        settingsStackView.alpha = 0.6
+        resultStackView.alpha = 1
+        
+        calculateResult()
+        
+        StorageManager.shared.save(changedProfile: profile)
+        StorageManager.shared.set(activeProfile: profile)
+
+        showResults(for: profile)
+    }
+    
+    func calculateResult() {
+        guard let age = ageTextField.text,
+            let height = heightTextField.text,
+            let weight = weightTextField.text,
+            let activityLevel = selectedActivityLevel ,
+            let goal = selectedGoal else { return }
+        guard let age = Int(age),
+            let height = Double(height),
+            let weight = Double(weight) else { return }
+        guard let selectedSex = selectedSex else { return }
+        
+        let sex: Sex = selectedSex == maleButton ? .male : .female
+        
+        profile.age = age
+        profile.sex = sex
+        profile.height = height
+        profile.weight = weight
+        profile.activityLevel = activityLevel
+        profile.goal = goal
+        profile.caloriesBMT = calculateBMR(weight: weight, height: height, age: age, sex: sex)
+        guard let bmt = profile.caloriesBMT  else { return }
+        let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
+        profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
+    }
+    
     // Функция для показа предупреждения
 //    func showAlert(message: String) {
 //        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
@@ -332,7 +355,8 @@ extension ViewController {
         heightTextField.isEnabled.toggle()
         activityLevelTextField.isEnabled.toggle()
         goalTextField.isEnabled.toggle()
-        calculateButton.isHidden.toggle()
+        
+        settingsStackView.alpha = 0.6
     }
 }
 

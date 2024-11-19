@@ -8,22 +8,49 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-
+    @IBOutlet weak var tableView: UITableView!
+    let profiles = StorageManager.shared.fetchProfiles()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = .red
+        tableView.reloadData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        print("TableView frame: \(tableView.frame)")
     }
-    */
+}
 
+//MARK: - UITableView
+extension MenuViewController: UITableViewDelegate, UITableViewDataSource, StorageManagerDelegate {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        profiles.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath)
+        print("cellForRowAt called for row \(indexPath.row)")
+        let profile = profiles[indexPath.row]
+        var content = cell.defaultContentConfiguration()
+        content.text = profile.nickname
+        content.image = UIImage(named: profile.icon)
+        cell.contentConfiguration = content
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "ПОЛЬЗОВАТЕЛИ"
+    }
+    
 }

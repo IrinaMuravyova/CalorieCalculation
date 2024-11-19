@@ -43,8 +43,12 @@ class ViewController: UIViewController {
     var selectedGoal: Goals?
     var selectedSex: UIButton?
     
-    var sideMenu: UIView!
-    var isMenuOpen = false
+
+    private var isMenuOpen = false // Флаг для отображения меню
+    private let menuWidth: CGFloat = 300 // Ширина бокового меню
+    private let menuContainerView = UIView() // Контейнер для меню
+    private let dimmingView = UIView() // Затемняющий фон для интерактивности
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +82,8 @@ class ViewController: UIViewController {
         // Добавляем распознаватель жестов для скрытия клавиатуры по нажатию на экран
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
         view.addGestureRecognizer(tapGesture)
+        let tapGestureForMenu = UITapGestureRecognizer(target: self, action: #selector(hideMenu))
+        dimmingView.addGestureRecognizer(tapGestureForMenu)
         
         // Создаем распознаватель долгого нажатия
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
@@ -98,6 +104,10 @@ class ViewController: UIViewController {
         
         sideMenuConfigure()
         
+        // Добавляем свайп-жест
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(hideMenu))
+        swipeGesture.direction = .left
+        self.view.addGestureRecognizer(swipeGesture)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,7 +117,7 @@ class ViewController: UIViewController {
         
         if profiles == nil || profiles.isEmpty || profile == nil {
             performSegue(withIdentifier: "greetingSegue", sender: self)
-        } 
+        }
     }
     
     @IBAction func editBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -127,9 +137,10 @@ class ViewController: UIViewController {
     @IBAction func settingsButtonTapped(_ sender: UIButton) {
         
         isMenuOpen.toggle()
-            UIView.animate(withDuration: 0.3) {
-                self.sideMenu.frame.origin.x = self.isMenuOpen ? 0 : -250
-            }
+        UIView.animate(withDuration: 0.3) {
+            self.menuContainerView.frame.origin.x = self.isMenuOpen ? 0 : -self.menuWidth
+            self.dimmingView.alpha = self.isMenuOpen ? 1 : 0
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -195,7 +206,6 @@ extension ViewController {
         weightTextField.text = weight.formatted()
         activityLevelTextField.text = activityLevel
         goalTextField.text = goal
-        
         
     }
     
@@ -303,20 +313,29 @@ extension ViewController {
     
     func sideMenuConfigure() {
         
-        let menuViewController = ViewController as? SideMenuViewController
-        // Настраиваем меню
-//        sideMenuViewController.view.frame = CGRect(x: -250, y: 0, width: 250, height: view.frame.height)
-//        addChild(menuViewController)
-//        view.addSubview(menuViewController.view)
-//        menuViewController.didMove(toParent: self)
+        // Подключаем ViewController по идентификатору
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuViewController") as? MenuViewController {
+            
+        // Настраиваем контейнер меню
+        menuContainerView.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
+        menuContainerView.backgroundColor = .white
+        view.addSubview(menuContainerView)
+      
+        // Добавляем меню как дочерний ViewController
+        addChild(menuViewController)
+        menuViewController.view.frame = menuContainerView.bounds
+        menuContainerView.addSubview(menuViewController.view)
+        menuViewController.didMove(toParent: self)
         
+        // Настройка затемняющего фона
+        dimmingView.frame = view.bounds
+        dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        dimmingView.alpha = 0 // По умолчанию невидимый
+        view.insertSubview(dimmingView, belowSubview: menuContainerView)
+            
+        }
         
-        // Создаем меню
-//        sideMenu = UIView(frame: CGRect(x: -250, y: 0, width: 250, height: view.frame.height))
-//        sideMenu.backgroundColor = .gray
-        
-        // Добавляем меню в главный контроллер
-//        view.addSubview(sideMenu)
         
         
     }
@@ -445,14 +464,17 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     @objc func dismissPicker() {
         view.endEditing(true) // Скрывает клавиатуру и PickerView
-        guard isMenuOpen else { return }
-        settingsButtonTapped(settingsButton)
     }
     
     func setupPickerView(_ pickerView: UIPickerView, tag: Int) {
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.tag = tag
+    }
+    
+    @objc func hideMenu() {
+        guard isMenuOpen else { return }
+        settingsButtonTapped(settingsButton)
     }
 }
 

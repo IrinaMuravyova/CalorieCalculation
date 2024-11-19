@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8839D9B82CEC6B0E001AC439 /* TeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D9B72CEC6B0E001AC439 /* TeamViewController.swift */; };
+		8839D9BA2CEC6C41001AC439 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D9B92CEC6C41001AC439 /* Team.swift */; };
+		8839D9BC2CEC6FB6001AC439 /* TeamViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D9BB2CEC6FB6001AC439 /* TeamViewCell.swift */; };
+		88A5368C2CEB286800F6DFEF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5368B2CEB286800F6DFEF /* MenuViewController.swift */; };
 		88D5EF8F2CE3013C0024E2CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */; };
 		88D5EF912CE3013C0024E2CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EF902CE3013C0024E2CC /* SceneDelegate.swift */; };
 		88D5EF932CE3013C0024E2CC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EF922CE3013C0024E2CC /* ViewController.swift */; };
@@ -20,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8839D9B72CEC6B0E001AC439 /* TeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewController.swift; sourceTree = "<group>"; };
+		8839D9B92CEC6C41001AC439 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		8839D9BB2CEC6FB6001AC439 /* TeamViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewCell.swift; sourceTree = "<group>"; };
+		88A5368B2CEB286800F6DFEF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		88D5EF8B2CE3013C0024E2CC /* CalorieCalculation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieCalculation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88D5EF902CE3013C0024E2CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				88D5EFAE2CE37A880024E2CC /* ImageCollectionViewCell.swift */,
+				8839D9BB2CEC6FB6001AC439 /* TeamViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -89,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				88D5EFA22CE301910024E2CC /* Profile.swift */,
+				8839D9B92CEC6C41001AC439 /* Team.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -115,6 +125,8 @@
 			children = (
 				88D5EF922CE3013C0024E2CC /* ViewController.swift */,
 				88D5EFAA2CE367620024E2CC /* GreetingViewContoller.swift */,
+				88A5368B2CEB286800F6DFEF /* MenuViewController.swift */,
+				8839D9B72CEC6B0E001AC439 /* TeamViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -193,10 +205,14 @@
 				88D5EFAB2CE367620024E2CC /* GreetingViewContoller.swift in Sources */,
 				88D5EF932CE3013C0024E2CC /* ViewController.swift in Sources */,
 				88D5EFA32CE301910024E2CC /* Profile.swift in Sources */,
+				8839D9B82CEC6B0E001AC439 /* TeamViewController.swift in Sources */,
 				88D5EFAF2CE37A880024E2CC /* ImageCollectionViewCell.swift in Sources */,
 				88D5EFA72CE336020024E2CC /* StorageManager.swift in Sources */,
 				88D5EF8F2CE3013C0024E2CC /* AppDelegate.swift in Sources */,
 				88D5EF912CE3013C0024E2CC /* SceneDelegate.swift in Sources */,
+				8839D9BC2CEC6FB6001AC439 /* TeamViewCell.swift in Sources */,
+				8839D9BA2CEC6C41001AC439 /* Team.swift in Sources */,
+				88A5368C2CEB286800F6DFEF /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

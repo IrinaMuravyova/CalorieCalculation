@@ -142,6 +142,7 @@ class ViewController: UIViewController {
     @IBAction func settingsButtonTapped(_ sender: UIButton) {
         
         isMenuOpen.toggle()
+        editButton.isEnabled = false
         UIView.animate(withDuration: 0.3) {
             self.menuContainerView.frame.origin.x = self.isMenuOpen ? 0 : -self.menuWidth
             self.dimmingView.alpha = self.isMenuOpen ? 1 : 0
@@ -533,6 +534,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc func hideMenu() {
         guard isMenuOpen else { return }
         settingsButtonTapped(settingsButton)
+        editButton.isEnabled = true
     }
 }
 

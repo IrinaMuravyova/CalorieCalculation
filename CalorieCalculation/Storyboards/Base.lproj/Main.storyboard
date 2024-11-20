@@ -263,6 +263,9 @@
                                                 <rect key="frame" x="57" y="0.0" width="51.5" height="51"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="questionmark.circle" catalog="system"/>
+                                                <connections>
+                                                    <segue destination="FKr-hR-MMc" kind="show" id="b0S-Tm-kdm"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFd-4n-rFe" userLabel="Spacing">
                                                 <rect key="frame" x="114.5" y="0.0" width="51" height="51"/>
@@ -407,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pr4-Zg-R27" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="744"/>
+            <point key="canvasLocation" x="1103" y="795"/>
         </scene>
         <!--Team View Controller-->
         <scene sceneID="U6o-Cg-t91">
@@ -524,7 +527,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCG-tZ-mo7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="1122"/>
+            <point key="canvasLocation" x="1103" y="1550"/>
+        </scene>
+        <!--Help View Controller-->
+        <scene sceneID="cMY-fE-XTI">
+            <objects>
+                <viewController id="FKr-hR-MMc" customClass="HelpViewController" customModule="CalorieCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c4o-6k-P2G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmX-2M-cTG">
+                                <rect key="frame" x="20" y="64" width="280" height="484"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sf6-XR-pwP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sf6-XR-pwP" firstAttribute="trailing" secondItem="CmX-2M-cTG" secondAttribute="trailing" constant="20" id="KmB-DS-K8z"/>
+                            <constraint firstItem="sf6-XR-pwP" firstAttribute="bottom" secondItem="CmX-2M-cTG" secondAttribute="bottom" constant="20" id="akz-33-8vm"/>
+                            <constraint firstItem="CmX-2M-cTG" firstAttribute="leading" secondItem="sf6-XR-pwP" secondAttribute="leading" constant="20" id="lOa-Tu-Fk4"/>
+                            <constraint firstItem="CmX-2M-cTG" firstAttribute="top" secondItem="sf6-XR-pwP" secondAttribute="top" id="mTX-cU-JEi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5eK-Q9-ZMl"/>
+                    <connections>
+                        <outlet property="helpTextLabel" destination="CmX-2M-cTG" id="0Gf-j3-HvK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VCQ-ao-EBb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1926" y="-2"/>
         </scene>
         <!--Greeting View Controller-->
         <scene sceneID="eq2-nQ-eca">
@@ -535,7 +571,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zBS-Wc-1Ed">
-                                <rect key="frame" x="20" y="40" width="280" height="131.5"/>
+                                <rect key="frame" x="20" y="104" width="280" height="131.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Давай знакомиться !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39c-EP-0bG">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
@@ -571,7 +607,7 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
-                                <rect key="frame" x="20" y="191.5" width="280" height="292"/>
+                                <rect key="frame" x="20" y="255.5" width="280" height="228"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vex-P0-YvD">
                                     <size key="itemSize" width="76" height="85"/>
@@ -634,7 +670,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIJ-I2-E7c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926" y="297"/>
+            <point key="canvasLocation" x="1926" y="796"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zyi-WD-svT">
@@ -670,11 +706,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YnF-R4-Ksg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="744"/>
+            <point key="canvasLocation" x="291" y="795"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7F6-nM-xpb"/>
+        <segue reference="Bls-Fc-fBC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>

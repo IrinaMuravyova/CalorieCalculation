@@ -10,7 +10,7 @@ import MessageUI
 
 class MenuViewController: UIViewController, GreetingViewControllerDelegate {
     func didUpdateProfile(nickname: String, icon: String) {
-        //TODO:
+        //TODO: kk
     }
     
     @IBOutlet weak var tableView: UITableView!

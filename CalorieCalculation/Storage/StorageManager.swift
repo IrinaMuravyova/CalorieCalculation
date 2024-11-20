@@ -106,6 +106,15 @@ class StorageManager {
         defaults.set(data, forKey: activeProfileKey)
     }
     
+    func deleteActiveProfile() {
+//        let profiles = fetchProfiles()
+//        let profile = profiles.first{$0.nickname == activeProfile.nickname}
+//
+//        let encoder = JSONEncoder()
+//        guard let data = try? encoder.encode(profile) else { return }
+        defaults.set(nil, forKey: activeProfileKey)
+    }
+    
     func nickmaneIsUnique(nickname : String) -> Bool {
         // Проверяем, существует ли уже профиль с таким nickname
         if StorageManager.shared.fetchProfiles().contains(where: { $0.nickname == nickname }) {

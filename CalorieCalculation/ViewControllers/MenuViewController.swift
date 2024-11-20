@@ -89,7 +89,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return profiles.count
+        return StorageManager.shared.fetchProfiles().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,10 +147,14 @@ extension MenuViewController {
     // Добавление кнопок удаления и редактирования
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Кнопка удаления
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [weak self] (_, _, completionHandler) in
-            guard let self = self else { return }
-            self.data.remove(at: indexPath.row) // Удаляем элемент из массива
-            tableView.deleteRows(at: [indexPath], with: .automatic) // Удаляем строку из таблицы
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
+//            guard let self = self else { return }
+            StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
+//            self.data.remove(at: indexPath.row)
+            // Обновляем интерфейс таблицы
+            tableView.performBatchUpdates {
+                tableView.deleteRows(at: [indexPath], with: .automatic) // Удаляем строку из таблицы
+            }
             completionHandler(true) // Завершаем действие
         }
 
@@ -163,6 +167,7 @@ extension MenuViewController {
         }
 
         editAction.backgroundColor = .blue // Настраиваем цвет кнопки редактирования
+        
         return UISwipeActionsConfiguration(actions: [deleteAction, editAction]) // Возвращаем обе кнопки
     }
 

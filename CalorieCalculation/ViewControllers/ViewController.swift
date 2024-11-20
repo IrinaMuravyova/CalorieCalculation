@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
         configuring(button: questionButton, withImage: UIImage(systemName: "questionmark.circle"))
         
-        if profile.age == nil {
+        if profile.age == nil { //TODO: change verify
             titleForParametersLabel.text = "Добавим подробностей:"
 //            editButton.isHidden = true
             editButton.style = .done
@@ -469,8 +469,6 @@ extension ViewController {
         proteinLabel.text = nutritions.protein.formatted()
         fatLabel.text = nutritions.fat.formatted()
         carbLabel.text = nutritions.carbs.formatted()
-        
-        settingsFieldsAvailableToggle()
     }
     
     func settingsFieldsAvailableToggle() {

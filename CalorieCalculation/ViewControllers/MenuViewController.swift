@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import MessageUI
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, GreetingViewControllerDelegate {
+    func didUpdateProfile(nickname: String, icon: String) {
+        //TODO:
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     let profiles = StorageManager.shared.fetchProfiles()
-    var data = ["Item 1", "Item 2", "Item 3", "Item 4"]
+    var data = ["Item 1", "Item 2", "Item 3", "Item 4"] //  для тестирования
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +23,60 @@ class MenuViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
+    }
+    
+    @IBAction func sendEmailButton(_ sender: UIButton) {
+        // Проверьте, доступна ли функция отправки писем
+//        if MFMailComposeViewController.canSendMail() {
+//            let mailComposeVC = MFMailComposeViewController()
+//            mailComposeVC.mailComposeDelegate = self
+//
+//            // Настройте письмо
+//            mailComposeVC.setToRecipients(["developer@example.com"]) // Замените на адрес разработчика
+//            mailComposeVC.setSubject("Обратная связь о приложении")
+//            mailComposeVC.setMessageBody("Здравствуйте! Хотелось бы сообщить следующее:", isHTML: false)
+//
+//            // Покажите почтовый интерфейс
+//            present(mailComposeVC, animated: true, completion: nil)
+//        } else {
+//            // Покажите сообщение об ошибке
+//            let alert = UIAlertController(
+//                title: "Ошибка",
+//                message: "На устройстве не настроен почтовый клиент.",
+//                preferredStyle: .alert
+//            )
+//            alert.addAction(UIAlertAction(title: "ОК", style: .default))
+//            present(alert, animated: true)
+//            }
+
+//    // MARK: - MFMailComposeViewControllerDelegate
+//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+//        controller.dismiss(animated: true)
+//
+//        // Обработка результата
+//        switch result {
+//        case .sent:
+//            print("Письмо отправлено")
+//        case .saved:
+//            print("Письмо сохранено")
+//        case .cancelled:
+//            print("Письмо отменено")
+//        case .failed:
+//            print("Ошибка отправки письма")
+//        @unknown default:
+//            break
+//        }
+//    }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "changeProfileSegue" { // Убедитесь, что идентификатор совпадает
+            if let changeProfileVC = segue.destination as? GreetingViewController {
+//                changeProfileVC.textForTitleLabel = "Редактировать"
+//                guard let indexPath = sender as? Int else { return }
+                changeProfileVC.delegate = self
+            }
+        }
     }
 }
 
@@ -98,7 +157,8 @@ extension MenuViewController {
         // Кнопка редактирования
         let editAction = UIContextualAction(style: .normal, title: "Редактировать") { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
-            self.showEditAlert(at: indexPath) // Открываем окно редактирования
+            performSegue(withIdentifier: "changeProfileSegue", sender: indexPath)
+//            self.showEditAlert(at: indexPath) // Открываем окно редактирования
             completionHandler(true)
         }
 
@@ -108,23 +168,29 @@ extension MenuViewController {
 
     // Окно редактирования
     private func showEditAlert(at indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Редактировать", message: "Измените текст", preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.text = self.data[indexPath.row]
-        }
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let greetingVC = storyboard.instantiateViewController(withIdentifier: "greetingViewController") as? GreetingViewController {
+//            greetingVC.titleLabel?.text = "Редактировать"
+//        }
+//        
+//        performSegue(withIdentifier: "greetingViewController", sender: indexPath)
+//        let alert = UIAlertController(title: "Редактировать", message: "Измените текст", preferredStyle: .alert)
+//        alert.addTextField { textField in
+//            textField.text = self.data[indexPath.row]
+//        }
 
-        let saveAction = UIAlertAction(title: "Сохранить", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            if let newText = alert.textFields?.first?.text, !newText.isEmpty {
-                self.data[indexPath.row] = newText
-                self.tableView.reloadRows(at: [indexPath], with: .automatic) // Обновляем строку
-            }
-        }
-
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
+//        let saveAction = UIAlertAction(title: "Сохранить", style: .default) { [weak self] _ in
+//            guard let self = self else { return }
+//            if let newText = alert.textFields?.first?.text, !newText.isEmpty {
+//                self.data[indexPath.row] = newText
+//                self.tableView.reloadRows(at: [indexPath], with: .automatic) // Обновляем строку
+//            }
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+//        alert.addAction(saveAction)
+//        alert.addAction(cancelAction)
+//        present(alert, animated: true, completion: nil)
     }
     
 }

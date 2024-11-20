@@ -65,7 +65,10 @@ class ViewController: UIViewController {
         
         if profile.age == nil {
             titleForParametersLabel.text = "Добавим подробностей:"
-            editButton.isHidden = true
+//            editButton.isHidden = true
+            editButton.style = .done
+            editButton.title = "OK"
+        
             resultStackView.isHidden = true
         } else {
             fillFields(for: profile)
@@ -127,10 +130,12 @@ class ViewController: UIViewController {
             sender.title = "ОК" //Done
             enableEditingMode()
             } else {
-            // Завершение редактирования
-            sender.style = .plain
-            sender.title = "Правка" //Edit
-            disableEditingMode()
+                if checkFilling() {
+                    // Завершение редактирования
+                    sender.style = .plain
+                    sender.title = "Правка" //Edit
+                    disableEditingMode()
+                }
             }
     }
     
@@ -266,6 +271,51 @@ extension ViewController {
             print("Long press began")
             // Добавить код, который выполняется при начале длительного нажатия
         }
+    }
+    
+    func checkFilling() -> Bool {
+        if selectedSex == nil {
+            showAlert(message: "Нужно указать пол: женский или мужской")
+            return false
+        }
+        
+        guard let age = ageTextField.text else {
+            showAlert(message: "Нужно указать свой возраст в годах")
+            return false
+        }
+        if Int(age) == nil {
+            showAlert(message: "Возраст указан некорректно. Укажи количество лет.")
+            return false
+        }
+        
+        guard let height = heightTextField.text else {
+            showAlert(message: "Нужно указать свой рост в сантиметрах")
+            return false
+        }
+        if Int(height) == nil {
+            showAlert(message: "Рост указан некорректно. Укажи свой рост в сантиметрах.")
+            return false
+        }
+        
+        
+        guard let weight = weightTextField.text else {
+            showAlert(message: "Нужно указать свой вес в килограммах")
+            return false
+        }
+        if Int(weight) == nil {
+            showAlert(message: "Вес указан некорректно. Укажи свой вес в сантиметрах.")
+            return false
+        }
+        
+        if selectedActivityLevel == nil {
+            showAlert(message: "Нужно указать уровень активности")
+            return false
+        }
+        if selectedGoal == nil {
+            showAlert(message: "Нужно указать свою цель")
+            return false
+        }
+        return true
     }
     
     func enableEditingMode() {

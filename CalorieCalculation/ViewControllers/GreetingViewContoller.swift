@@ -13,6 +13,7 @@ protocol GreetingViewControllerDelegate: AnyObject {
 
 class GreetingViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var continueButton: UIButton!

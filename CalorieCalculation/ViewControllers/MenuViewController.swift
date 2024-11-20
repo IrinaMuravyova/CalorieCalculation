@@ -148,13 +148,8 @@ extension MenuViewController {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Кнопка удаления
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
-//            guard let self = self else { return }
             StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
-//            self.data.remove(at: indexPath.row)
-            // Обновляем интерфейс таблицы
-            tableView.performBatchUpdates {
-                tableView.deleteRows(at: [indexPath], with: .automatic) // Удаляем строку из таблицы
-            }
+            tableView.deleteRows(at: [indexPath], with: .automatic) // Удаляем строку из таблицы
             completionHandler(true) // Завершаем действие
         }
 

@@ -16,7 +16,6 @@ class MenuViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = .red
         tableView.reloadData()
     }
 }
@@ -39,7 +38,10 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
         
         var content = cell.defaultContentConfiguration()
         content.text = profile.nickname
-        content.image = UIImage(named: profile.icon)
+        if let image = UIImage(named: profile.icon) {
+            content.image = image
+            content.imageProperties.maximumSize = CGSize(width: 30, height: 30)
+        }
         cell.contentConfiguration = content
         return cell
     }

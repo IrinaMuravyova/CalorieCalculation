@@ -397,7 +397,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Настройки" id="ztO-xd-Ida"/>
                     <connections>
-                        <outlet property="sendEmailButton" destination="SnY-Ec-P7d" id="Ii4-xk-LEu"/>
                         <outlet property="tableView" destination="UJi-6H-3ik" id="CBj-iA-YEG"/>
                     </connections>
                 </viewController>
@@ -652,7 +651,6 @@
         <!--Navigation Controller-->
         <scene sceneID="XgW-b4-qCv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YnF-R4-Ksg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="menuNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fyK-lD-CUU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4te-Wy-cg3">
@@ -664,6 +662,7 @@
                         <segue destination="q5B-ZJ-RZS" kind="relationship" relationship="rootViewController" id="HA5-wr-IaH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YnF-R4-Ksg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="278" y="744"/>
         </scene>

@@ -189,7 +189,12 @@ extension ViewController {
     func fillFields(for profile: Profile) {
         fillSettings(for: profile)
         fillNutritions(for: profile)
+        
         settingsFieldsAvailableToggle()
+        
+        selectedSex = profile.sex == .female ? femaleButton : maleButton
+        selectedActivityLevel = profile.activityLevel
+        selectedGoal = profile.goal
     }
     
     func fillSettings(for profile: Profile) {
@@ -274,6 +279,8 @@ extension ViewController {
     }
     
     func checkFilling() -> Bool {
+        let defaultButtonImage = UIImage(systemName: "circle")
+//        if maleButton.imageView?.image == defaultButtonImage && femaleBuvtton.imageView?.image == defaultButtonImage
         if selectedSex == nil {
             showAlert(message: "Нужно указать пол: женский или мужской")
             return false
@@ -360,6 +367,10 @@ extension ViewController {
         guard let bmt = profile.caloriesBMT  else { return }
         let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
         profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
+
+        self.selectedSex = selectedSex
+        selectedActivityLevel = profile.activityLevel
+        selectedGoal = profile.goal
     }
     
     func sideMenuConfigure() {

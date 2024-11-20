@@ -339,7 +339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1102.5" y="-77.112676056338032"/>
+            <point key="canvasLocation" x="1103" y="-2"/>
         </scene>
         <!--Настройки-->
         <scene sceneID="SbB-yU-OWu">
@@ -535,7 +535,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="zBS-Wc-1Ed">
-                                <rect key="frame" x="20" y="104" width="280" height="131.5"/>
+                                <rect key="frame" x="20" y="40" width="280" height="131.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Давай знакомиться !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39c-EP-0bG">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33.5"/>
@@ -571,7 +571,7 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
-                                <rect key="frame" x="20" y="255.5" width="280" height="228"/>
+                                <rect key="frame" x="20" y="191.5" width="280" height="292"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vex-P0-YvD">
                                     <size key="itemSize" width="76" height="85"/>
@@ -674,7 +674,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Bls-Fc-fBC"/>
+        <segue reference="7F6-nM-xpb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>

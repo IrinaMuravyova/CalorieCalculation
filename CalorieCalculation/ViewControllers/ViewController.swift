@@ -59,7 +59,7 @@ class ViewController: UIViewController {
 //        print(profiles!)
 //        print(profile!)
         
-        configuring(button: profileButton, withImage: UIImage(named: profile.icon) )
+        configuring(button: profileButton, withImage: UIImage(named: profile.icon))
         configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
         configuring(button: questionButton, withImage: UIImage(systemName: "questionmark.circle"))
         
@@ -555,6 +555,11 @@ extension ViewController: GreetingViewControllerDelegate {
         )
         StorageManager.shared.add(newProfile: newProfile)
         StorageManager.shared.set(activeProfile: newProfile)
+        
+        // Обновляю иконку у кнопки профиля
+        configuring(button: profileButton, withImage: UIImage(named: newProfile.icon) )
+        // Обновляю таблицу в side menu
+        sideMenuConfigure()
     }
 }
 

@@ -8,11 +8,7 @@
 import UIKit
 import MessageUI
 
-class MenuViewController: UIViewController, GreetingViewControllerDelegate {
-    func didUpdateProfile(nickname: String, icon: String) {
-        //TODO: kk
-    }
-    
+class MenuViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let profiles = StorageManager.shared.fetchProfiles()
     var data = ["Item 1", "Item 2", "Item 3", "Item 4"] //  для тестирования
@@ -77,6 +73,13 @@ class MenuViewController: UIViewController, GreetingViewControllerDelegate {
                 changeProfileVC.delegate = self
             }
         }
+    }
+}
+
+extension MenuViewController: GreetingViewControllerDelegate {
+    func didUpdateProfile(nickname: String, icon: String) {
+        print("Вызывается второй метод didUpdateProfile")
+        //TODO: kk
     }
 }
 
@@ -150,6 +153,7 @@ extension MenuViewController {
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
             StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
             tableView.deleteRows(at: [indexPath], with: .automatic) // Удаляем строку из таблицы
+            //TODO: если это был единственный пользователь, то выводить greetingVC
             completionHandler(true) // Завершаем действие
         }
 

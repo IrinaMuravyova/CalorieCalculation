@@ -8,7 +8,6 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    @IBOutlet weak var sendEmailButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     let profiles = StorageManager.shared.fetchProfiles()
     

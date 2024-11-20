@@ -279,7 +279,7 @@ extension ViewController {
     }
     
     func checkFilling() -> Bool {
-        let defaultButtonImage = UIImage(systemName: "circle")
+//        let defaultButtonImage = UIImage(systemName: "circle")
 //        if maleButton.imageView?.image == defaultButtonImage && femaleBuvtton.imageView?.image == defaultButtonImage
         if selectedSex == nil {
             showAlert(message: "Нужно указать пол: женский или мужской")
@@ -466,9 +466,7 @@ extension ViewController {
         caloriesLabel.text = profile.caloriesTDEEForGoal?.formatted()
         guard let weight = profile.weight, let tdee = profile.caloriesTDEEForGoal else { return }
         let nutritions = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: tdee)
-        proteinLabel.text = nutritions.protein.formatted()
-        fatLabel.text = nutritions.fat.formatted()
-        carbLabel.text = nutritions.carbs.formatted()
+        fillNutritions(for: profile)
     }
     
     func settingsFieldsAvailableToggle() {

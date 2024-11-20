@@ -140,6 +140,7 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.menuContainerView.frame.origin.x = self.isMenuOpen ? 0 : -self.menuWidth
             self.dimmingView.alpha = self.isMenuOpen ? 1 : 0
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -155,7 +156,7 @@ class ViewController: UIViewController {
 //MARK: - Setup methods
 extension ViewController {
     func configuring(button: UIButton, withImage: UIImage!) {
-        var resizedImage = resizeImage(image: withImage, targetSize: CGSize(width: 50, height: 50))
+        let resizedImage = resizeImage(image: withImage, targetSize: CGSize(width: 50, height: 50))
             
         // Настраиваем конфигурацию
         var configuration = UIButton.Configuration.plain()
@@ -315,27 +316,27 @@ extension ViewController {
         
         // Подключаем ViewController по идентификатору
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuViewController") as? MenuViewController {
-            
-        // Настраиваем контейнер меню
-        menuContainerView.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
-        menuContainerView.backgroundColor = .white
-        view.addSubview(menuContainerView)
-      
-        // Добавляем меню как дочерний ViewController
-        addChild(menuViewController)
-        menuViewController.view.frame = menuContainerView.bounds
-        menuContainerView.addSubview(menuViewController.view)
-        menuViewController.didMove(toParent: self)
-        
-        // Настройка затемняющего фона
-        dimmingView.frame = view.bounds
-        dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        dimmingView.alpha = 0 // По умолчанию невидимый
-        view.insertSubview(dimmingView, belowSubview: menuContainerView)
-            
+        if let navigationController = storyboard.instantiateViewController(withIdentifier: "menuNavigationController") as? UINavigationController {
+            if let  menuViewController = navigationController.topViewController as? MenuViewController {
+                // Настраиваем контейнер меню
+                menuContainerView.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
+                menuContainerView.backgroundColor = .white
+                view.addSubview(menuContainerView)
+                
+                // Добавляем меню как дочерний ViewController
+                addChild(menuViewController)
+                menuViewController.view.frame = menuContainerView.bounds
+                menuContainerView.addSubview(menuViewController.view)
+                menuViewController.didMove(toParent: self)
+                
+                // Настройка затемняющего фона
+                dimmingView.frame = view.bounds
+                dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+                dimmingView.alpha = 0 // По умолчанию невидимый
+                view.insertSubview(dimmingView, belowSubview: menuContainerView)
+                
+            }
         }
-        
         
         
     }

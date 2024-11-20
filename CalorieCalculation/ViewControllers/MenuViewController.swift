@@ -8,6 +8,7 @@
 import UIKit
 
 class MenuViewController: UIViewController {
+    @IBOutlet weak var sendEmailButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     let profiles = StorageManager.shared.fetchProfiles()
     
@@ -18,11 +19,6 @@ class MenuViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .red
         tableView.reloadData()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print("TableView frame: \(tableView.frame)")
     }
 }
 
@@ -35,13 +31,13 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        profiles.count
+        return profiles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath)
-        print("cellForRowAt called for row \(indexPath.row)")
         let profile = profiles[indexPath.row]
+        
         var content = cell.defaultContentConfiguration()
         content.text = profile.nickname
         content.image = UIImage(named: profile.icon)

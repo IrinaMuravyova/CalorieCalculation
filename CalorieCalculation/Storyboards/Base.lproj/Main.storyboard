@@ -348,11 +348,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qpH-04-ec9">
-                                <rect key="frame" x="20" y="64" width="280" height="306"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tA3-c2-Vq6">
+                                <rect key="frame" x="20" y="64" width="280" height="504"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UJi-6H-3ik">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="217"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="UJi-6H-3ik">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="108"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileCell" id="JRN-t4-VSt">
@@ -365,38 +365,39 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnY-Ec-P7d">
-                                        <rect key="frame" x="0.0" y="227" width="280" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="НАПИСАТЬ РАЗРАБОТЧИКУ"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhI-Mn-q8q">
-                                        <rect key="frame" x="0.0" y="271.5" width="280" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="О НАС"/>
-                                        <connections>
-                                            <segue destination="UTN-k6-Rkn" kind="show" identifier="teamSeque" id="vpd-e3-mt5"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qpH-04-ec9">
+                                        <rect key="frame" x="0.0" y="118" width="280" height="386"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnY-Ec-P7d">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="341.5"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="НАПИСАТЬ РАЗРАБОТЧИКУ"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhI-Mn-q8q">
+                                                <rect key="frame" x="0.0" y="351.5" width="280" height="34.5"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="О НАС"/>
+                                                <connections>
+                                                    <segue destination="UTN-k6-Rkn" kind="show" identifier="teamSeque" id="vpd-e3-mt5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="UJi-6H-3ik" firstAttribute="leading" secondItem="qpH-04-ec9" secondAttribute="leading" id="Y2T-Vv-76S"/>
-                                    <constraint firstAttribute="trailing" secondItem="UJi-6H-3ik" secondAttribute="trailing" id="cGC-db-dTz"/>
-                                    <constraint firstItem="UJi-6H-3ik" firstAttribute="top" secondItem="qpH-04-ec9" secondAttribute="top" id="gLV-RM-xyf"/>
-                                    <constraint firstItem="SnY-Ec-P7d" firstAttribute="top" secondItem="UJi-6H-3ik" secondAttribute="bottom" constant="10" id="sTj-xx-IIR"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1gW-Aj-Obc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1gW-Aj-Obc" firstAttribute="trailing" secondItem="qpH-04-ec9" secondAttribute="trailing" constant="20" id="36c-gz-UNK"/>
-                            <constraint firstItem="qpH-04-ec9" firstAttribute="leading" secondItem="1gW-Aj-Obc" secondAttribute="leading" constant="20" id="FIu-Xk-umN"/>
-                            <constraint firstItem="qpH-04-ec9" firstAttribute="top" secondItem="1gW-Aj-Obc" secondAttribute="top" id="RIp-ze-S6D"/>
+                            <constraint firstItem="1gW-Aj-Obc" firstAttribute="trailing" secondItem="tA3-c2-Vq6" secondAttribute="trailing" constant="20" id="ESD-cq-msV"/>
+                            <constraint firstItem="tA3-c2-Vq6" firstAttribute="leading" secondItem="1gW-Aj-Obc" secondAttribute="leading" constant="20" id="FmN-oA-1fM"/>
+                            <constraint firstItem="1gW-Aj-Obc" firstAttribute="bottom" secondItem="tA3-c2-Vq6" secondAttribute="bottom" id="X5M-jT-G0G"/>
+                            <constraint firstItem="tA3-c2-Vq6" firstAttribute="top" secondItem="1gW-Aj-Obc" secondAttribute="top" id="xeZ-ct-tik"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Настройки" id="ztO-xd-Ida"/>
                     <connections>
+                        <outlet property="sendEmailButton" destination="SnY-Ec-P7d" id="Ii4-xk-LEu"/>
                         <outlet property="tableView" destination="UJi-6H-3ik" id="CBj-iA-YEG"/>
                     </connections>
                 </viewController>

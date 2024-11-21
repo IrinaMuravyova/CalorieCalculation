@@ -540,24 +540,27 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
 //MARK: - GreetingViewControllerDelegate
 extension ViewController: GreetingViewControllerDelegate {
-    func didUpdateProfile(nickname: String, icon: String) {
-        let newProfile = Profile(
-            nickname: nickname,
-            icon: icon,
-            age: nil,
-            sex: nil,
-            height: nil,
-            weight: nil,
-            activityLevel: nil,
-            goal: nil,
-            caloriesBMT: nil,
-            caloriesTDEEForGoal: nil
-        )
-        StorageManager.shared.add(newProfile: newProfile)
-        StorageManager.shared.set(activeProfile: newProfile)
+//    func didUpdateProfile(nickname: String, icon: String) {
+    func didUpdateProfile(_ profile: Profile) {
+//        let newProfile = Profile(
+//            nickname: nickname,
+//            icon: icon,
+//            age: nil,
+//            sex: nil,
+//            height: nil,
+//            weight: nil,
+//            activityLevel: nil,
+//            goal: nil,
+//            caloriesBMT: nil,
+//            caloriesTDEEForGoal: nil
+//        )
+//        StorageManager.shared.add(newProfile: newProfile)
+//        StorageManager.shared.set(activeProfile: newProfile)
+//        
         
+        hideMenu()
         // Обновляю иконку у кнопки профиля
-        configuring(button: profileButton, withImage: UIImage(named: newProfile.icon) )
+        configuring(button: profileButton, withImage: UIImage(named: profile.icon) )
         // Обновляю таблицу в side menu
         sideMenuConfigure()
     }

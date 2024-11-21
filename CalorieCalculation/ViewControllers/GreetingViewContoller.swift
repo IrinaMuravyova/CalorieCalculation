@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GreetingViewControllerDelegate: AnyObject {
-    func didUpdateProfile(nickname: String, icon: String)
+    func didUpdateProfile(_ profile: Profile)
 }
 
 class GreetingViewController: UIViewController {
@@ -38,15 +38,31 @@ class GreetingViewController: UIViewController {
     }
     
     @IBAction func continueButtonTapped(_ sender: UIButton) {
-            guard let nickname = nicknameTextField.text,
-                  let icon = icon,
-                  !nickname.isEmpty else { return }
-      
-            // Передача данных через делегат
-            delegate?.didUpdateProfile(nickname: nickname, icon: icon)
-            
-            // Закрытие модального экрана
-            dismiss(animated: true, completion: nil)
+        guard let nickname = nicknameTextField.text,
+              let icon = icon,
+              !nickname.isEmpty else { return }
+      // добавляю нового пользователя
+        let newProfile = Profile(
+            nickname: nickname,
+            icon: icon,
+            age: nil,
+            sex: nil,
+            height: nil,
+            weight: nil,
+            activityLevel: nil,
+            goal: nil,
+            caloriesBMT: nil,
+            caloriesTDEEForGoal: nil
+        )
+        StorageManager.shared.add(newProfile: newProfile)
+        StorageManager.shared.set(activeProfile: newProfile)
+        
+        // Передача данных через делегат
+        delegate?.didUpdateProfile(newProfile)
+    
+    
+        // Закрытие модального экрана
+        dismiss(animated: true, completion: nil)
         }
 }
 

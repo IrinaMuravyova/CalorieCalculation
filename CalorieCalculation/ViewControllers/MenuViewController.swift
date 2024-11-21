@@ -65,21 +65,25 @@ class MenuViewController: UIViewController {
 //    }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "changeProfileSegue" { // Убедитесь, что идентификатор совпадает
-            if let changeProfileVC = segue.destination as? GreetingViewController {
-//                changeProfileVC.textForTitleLabel = "Редактировать"
-//                guard let indexPath = sender as? Int else { return }
-                changeProfileVC.delegate = self
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "changeProfileSegue" { // Убедитесь, что идентификатор совпадает
+//            if let changeProfileVC = segue.destination as? GreetingViewController {
+////                changeProfileVC.textForTitleLabel = "Редактировать"
+////                guard let indexPath = sender as? Int else { return }
+//                changeProfileVC.delegate = self
+//            }
+//        }
+//    }
 }
 
 extension MenuViewController: GreetingViewControllerDelegate {
-    func didUpdateProfile(nickname: String, icon: String) {
-        print("Вызывается второй метод didUpdateProfile")
-        //TODO: kk
+    func didUpdateProfile(_ profile: Profile) {
+        if let navigationController = self.navigationController,
+           let  mainVC = navigationController.viewControllers.first(where: { $0 is ViewController }) as? ViewController {
+                StorageManager.shared.add(newProfile: profile)
+                StorageManager.shared.set(activeProfile: profile)
+                mainVC.didUpdateProfile(profile)
+            }
     }
 }
 
@@ -152,8 +156,23 @@ extension MenuViewController {
         // Кнопка удаления
         let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
             StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
-            tableView.deleteRows(at: [indexPath], with: .automatic) // Удаляем строку из таблицы
-            //TODO: если это был единственный пользователь, то выводить greetingVC
+            
+        // Обновляем таблицу после удаления
+            tableView.performBatchUpdates({
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }, completion: { _ in
+                // Если массив пуст, открываем GreetingViewController
+                if StorageManager.shared.fetchProfiles().isEmpty {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let greetingVC = storyboard.instantiateViewController(withIdentifier: "greetingViewController") as? GreetingViewController {
+                        greetingVC.modalPresentationStyle = .fullScreen
+                        greetingVC.delegate = self
+                        self.present(greetingVC, animated: true, completion: nil)
+                    }
+                }
+                
+            })
+
             completionHandler(true) // Завершаем действие
         }
 

@@ -8,7 +8,7 @@
 import UIKit
 import MessageUI
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     let profiles = StorageManager.shared.fetchProfiles()
     var data = ["Item 1", "Item 2", "Item 3", "Item 4"] //  для тестирования
@@ -33,46 +33,46 @@ class MenuViewController: UIViewController {
     
     @IBAction func sendEmailButton(_ sender: UIButton) {
         // Проверьте, доступна ли функция отправки писем
-//        if MFMailComposeViewController.canSendMail() {
-//            let mailComposeVC = MFMailComposeViewController()
-//            mailComposeVC.mailComposeDelegate = self
-//
-//            // Настройте письмо
-//            mailComposeVC.setToRecipients(["developer@example.com"]) // Замените на адрес разработчика
-//            mailComposeVC.setSubject("Обратная связь о приложении")
-//            mailComposeVC.setMessageBody("Здравствуйте! Хотелось бы сообщить следующее:", isHTML: false)
-//
-//            // Покажите почтовый интерфейс
-//            present(mailComposeVC, animated: true, completion: nil)
-//        } else {
-//            // Покажите сообщение об ошибке
-//            let alert = UIAlertController(
-//                title: "Ошибка",
-//                message: "На устройстве не настроен почтовый клиент.",
-//                preferredStyle: .alert
-//            )
-//            alert.addAction(UIAlertAction(title: "ОК", style: .default))
-//            present(alert, animated: true)
-//            }
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeVC = MFMailComposeViewController()
+            mailComposeVC.mailComposeDelegate = self
 
-//    // MARK: - MFMailComposeViewControllerDelegate
-//    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-//        controller.dismiss(animated: true)
-//
-//        // Обработка результата
-//        switch result {
-//        case .sent:
-//            print("Письмо отправлено")
-//        case .saved:
-//            print("Письмо сохранено")
-//        case .cancelled:
-//            print("Письмо отменено")
-//        case .failed:
-//            print("Ошибка отправки письма")
-//        @unknown default:
-//            break
-//        }
-//    }
+            // Настройте письмо
+            mailComposeVC.setToRecipients(["miomir@yandex.ru"]) // адрес разработчика
+            mailComposeVC.setSubject("Обратная связь о приложении")
+            mailComposeVC.setMessageBody("Здравствуйте! Хотелось бы сообщить следующее:", isHTML: false)
+
+            // Покажите почтовый интерфейс
+            present(mailComposeVC, animated: true, completion: nil)
+        } else {
+            // Покажите сообщение об ошибке
+            let alert = UIAlertController(
+                title: "Ошибка",
+                message: "На устройстве не настроен почтовый клиент.",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "ОК", style: .default))
+            present(alert, animated: true)
+            }
+
+    // MARK: - MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+
+        // Обработка результата
+        switch result {
+        case .sent:
+            print("Письмо отправлено")
+        case .saved:
+            print("Письмо сохранено")
+        case .cancelled:
+            print("Письмо отменено")
+        case .failed:
+            print("Ошибка отправки письма")
+        @unknown default:
+            break
+        }
+    }
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

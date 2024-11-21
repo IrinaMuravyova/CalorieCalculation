@@ -29,13 +29,6 @@ class StorageManager {
         return profiles
     }
     
-//    func fetchIndexActiveProfile() -> Int {
-//        guard let data = defaults.data(forKey: activeProfileKey) else { return 0 }
-//        let decoder = JSONDecoder()
-//        guard let index = try? decoder.decode(Int.self, from: data) else { return 0 }
-//        return index
-//    }
-    
     func fetchActiveProfile() -> Profile {
         let newProfile = Profile( //TODO: Как то иначе обработать ошибку
             nickname: "User",
@@ -70,9 +63,18 @@ class StorageManager {
         let index = profiles.firstIndex {$0.nickname == changedProfile.nickname}
         guard let index = index else { return }
         profiles[index] = changedProfile
-//        profiles.remove(at: index)
-//        profiles.append(changedProfile)
-//        
+      
+        let encoder = JSONEncoder()
+        guard let data = try? encoder.encode(profiles) else { return }
+        defaults.set(data, forKey: profilesKey)
+    }
+    
+    func changeProfile(atIndex: Int, withNickname: String, andIcon: String) {
+        var profiles = fetchProfiles()
+
+        profiles[atIndex].nickname = withNickname
+        profiles[atIndex].icon = andIcon
+
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(profiles) else { return }
         defaults.set(data, forKey: profilesKey)

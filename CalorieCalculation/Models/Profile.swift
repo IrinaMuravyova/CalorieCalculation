@@ -8,8 +8,8 @@
 import Foundation
 
 struct Profile: Codable {
-    let nickname: String
-    let icon: String
+    var nickname: String
+    var icon: String
     var age: Int?
     var sex: Sex?
     var height: Double?

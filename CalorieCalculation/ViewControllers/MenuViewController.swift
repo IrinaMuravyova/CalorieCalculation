@@ -21,6 +21,16 @@ class MenuViewController: UIViewController {
         tableView.reloadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "changeProfileSegue" {
+            if let profileVC = segue.destination as? GreetingViewController {
+                profileVC.delegate = self
+                guard let index = sender as? IndexPath else { return }
+                profileVC.changingProfile = StorageManager.shared.fetchProfiles()[index.row]
+            }
+        }
+    }
+    
     @IBAction func sendEmailButton(_ sender: UIButton) {
         // Проверьте, доступна ли функция отправки писем
 //        if MFMailComposeViewController.canSendMail() {

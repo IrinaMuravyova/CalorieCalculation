@@ -53,11 +53,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        StorageManager.shared.deleteProfile(at: 0) // для тестирования
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
-//        print(profiles!)
-//        print(profile!)
+
         
         configuring(button: profileButton, withImage: UIImage(named: profile.icon))
         configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
@@ -65,7 +63,6 @@ class ViewController: UIViewController {
         
         if profile.age == nil { //TODO: change verify
             titleForParametersLabel.text = "Добавим подробностей:"
-//            editButton.isHidden = true
             editButton.style = .done
             editButton.title = "OK"
         
@@ -542,25 +539,12 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 extension ViewController: GreetingViewControllerDelegate {
 //    func didUpdateProfile(nickname: String, icon: String) {
     func didUpdateProfile(_ profile: Profile) {
-//        let newProfile = Profile(
-//            nickname: nickname,
-//            icon: icon,
-//            age: nil,
-//            sex: nil,
-//            height: nil,
-//            weight: nil,
-//            activityLevel: nil,
-//            goal: nil,
-//            caloriesBMT: nil,
-//            caloriesTDEEForGoal: nil
-//        )
-//        StorageManager.shared.add(newProfile: newProfile)
-//        StorageManager.shared.set(activeProfile: newProfile)
-//        
-        
+
         hideMenu()
+        
         // Обновляю иконку у кнопки профиля
-        configuring(button: profileButton, withImage: UIImage(named: profile.icon) )
+        configuring(button: profileButton, withImage: UIImage(named: profile.icon))
+        
         // Обновляю таблицу в side menu
         sideMenuConfigure()
     }

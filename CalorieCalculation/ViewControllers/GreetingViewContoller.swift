@@ -26,6 +26,8 @@ class GreetingViewController: UIViewController {
     
     var selectedIndexPath: IndexPath?
     var icon: String?
+    var changingProfile: Profile?
+    var changingStarted = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,35 +37,62 @@ class GreetingViewController: UIViewController {
         nicknameTextField.delegate = self
         
         continueButton.isEnabled = false
+        
+        // если окно вызвано для изменения профиля, то заполняю nickname
+        if changingProfile != nil {
+            nicknameTextField.text = changingProfile?.nickname
+            imagesCollectionView.reloadData()
+        }
     }
     
     @IBAction func continueButtonTapped(_ sender: UIButton) {
         guard let nickname = nicknameTextField.text,
               let icon = icon,
               !nickname.isEmpty else { return }
-      // добавляю нового пользователя
-        let newProfile = Profile(
-            nickname: nickname,
-            icon: icon,
-            age: nil,
-            sex: nil,
-            height: nil,
-            weight: nil,
-            activityLevel: nil,
-            goal: nil,
-            caloriesBMT: nil,
-            caloriesTDEEForGoal: nil
-        )
-        StorageManager.shared.add(newProfile: newProfile)
-        StorageManager.shared.set(activeProfile: newProfile)
         
-        // Передача данных через делегат
-        delegate?.didUpdateProfile(newProfile)
-    
-    
-        // Закрытие модального экрана
-        dismiss(animated: true, completion: nil)
+        if changingStarted {
+            guard let index = StorageManager.shared.fetchProfiles().firstIndex(where: {$0.nickname == changingProfile?.nickname}) else { return }
+        
+            StorageManager.shared.changeProfile(atIndex: index, withNickname: nickname, andIcon: icon)
+            
+            changingProfile = nil
+            changingStarted = false
+
+            // Передача данных через делегат
+            let changedProfile = StorageManager.shared.fetchProfiles()[index]
+            delegate?.didUpdateProfile(changedProfile)
+            
+            // возвращаюсь на ввод подробностей
+            if let navigationController = self.view.window?.rootViewController as? UINavigationController {
+                self.dismiss(animated: false) {
+                    navigationController.popToRootViewController(animated: false)
+                }
+            }
+            
+        } else {
+            // добавляю нового пользователя
+            let newProfile = Profile(
+                nickname: nickname,
+                icon: icon,
+                age: nil,
+                sex: nil,
+                height: nil,
+                weight: nil,
+                activityLevel: nil,
+                goal: nil,
+                caloriesBMT: nil,
+                caloriesTDEEForGoal: nil
+            )
+            StorageManager.shared.add(newProfile: newProfile)
+            StorageManager.shared.set(activeProfile: newProfile)
+            
+            // Передача данных через делегат
+            delegate?.didUpdateProfile(newProfile)
+            
+            // Закрытие модального экрана
+            dismiss(animated: true, completion: nil)
         }
+    }
 }
 
 //MARK: - UICollectionView для ячеек с иконками
@@ -76,6 +105,12 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = UIImage(named: icons[indexPath.row])
+        
+        // Если окно вызвано для изменения профиля, то выделяю текущую иконку профиля
+        if changingProfile != nil && icons[indexPath.item]   ==  changingProfile?.icon && !changingStarted {
+            selectedIndexPath = indexPath
+            changingStarted = true
+        }
         
         if indexPath == selectedIndexPath  {
             setShadow(for: cell.imageView)
@@ -107,7 +142,7 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Получаем предыдущий индекс выделенной ячейки, если он существует
         let previousIndexPath = selectedIndexPath
-
+            
         // Обновляем индекс новой выделенной ячейки
         selectedIndexPath = indexPath
 

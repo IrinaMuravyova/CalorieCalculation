@@ -74,16 +74,6 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         }
     }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "changeProfileSegue" { // Убедитесь, что идентификатор совпадает
-//            if let changeProfileVC = segue.destination as? GreetingViewController {
-////                changeProfileVC.textForTitleLabel = "Редактировать"
-////                guard let indexPath = sender as? Int else { return }
-//                changeProfileVC.delegate = self
-//            }
-//        }
-//    }
 }
 
 extension MenuViewController: GreetingViewControllerDelegate {

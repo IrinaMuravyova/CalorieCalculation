@@ -23,9 +23,9 @@ struct TeamMember {
     static func getTeam() -> [TeamMember] {
         [TeamMember(
             photo:"IOSDev_IM",
-            role: "IOS Разработчик",
-            name: "Ирина",
-            surname: "Муравьева",
+            role: NSLocalizedString("IM_role", comment: ""),
+            name: NSLocalizedString("IM_name", comment: ""),
+            surname: NSLocalizedString("IM_surname", comment: ""),
             linkedIn: "https://www.linkedin.com/in/irina-muravyeva-9307982b1/",
             gitHub: "https://github.com/IrinaMuravyova",
             telegram: "https://t.me/murashek_do_murashek"

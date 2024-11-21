@@ -5,3 +5,34 @@
   Created by Irina Muravyeva on 21.11.2024.
   
 */
+"weight_loss" = "减肥";
+"IM_role" = "IOS开发人员"; 
+"IM_name" = "伊丽娜";
+"IM_surname" = "";
+"user_exist" = "昵称已经存在。"
+"title_for_parameters_label" = "请填写这些字段: ";
+"edit_title" = "编辑";
+"sex_alert" = "指定女性或男性性别";
+"age_alert" = "指定您的年龄（年）";
+"height_alert" = "指定你的身高（厘米）";
+"weight_alert" = "指定你的体重（公斤）";
+"activity_alert" = "选择你通常有多活跃。";
+"goal_alert" = "选择你的目标。";
+"parameters_title" = "我的设置:";
+"error_title_alert" = "错误";
+"help_label" =
+"""
+Harris-Benedict公式是全球最受欢迎的公式，用于计算基础代谢水平并确定必要的卡路里。
+
+该公式是由美国生理学家弗朗西斯*加诺*本尼迪克特和植物学家詹姆斯*亚瑟*哈里斯在上个世纪初推导出来的，但仍然具有相关性。 它的误差范围只有5%左右.
+
+为了计算减肥的卡路里摄入量，使用20％的卡路里赤字来调整蛋白质，脂肪和碳水化合物的比例。
+而对于体重增加，分别为20％的卡路里过剩，调整蛋白质，脂肪和碳水化合物的比例。
+""";
+"mail_title" = "关于应用程序的反馈";
+"mail_message" = "你好！ 我想告诉你以下几点:";
+"mail_error" = "设备上未配置电子邮件客户端。";
+"section_title" = "用户";
+"footer_text" = "向左滑动以删除或更改用户。";
+"delete_title" = "删除";
+"edit_title_menu" = "编辑";

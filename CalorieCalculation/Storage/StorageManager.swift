@@ -115,7 +115,8 @@ class StorageManager {
     func nickmaneIsUnique(nickname : String) -> Bool {
         // Проверяем, существует ли уже профиль с таким nickname
         if StorageManager.shared.fetchProfiles().contains(where: { $0.nickname == nickname }) {
-            delegate?.showAlert(message: "Этот пользователь уже существует.") // Error: Nickname already exists
+            let message = NSLocalizedString("user_exist", comment: "")
+            delegate?.showAlert(message: message)
             return false // Возвращаем, что сохранение не удалось
         } else {
             return true

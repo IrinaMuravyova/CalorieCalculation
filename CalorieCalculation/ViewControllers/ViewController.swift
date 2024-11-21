@@ -62,7 +62,7 @@ class ViewController: UIViewController {
         configuring(button: questionButton, withImage: UIImage(systemName: "questionmark.circle"))
         
         if profile.age == nil { //TODO: change verify
-            titleForParametersLabel.text = "Добавим подробностей:"
+            titleForParametersLabel.text = NSLocalizedString("title_for_parameters_label", comment: "")
             editButton.style = .done
             editButton.title = "OK"
         
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
                 if checkFilling() {
                     // Завершение редактирования
                     sender.style = .plain
-                    sender.title = "Правка" //Edit
+                    sender.title = NSLocalizedString("edit_title", comment: "")
                     disableEditingMode()
                 }
             }
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "greetingSegue" { // Убедитесь, что идентификатор совпадает
+        if segue.identifier == "greetingSegue" {
             if let greetingVC = segue.destination as? GreetingViewController {
                 greetingVC.delegate = self
             }
@@ -278,46 +278,54 @@ extension ViewController {
     
     func checkFilling() -> Bool {
 //        let defaultButtonImage = UIImage(systemName: "circle")
-//        if maleButton.imageView?.image == defaultButtonImage && femaleBuvtton.imageView?.image == defaultButtonImage
+//        if maleButton.imageView?.image == defaultButtonImage && femaleButton.imageView?.image == defaultButtonImage
         if selectedSex == nil {
-            showAlert(message: "Нужно указать пол: женский или мужской")
+            let message = NSLocalizedString("sex_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         
         guard let age = ageTextField.text else {
-            showAlert(message: "Нужно указать свой возраст в годах")
+            let message = NSLocalizedString("age_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         if Int(age) == nil {
-            showAlert(message: "Возраст указан некорректно. Укажи количество лет.")
+            let message = NSLocalizedString("age_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         
         guard let height = heightTextField.text else {
-            showAlert(message: "Нужно указать свой рост в сантиметрах")
+            let message = NSLocalizedString("height_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         if Int(height) == nil {
-            showAlert(message: "Рост указан некорректно. Укажи свой рост в сантиметрах.")
+            let message = NSLocalizedString("height_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         
-        
         guard let weight = weightTextField.text else {
-            showAlert(message: "Нужно указать свой вес в килограммах")
+            let message = NSLocalizedString("weight_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         if Int(weight) == nil {
-            showAlert(message: "Вес указан некорректно. Укажи свой вес в сантиметрах.")
+            let message = NSLocalizedString("weight_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         
         if selectedActivityLevel == nil {
-            showAlert(message: "Нужно указать уровень активности")
+            let message = NSLocalizedString("activity_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         if selectedGoal == nil {
-            showAlert(message: "Нужно указать свою цель")
+            let message = NSLocalizedString("goal_alert", comment: "")
+            showAlert(message: message)
             return false
         }
         return true
@@ -468,7 +476,7 @@ extension ViewController {
     }
     
     func settingsFieldsAvailableToggle() {
-        titleForParametersLabel.text = "Мои параметры: "
+        titleForParametersLabel.text = NSLocalizedString("parameters_title", comment: "")
         maleButton.isEnabled.toggle()
         femaleButton.isEnabled.toggle()
         ageTextField.isEnabled.toggle()
@@ -553,7 +561,8 @@ extension ViewController: GreetingViewControllerDelegate {
 extension ViewController: StorageManagerDelegate {
     // Функция для показа предупреждения
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let title = NSLocalizedString("error_title_alert", comment: "")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }

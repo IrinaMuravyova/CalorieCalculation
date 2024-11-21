@@ -39,16 +39,17 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
             // Настройте письмо
             mailComposeVC.setToRecipients(["miomir@yandex.ru"]) // адрес разработчика
-            mailComposeVC.setSubject("Обратная связь о приложении")
-            mailComposeVC.setMessageBody("Здравствуйте! Хотелось бы сообщить следующее:", isHTML: false)
+            mailComposeVC.setSubject(NSLocalizedString("mail_title", comment: ""))
+            mailComposeVC.setMessageBody(NSLocalizedString("mail_message", comment: ""), isHTML: false)
 
             // Покажите почтовый интерфейс
             present(mailComposeVC, animated: true, completion: nil)
         } else {
+            let titleError = NSLocalizedString("error_title_alert", comment: "")
             // Покажите сообщение об ошибке
             let alert = UIAlertController(
-                title: "Ошибка",
-                message: "На устройстве не настроен почтовый клиент.",
+                title: titleError,
+                message: NSLocalizedString("mail_error", comment: ""),
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: "ОК", style: .default))
@@ -90,7 +91,8 @@ extension MenuViewController: GreetingViewControllerDelegate {
 //MARK: - UITableView
 extension MenuViewController: UITableViewDelegate, UITableViewDataSource, StorageManagerDelegate {
     func showAlert(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let titleError = NSLocalizedString("error_title_alert", comment: "")
+        let alert = UIAlertController(title: titleError, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
@@ -114,7 +116,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "ПОЛЬЗОВАТЕЛИ"
+        NSLocalizedString("section_title", comment: "")
     }
     
     // MARK: - Custom Footer View
@@ -124,7 +126,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
 
         let footerLabel = UILabel()
         footerLabel.numberOfLines = 0 // Позволяет неограниченное количество строк
-        footerLabel.text = "Свайп влево для удаления или изменения профиля."
+        footerLabel.text = NSLocalizedString("footer_text", comment: "")
         footerLabel.font = UIFont.systemFont(ofSize: 14)
         footerLabel.textColor = .gray
         footerLabel.textAlignment = .left
@@ -154,7 +156,8 @@ extension MenuViewController {
     // Добавление кнопок удаления и редактирования
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Кнопка удаления
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, completionHandler) in
+        let deleteTitle = NSLocalizedString("delete_title", comment: "")
+        let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { (_, _, completionHandler) in
             StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
             
         // Обновляем таблицу после удаления
@@ -177,10 +180,10 @@ extension MenuViewController {
         }
 
         // Кнопка редактирования
-        let editAction = UIContextualAction(style: .normal, title: "Редактировать") { [weak self] (_, _, completionHandler) in
+        let editTitle = NSLocalizedString("edit_title_menu", comment: "")
+        let editAction = UIContextualAction(style: .normal, title: editTitle) { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
             performSegue(withIdentifier: "changeProfileSegue", sender: indexPath)
-//            self.showEditAlert(at: indexPath) // Открываем окно редактирования
             completionHandler(true)
         }
 

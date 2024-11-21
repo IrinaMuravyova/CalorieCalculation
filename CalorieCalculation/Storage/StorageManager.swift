@@ -109,11 +109,6 @@ class StorageManager {
     }
     
     func deleteActiveProfile() {
-//        let profiles = fetchProfiles()
-//        let profile = profiles.first{$0.nickname == activeProfile.nickname}
-//
-//        let encoder = JSONEncoder()
-//        guard let data = try? encoder.encode(profile) else { return }
         defaults.set(nil, forKey: activeProfileKey)
     }
     

@@ -20,8 +20,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
-    @IBOutlet weak var activityLevelTextField: UITextField!
-
     @IBOutlet weak var activityLevelTextView: UITextView!
     @IBOutlet weak var goalTextField: UITextField!
     
@@ -91,6 +89,9 @@ class ViewController: UIViewController {
         proteinTitleLabel.text = NSLocalizedString("protein_title_label", comment: "")
         fatTitleLabel.text = NSLocalizedString("fat_title_label", comment: "")
         carbsTitleLabel.text = NSLocalizedString("carbs_title_label", comment: "")
+        
+        activityLevelTextView.text = NSLocalizedString("choose_value", comment: "")
+        goalTextField.text = NSLocalizedString("choose_value", comment: "")
         
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
@@ -165,6 +166,7 @@ class ViewController: UIViewController {
         // Добавляем рамку
         activityLevelTextView.layer.borderWidth = 1
         activityLevelTextView.layer.cornerRadius = 5
+        activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -264,7 +266,8 @@ extension ViewController {
             let age = profile.age,
             let height = profile.height,
             let weight = profile.weight,
-            let activityLevel = profile.activityLevel?.rawValue,
+//            let activityLevel = profile.activityLevel?.rawValue,
+            let activityLevel = profile.activityLevel?.localized,
             let goal = profile.goal?.rawValue
         else { return }
         
@@ -576,9 +579,9 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     // UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 1 {
-            return ActivityLevel.allCases[row].description
+            return ActivityLevel.allCases[row].localized
         } else if pickerView.tag == 2 {
-            return Goals.allCases[row].rawValue
+            return Goals.allCases[row].localized    
         }
         return nil
     }
@@ -586,11 +589,11 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
 //            activityLevelTextField.text = ActivityLevel.allCases[row].rawValue 
-            activityLevelTextView.text = ActivityLevel.allCases[row].rawValue
-           
+            activityLevelTextView.text = ActivityLevel.allCases[row].localized
+            activityLevelTextView.textAlignment = .left
             selectedActivityLevel = ActivityLevel.allCases[row]
         } else if pickerView.tag == 2 {
-            goalTextField.text = Goals.allCases[row].rawValue
+            goalTextField.text = Goals.allCases[row].localized
             selectedGoal = Goals.allCases[row]
         }
     }

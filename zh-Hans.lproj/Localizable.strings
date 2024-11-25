@@ -44,3 +44,12 @@
 "protein_title_label" = "蛋白质";
 "fat_title_label" = "脂肪";
 "carbs_title_label" = "碳水化合物";
+"no_activity" = "<5000步，无需培训";
+"low_activity" = "每周7-9千步+2-3次锻炼";
+"normal_activity" = "每周10-15千步+3-4次锻炼";
+"high_activity" = "每周5-7次训练";
+"extremal_activity" = "艰苦体力劳动的工人";
+"weight_loss" = "减肥";
+"muscle_gain" = "肌肉增益";
+"maintenance" = "维护";
+"choose_value" = "选择价值";

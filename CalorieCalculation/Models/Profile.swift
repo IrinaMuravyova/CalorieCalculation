@@ -26,17 +26,21 @@ enum Sex: Codable {
 }
 
 enum Goals: String, Codable, CaseIterable {
-    case weightLoss = "Снижение веса"
-    case savingWeight = "Поддержание веса"
-    case weightGain = "Набор веса"
+    case weightLoss = "weight_loss" // "Снижение веса"
+    case savingWeight = "maintenance" // "Поддержание веса"
+    case weightGain = "muscle_gain" // "Набор веса"
+
+    var localized: String {
+            return NSLocalizedString(self.rawValue, comment: "")
+        }
 }
 
 enum ActivityLevel: String, Codable, CaseIterable {
-    case sedentary = "<5000 шагов, тренировки отсутствуют" // Сидячий, малоподвижный ()
-    case lightActivity = "7-9 тыс. шагов + 2-3 тренировки в неделю" // Легкая активность ()
-    case normalActivity = "10-15 тыс. шагов + 3-4 тренировки в неделю" // Средняя активность ()
-    case highActivity = "5-7 тренировок в неделю" // Высокая активность ()
-    case extremalActivity = "Работники тяжёлого физического труда"
+    case sedentary = "no_activity" // "<5000 шагов, тренировки отсутствуют" // Сидячий, малоподвижный ()
+    case lightActivity = "low_activity" // "7-9 тыс. шагов + 2-3 тренировки в неделю" // Легкая активность ()
+    case normalActivity = "normal_activity" // "10-15 тыс. шагов + 3-4 тренировки в неделю" // Средняя активность ()
+    case highActivity = "high_activity" // "5-7 тренировок в неделю" // Высокая активность ()
+    case extremalActivity = "extremal_activity" // "Работники тяжёлого физического труда"
     
     var value: Double {
         switch self {
@@ -47,6 +51,10 @@ enum ActivityLevel: String, Codable, CaseIterable {
         case .extremalActivity: return 1.9
         }
     }
+    
+    var localized: String {
+            return NSLocalizedString(self.rawValue, comment: "")
+        }
     
     var description: String {
         return self.rawValue

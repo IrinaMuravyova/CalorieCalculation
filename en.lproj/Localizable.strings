@@ -44,3 +44,12 @@
 "protein_title_label" = "Protein";
 "fat_title_label" = "Fat";
 "carbs_title_label" = "Carbs";
+"no_activity" = "<5000 steps, no training";
+"low_activity" = "7-9 thousand steps + 2-3 workouts per week";
+"normal_activity" = "10-15 thousand steps + 3-4 workouts per week";
+"high_activity" = "5-7 workouts per week";
+"extremal_activity" = "Workers of hard physical labor";
+"weight_loss" = "Weight loss";
+"muscle_gain" = "Muscle gain";
+"maintenance" = "Maintenance";
+"choose_value" = "Choose value";

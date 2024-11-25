@@ -11,9 +11,9 @@
 		8839D9BA2CEC6C41001AC439 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D9B92CEC6C41001AC439 /* Team.swift */; };
 		8839D9BC2CEC6FB6001AC439 /* TeamViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D9BB2CEC6FB6001AC439 /* TeamViewCell.swift */; };
 		8839D9BE2CEDC389001AC439 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8839D9BD2CEDC389001AC439 /* HelpViewController.swift */; };
-		8839D9C52CEEF851001AC439 /* Localizable.strings (English).strings in Resources */ = {isa = PBXBuildFile; fileRef = 8839D9C32CEEF851001AC439 /* Localizable.strings (English).strings */; };
-		8839D9C82CEEF865001AC439 /* Localizable.strings (Russian).strings in Resources */ = {isa = PBXBuildFile; fileRef = 8839D9C62CEEF865001AC439 /* Localizable.strings (Russian).strings */; };
-		8839D9CB2CEEF88E001AC439 /* Localizable.strings (Chinese).strings in Resources */ = {isa = PBXBuildFile; fileRef = 8839D9C92CEEF88E001AC439 /* Localizable.strings (Chinese).strings */; };
+		8839D9C52CEEF851001AC439 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8839D9C32CEEF851001AC439 /* Localizable.strings */; };
+		8839D9EB2CEF1271001AC439 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8839D9EA2CEF1271001AC439 /* Localizable.strings */; };
+		883D881E2CEF195F000B8C6F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 883D881D2CEF195F000B8C6F /* Localizable.strings */; };
 		88A5368C2CEB286800F6DFEF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A5368B2CEB286800F6DFEF /* MenuViewController.swift */; };
 		88D5EF8F2CE3013C0024E2CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */; };
 		88D5EF912CE3013C0024E2CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D5EF902CE3013C0024E2CC /* SceneDelegate.swift */; };
@@ -32,13 +32,17 @@
 		8839D9B92CEC6C41001AC439 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		8839D9BB2CEC6FB6001AC439 /* TeamViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewCell.swift; sourceTree = "<group>"; };
 		8839D9BD2CEDC389001AC439 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		8839D9BF2CEEF7C3001AC439 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		8839D9C02CEEF7C3001AC439 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		8839D9C12CEEF7D2001AC439 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Main.strings"; sourceTree = "<group>"; };
-		8839D9C22CEEF7D2001AC439 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		8839D9C42CEEF851001AC439 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Localizable.strings (English).strings"; sourceTree = "<group>"; };
-		8839D9C72CEEF865001AC439 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Localizable.strings (Russian).strings"; sourceTree = "<group>"; };
-		8839D9CA2CEEF88E001AC439 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Localizable.strings (Chinese).strings"; sourceTree = "<group>"; };
+		8839D9CE2CEF0C20001AC439 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8839D9D02CEF0C20001AC439 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		8839D9D32CEF0CD6001AC439 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		8839D9D62CEF0F24001AC439 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		8839D9E62CEF1250001AC439 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8839D9E92CEF1271001AC439 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		883D88192CEF1929000B8C6F /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Main.strings"; sourceTree = "<group>"; };
+		883D881A2CEF194D000B8C6F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		883D881B2CEF194E000B8C6F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		883D881C2CEF195F000B8C6F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		883D88202CEF1A54000B8C6F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		88A5368B2CEB286800F6DFEF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		88D5EF8B2CE3013C0024E2CC /* CalorieCalculation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalorieCalculation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D5EF8E2CE3013C0024E2CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,9 +81,9 @@
 		88D5EF822CE3013C0024E2CC = {
 			isa = PBXGroup;
 			children = (
-				8839D9C32CEEF851001AC439 /* Localizable.strings (English).strings */,
-				8839D9C62CEEF865001AC439 /* Localizable.strings (Russian).strings */,
-				8839D9C92CEEF88E001AC439 /* Localizable.strings (Chinese).strings */,
+				883D881D2CEF195F000B8C6F /* Localizable.strings */,
+				8839D9EA2CEF1271001AC439 /* Localizable.strings */,
+				8839D9C32CEEF851001AC439 /* Localizable.strings */,
 				88D5EF8D2CE3013C0024E2CC /* CalorieCalculation */,
 				88D5EF8C2CE3013C0024E2CC /* Products */,
 			);
@@ -184,13 +188,14 @@
 			};
 			buildConfigurationList = 88D5EF862CE3013C0024E2CC /* Build configuration list for PBXProject "CalorieCalculation" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 				"zh-Hans",
 				"en-GB",
+				ru,
 			);
 			mainGroup = 88D5EF822CE3013C0024E2CC;
 			productRefGroup = 88D5EF8C2CE3013C0024E2CC /* Products */;
@@ -208,10 +213,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				88D5EF982CE3013D0024E2CC /* Assets.xcassets in Resources */,
-				8839D9CB2CEEF88E001AC439 /* Localizable.strings (Chinese).strings in Resources */,
+				8839D9EB2CEF1271001AC439 /* Localizable.strings in Resources */,
 				88D5EF9B2CE3013D0024E2CC /* Base in Resources */,
-				8839D9C52CEEF851001AC439 /* Localizable.strings (English).strings in Resources */,
-				8839D9C82CEEF865001AC439 /* Localizable.strings (Russian).strings in Resources */,
+				8839D9C52CEEF851001AC439 /* Localizable.strings in Resources */,
+				883D881E2CEF195F000B8C6F /* Localizable.strings in Resources */,
 				88D5EF962CE3013C0024E2CC /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,36 +246,39 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8839D9C32CEEF851001AC439 /* Localizable.strings (English).strings */ = {
+		8839D9C32CEEF851001AC439 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8839D9C42CEEF851001AC439 /* en */,
+				8839D9D62CEF0F24001AC439 /* en-GB */,
+				8839D9E62CEF1250001AC439 /* en */,
 			);
-			name = "Localizable.strings (English).strings";
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		8839D9C62CEEF865001AC439 /* Localizable.strings (Russian).strings */ = {
+		8839D9EA2CEF1271001AC439 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8839D9C72CEEF865001AC439 /* en */,
+				8839D9E92CEF1271001AC439 /* zh-Hans */,
 			);
-			name = "Localizable.strings (Russian).strings";
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		8839D9C92CEEF88E001AC439 /* Localizable.strings (Chinese).strings */ = {
+		883D881D2CEF195F000B8C6F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8839D9CA2CEEF88E001AC439 /* en */,
+				883D881C2CEF195F000B8C6F /* ru */,
 			);
-			name = "Localizable.strings (Chinese).strings";
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		88D5EF942CE3013C0024E2CC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				88D5EF952CE3013C0024E2CC /* Base */,
-				8839D9BF2CEEF7C3001AC439 /* zh-Hans */,
-				8839D9C12CEEF7D2001AC439 /* en-GB */,
+				8839D9D02CEF0C20001AC439 /* en */,
+				883D88192CEF1929000B8C6F /* en-GB */,
+				883D881A2CEF194D000B8C6F /* ru */,
+				883D88202CEF1A54000B8C6F /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -279,8 +287,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				88D5EF9A2CE3013D0024E2CC /* Base */,
-				8839D9C02CEEF7C3001AC439 /* zh-Hans */,
-				8839D9C22CEEF7D2001AC439 /* en-GB */,
+				8839D9CE2CEF0C20001AC439 /* en */,
+				8839D9D32CEF0CD6001AC439 /* en-GB */,
+				883D881B2CEF194E000B8C6F /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

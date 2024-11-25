@@ -28,3 +28,20 @@
 "footer_text" = "Свайп влево для удаления или изменения профиля.";
 "delete_title" = "Удалить";
 "edit_title_menu" = "Редактировать";
+//"email_to_developer_title" = "НАПИСАТЬ РАЗРАБОТЧИКУ";
+//"about_us_title" = "О НАС";
+//"sex_title_label" = "пол";
+//"age_title_label" = "Возраст, лет";
+//"height_title_label" = "Рост, см";
+//"weight_title_label" = "Вес, кг";
+//"activity_title_label" = "Образ жизни";
+//"goal_title_label" = "Цель";
+//"male_title_label" = "мужской";
+//"female_title_label" = "женский";
+//"result_title_label" = "Мой расчет";
+//"day_norm_title_label" = "Суточная норма:";
+//"kcal_title_label" = "Ккал";
+//"protein_title_label" = "Белки";
+//"fat_title_label" = "Жиры";
+//"carbs_title_label" = "Углеводы";
+

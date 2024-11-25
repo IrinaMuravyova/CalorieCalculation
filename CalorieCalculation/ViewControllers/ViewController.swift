@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var activityLevelTextField: UITextField!
+
+    @IBOutlet weak var activityLevelTextView: UITextView!
     @IBOutlet weak var goalTextField: UITextField!
     
     @IBOutlet weak var caloriesLabel: UILabel!
@@ -35,6 +37,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var questionButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
+    
+    // For localize
+    @IBOutlet weak var sexLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var lifeStyleLabel: UILabel!
+    @IBOutlet weak var goalLabel: UILabel!
+    @IBOutlet weak var maleLabel: UILabel!
+    @IBOutlet weak var femaleLabel: UILabel!
+    @IBOutlet weak var resultTitleLabel: UILabel!
+    @IBOutlet weak var dayliNormLabel: UILabel!
+    @IBOutlet weak var kcalLabel: UILabel!
+    @IBOutlet weak var proteinTitleLabel: UILabel!
+    @IBOutlet weak var fatTitleLabel: UILabel!
+    @IBOutlet weak var carbsTitleLabel: UILabel!
+    @IBOutlet weak var editBarButtonTitle: UIBarButtonItem!
+    
+    
     
     var activeTextField: UITextField?
     var activityLevelPickerView = UIPickerView()
@@ -52,6 +73,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if let localizedValue = Bundle.main.localizedString(forKey: "weight_loss", value: nil, table: nil) as? String {
+//            print("Localized Value: \(localizedValue)")
+//        }
+        // For localize
+        sexLabel.text = NSLocalizedString("sex_title_label", comment: "")
+        ageLabel.text = NSLocalizedString("age_title_label", comment: "")
+        heightLabel.text = NSLocalizedString("height_title_label", comment: "")
+        weightLabel.text = NSLocalizedString("weight_title_label", comment: "")
+        lifeStyleLabel.text = NSLocalizedString("activity_title_label", comment: "")
+        goalLabel.text = NSLocalizedString("goal_title_label", comment: "")
+        maleLabel.text = NSLocalizedString("male_title_label", comment: "")
+        femaleLabel.text = NSLocalizedString("female_title_label", comment: "")
+        resultTitleLabel.text = NSLocalizedString("result_title_label", comment: "")
+        dayliNormLabel.text = NSLocalizedString("day_norm_title_label", comment: "")
+        kcalLabel.text = NSLocalizedString("kcal_title_label", comment: "")
+        proteinTitleLabel.text = NSLocalizedString("protein_title_label", comment: "")
+        fatTitleLabel.text = NSLocalizedString("fat_title_label", comment: "")
+        carbsTitleLabel.text = NSLocalizedString("carbs_title_label", comment: "")
         
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
@@ -63,6 +102,7 @@ class ViewController: UIViewController {
         
         if profile.age == nil { //TODO: change verify
             titleForParametersLabel.text = NSLocalizedString("title_for_parameters_label", comment: "")
+            
             editButton.style = .done
             editButton.title = "OK"
         
@@ -76,7 +116,8 @@ class ViewController: UIViewController {
         
         setupPickerView(activityLevelPickerView, tag: 1)
         setupPickerView(goalPickerView, tag: 2)
-        activityLevelTextField.inputView = activityLevelPickerView
+//        activityLevelTextField.inputView = activityLevelPickerView
+        activityLevelTextView.inputView = activityLevelPickerView
         goalTextField.inputView = goalPickerView
         
         // Добавляем распознаватель жестов для скрытия клавиатуры по нажатию на экран
@@ -108,6 +149,22 @@ class ViewController: UIViewController {
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(hideMenu))
         swipeGesture.direction = .left
         self.view.addGestureRecognizer(swipeGesture)
+        
+        // Извлекаю код языка и устанавливаю язык интерфейса
+        let userPreferredLanguage = Locale.preferredLanguages.first?.prefix(2) ?? "en"
+        Bundle.setLanguage(String(userPreferredLanguage))
+        
+        // Настройте параметры UITextView
+        activityLevelTextView.isScrollEnabled = false
+        activityLevelTextView.textContainer.lineBreakMode = .byWordWrapping
+//        activityLevelTextView.textContainerInset = .init(top: 10, left: 7, bottom: 10, right: 7)// Убираем отступы
+//        activityLevelTextView.textContainerInset = .zero
+        activityLevelTextView.textContainerInset = .init(top: 0, left: 7, bottom: 0, right: 7)
+        activityLevelTextView.textContainer.lineFragmentPadding = 0
+         
+        // Добавляем рамку
+        activityLevelTextView.layer.borderWidth = 1
+        activityLevelTextView.layer.cornerRadius = 5
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -154,6 +211,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
 }
 
 //MARK: - Setup methods
@@ -213,7 +271,8 @@ extension ViewController {
         ageTextField.text = age.formatted()
         heightTextField.text = height.formatted()
         weightTextField.text = weight.formatted()
-        activityLevelTextField.text = activityLevel
+        activityLevelTextView.text = activityLevel
+
         goalTextField.text = goal
         
     }
@@ -482,9 +541,17 @@ extension ViewController {
         ageTextField.isEnabled.toggle()
         weightTextField.isEnabled.toggle()
         heightTextField.isEnabled.toggle()
-        activityLevelTextField.isEnabled.toggle()
+        activityLevelTextView.isUserInteractionEnabled.toggle()
+        if activityLevelTextView.isUserInteractionEnabled {
+                // Активное состояние
+            activityLevelTextView.backgroundColor = UIColor.white
+            activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
+            } else {
+                // Неактивное состояние
+                activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
+                activityLevelTextView.backgroundColor = UIColor.systemFill // не тот цвет
+            }
         goalTextField.isEnabled.toggle()
-        
         settingsStackView.alpha = 0.6
     }
 }
@@ -518,7 +585,9 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
-            activityLevelTextField.text = ActivityLevel.allCases[row].rawValue
+//            activityLevelTextField.text = ActivityLevel.allCases[row].rawValue 
+            activityLevelTextView.text = ActivityLevel.allCases[row].rawValue
+           
             selectedActivityLevel = ActivityLevel.allCases[row]
         } else if pickerView.tag == 2 {
             goalTextField.text = Goals.allCases[row].rawValue
@@ -565,5 +634,19 @@ extension ViewController: StorageManagerDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Set interface language
+extension Bundle {
+    private static var bundle: Bundle?
+
+    static func setLanguage(_ language: String) {
+        guard let path = Bundle.main.path(forResource: language, ofType: "lproj") else { return }
+        bundle = Bundle(path: path)
+    }
+
+    static func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
+        return bundle?.localizedString(forKey: key, value: value, table: tableName) ?? key
     }
 }

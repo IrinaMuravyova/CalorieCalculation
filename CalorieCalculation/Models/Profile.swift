@@ -32,11 +32,11 @@ enum Goals: String, Codable, CaseIterable {
 }
 
 enum ActivityLevel: String, Codable, CaseIterable {
-    case sedentary = "Сидячий, малоподвижный"
-    case lightActivity = "1-3 тренировки в неделю"
-    case normalActivity = "3-5 тренировок в неделю"
-    case highActivity = "5-7 тренировок в неделю или тяжелая физическая работа"
-    case extremalActivity = "7 раз в неделю высокие спортивные нагрузки"
+    case sedentary = "<5000 шагов, тренировки отсутствуют" // Сидячий, малоподвижный ()
+    case lightActivity = "7-9 тыс. шагов + 2-3 тренировки в неделю" // Легкая активность ()
+    case normalActivity = "10-15 тыс. шагов + 3-4 тренировки в неделю" // Средняя активность ()
+    case highActivity = "5-7 тренировок в неделю" // Высокая активность ()
+    case extremalActivity = "Работники тяжёлого физического труда"
     
     var value: Double {
         switch self {

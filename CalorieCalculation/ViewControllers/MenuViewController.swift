@@ -10,6 +10,9 @@ import MessageUI
 
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emailToDeveloper: UIButton!
+    @IBOutlet weak var aboutUs: UIButton!
+    
     let profiles = StorageManager.shared.fetchProfiles()
     var data = ["Item 1", "Item 2", "Item 3", "Item 4"] //  для тестирования
     
@@ -19,6 +22,9 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
+        
+//        emailToDeveloper.setTitle(NSLocalizedString("email_to_developer_title", comment: ""), for: .normal)
+//        aboutUs.setTitle(NSLocalizedString("about_us_title", comment: ""), for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -3,43 +3,43 @@
 "123-Vz-lOr.text" = "linkedIn";
 
 /* Class = "UILabel"; text = "Углеводы"; ObjectID = "2jd-T0-ouX"; */
-"2jd-T0-ouX.text" = "Углеводы";
+"2jd-T0-ouX.text" = "Carbs";
 
 /* Class = "UILabel"; text = "Давай знакомиться !"; ObjectID = "39c-EP-0bG"; */
-"39c-EP-0bG.text" = "Давай знакомиться !";
+"39c-EP-0bG.text" = "Let's get acquainted!";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "3tc-ig-OcW"; */
 "3tc-ig-OcW.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Белки"; ObjectID = "3vv-WQ-YNF"; */
-"3vv-WQ-YNF.text" = "Белки";
+"3vv-WQ-YNF.text" = "Protein";
 
 /* Class = "UILabel"; text = "Пол"; ObjectID = "48k-7v-b2T"; */
-"48k-7v-b2T.text" = "Пол";
+"48k-7v-b2T.text" = "Gender by birth";
 
 /* Class = "UILabel"; text = "Выбери иконку:"; ObjectID = "6iR-a2-Lhv"; */
-"6iR-a2-Lhv.text" = "Выбери иконку:";
+"6iR-a2-Lhv.text" = "Choose icon:";
 
 /* Class = "UILabel"; text = "Мой расчет"; ObjectID = "7NJ-XL-bjj"; */
-"7NJ-XL-bjj.text" = "Мой расчет";
+"7NJ-XL-bjj.text" = "My results";
 
 /* Class = "UILabel"; text = "мужской"; ObjectID = "8oB-7F-Qda"; */
-"8oB-7F-Qda.text" = "мужской";
+"8oB-7F-Qda.text" = "male";
 
 /* Class = "UILabel"; text = "Рост, см"; ObjectID = "8wX-yZ-9px"; */
-"8wX-yZ-9px.text" = "Рост, см";
+"8wX-yZ-9px.text" = "Height, cm";
 
 /* Class = "UILabel"; text = "Вес, кг"; ObjectID = "9fI-VE-Jdp"; */
-"9fI-VE-Jdp.text" = "Вес, кг";
+"9fI-VE-Jdp.text" = "Weight, kg";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "CmX-2M-cTG"; */
 "CmX-2M-cTG.text" = "Label";
 
 /* Class = "UILabel"; text = "Суточная норма:"; ObjectID = "DGx-Ps-vzo"; */
-"DGx-Ps-vzo.text" = "Суточная норма:";
+"DGx-Ps-vzo.text" = "Daily norm:";
 
 /* Class = "UIButton"; configuration.title = "О НАС"; ObjectID = "DhI-Mn-q8q"; */
-"DhI-Mn-q8q.configuration.title" = "О НАС";
+"DhI-Mn-q8q.configuration.title" = "ABOUT US";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "DhI-Mn-q8q"; */
 "DhI-Mn-q8q.normalTitle" = "Button";
@@ -54,19 +54,19 @@
 "Lov-lD-QXx.text" = "100";
 
 /* Class = "UILabel"; text = "Возраст, лет"; ObjectID = "Pxz-yt-awi"; */
-"Pxz-yt-awi.text" = "Возраст, лет";
+"Pxz-yt-awi.text" = "Age, years";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Rft-Le-oW6"; */
 "Rft-Le-oW6.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Ккал"; ObjectID = "Rvq-ZC-PQg"; */
-"Rvq-ZC-PQg.text" = "Ккал";
+"Rvq-ZC-PQg.text" = "Kcal";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SFd-4n-rFe"; */
 "SFd-4n-rFe.normalTitle" = "Button";
 
 /* Class = "UIButton"; configuration.title = "НАПИСАТЬ РАЗРАБОТЧИКУ"; ObjectID = "SnY-Ec-P7d"; */
-"SnY-Ec-P7d.configuration.title" = "НАПИСАТЬ РАЗРАБОТЧИКУ";
+"SnY-Ec-P7d.configuration.title" = "WRITE TO THE DEVELOPER";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SnY-Ec-P7d"; */
 "SnY-Ec-P7d.normalTitle" = "Button";
@@ -78,16 +78,16 @@
 "TXy-cD-Mbp.text" = "1000";
 
 /* Class = "UILabel"; text = "женский"; ObjectID = "WPN-Ud-VNJ"; */
-"WPN-Ud-VNJ.text" = "женский";
+"WPN-Ud-VNJ.text" = "female";
 
 /* Class = "UILabel"; text = "Образ жизни"; ObjectID = "Xu6-8j-9Re"; */
-"Xu6-8j-9Re.text" = "Образ жизни";
+"Xu6-8j-9Re.text" = "Lifestyle";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Yho-sa-f05"; */
 "Yho-sa-f05.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Жиры"; ObjectID = "a0h-Ac-F7C"; */
-"a0h-Ac-F7C.text" = "Жиры";
+"a0h-Ac-F7C.text" = "Fat";
 
 /* Class = "UILabel"; text = "100"; ObjectID = "edU-Tx-DVc"; */
 "edU-Tx-DVc.text" = "100";
@@ -96,34 +96,34 @@
 "ieG-Hg-mHP.text" = "100";
 
 /* Class = "UIBarButtonItem"; title = "Правка"; ObjectID = "kBE-mG-GW9"; */
-"kBE-mG-GW9.title" = "Правка";
+"kBE-mG-GW9.title" = "Edit";
 
 /* Class = "UILabel"; text = "Введи имя:"; ObjectID = "lz1-nS-oMf"; */
-"lz1-nS-oMf.text" = "Введи имя:";
+"lz1-nS-oMf.text" = "Nickname:";
 
 /* Class = "UILabel"; text = "Цель"; ObjectID = "poU-vM-qkU"; */
-"poU-vM-qkU.text" = "Цель";
+"poU-vM-qkU.text" = "Goal";
 
 /* Class = "UILabel"; text = "Имя Фамилия"; ObjectID = "q1B-mA-JA2"; */
-"q1B-mA-JA2.text" = "Имя Фамилия";
+"q1B-mA-JA2.text" = "Name Surname";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "uuX-3G-hp9"; */
 "uuX-3G-hp9.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "Мои настройки:"; ObjectID = "uxB-Ay-cVl"; */
-"uxB-Ay-cVl.text" = "Мои настройки:";
+"uxB-Ay-cVl.text" = "My settings:";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vge-nF-C0f"; */
 "vge-nF-C0f.normalTitle" = "Button";
 
 /* Class = "UIButton"; configuration.title = "Идем дальше "; ObjectID = "zQS-sj-9zK"; */
-"zQS-sj-9zK.configuration.title" = "Идем дальше ";
+"zQS-sj-9zK.configuration.title" = "Let's go on";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "zQS-sj-9zK"; */
 "zQS-sj-9zK.normalTitle" = "Button";
 
 /* Class = "UILabel"; text = "роль"; ObjectID = "zec-Yx-PT3"; */
-"zec-Yx-PT3.text" = "роль";
+"zec-Yx-PT3.text" = "role";
 
 /* Class = "UINavigationItem"; title = "Настройки"; ObjectID = "ztO-xd-Ida"; */
-"ztO-xd-Ida.title" = "Настройки";
+"ztO-xd-Ida.title" = "Settings";

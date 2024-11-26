@@ -119,6 +119,9 @@ class ViewController: UIViewController {
         activityLevelTextView.inputView = activityLevelPickerView
         goalTextField.inputView = goalPickerView
         
+        activityLevelTextView.delegate = self
+        goalTextField.delegate = self
+        
         // Добавляем распознаватель жестов для скрытия клавиатуры по нажатию на экран
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPicker))
         view.addGestureRecognizer(tapGesture)
@@ -163,6 +166,7 @@ class ViewController: UIViewController {
         activityLevelTextView.layer.borderWidth = 1
         activityLevelTextView.layer.cornerRadius = 5
         activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -216,6 +220,31 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+// MARK: - UITextViewDelegate, UITextFieldDelegate
+extension ViewController: UITextViewDelegate, UITextFieldDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView == activityLevelTextView {
+            // Устанавливаю текст в момент активации UIPickerView
+            if let firstActivityLevel = ActivityLevel.allCases.first {
+                activityLevelTextView.text = firstActivityLevel.localized
+                selectedActivityLevel = firstActivityLevel
+            }
+        }
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == goalTextField {
+            // Устанавливаю текст в момент активации UIPickerView
+            if let firstGoal = Goals.allCases.first {
+                goalTextField.text = firstGoal.localized
+                selectedGoal = firstGoal
+            }
+        }
+        return true
+    }
 }
 
 //MARK: - Setup methods

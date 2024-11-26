@@ -23,8 +23,8 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
         tableView.delegate = self
         tableView.reloadData()
         
-//        emailToDeveloper.setTitle(NSLocalizedString("email_to_developer_title", comment: ""), for: .normal)
-//        aboutUs.setTitle(NSLocalizedString("about_us_title", comment: ""), for: .normal)
+        emailToDeveloper.setTitle(NSLocalizedString("email_to_developer_title", comment: ""), for: .normal)
+        aboutUs.setTitle(NSLocalizedString("about_us_title", comment: ""), for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

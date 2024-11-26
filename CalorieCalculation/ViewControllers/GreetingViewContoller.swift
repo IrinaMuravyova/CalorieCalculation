@@ -43,6 +43,7 @@ class GreetingViewController: UIViewController {
             nicknameTextField.text = changingProfile?.nickname
             imagesCollectionView.reloadData()
         }
+        
     }
     
     @IBAction func continueButtonTapped(_ sender: UIButton) {
@@ -160,11 +161,19 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
 
 extension GreetingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
         checkContinueButtonEnable()
-        
+        textField.resignFirstResponder()
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    // Получаем текущий текст в поле с учетом изменения
+    if let currentText = textField.text {
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        checkContinueButtonEnable(updatedText)
+    }
+    return true
+}
 }
 
 //MARK: - Private methods
@@ -187,11 +196,12 @@ extension GreetingViewController {
         }
     }
     
-    private func checkContinueButtonEnable(){
-        guard let nickname =  nicknameTextField.text else { return }
-        
-        if selectedIndexPath != nil && !nickname.isEmpty
-            {
+    @objc private func checkContinueButtonEnable(_ updatedText: String? = nil){
+        // Если текст был передан, проверяю его состояние, иначе использую текущее значение в textField
+        let text = updatedText ?? nicknameTextField.text
+
+        // Проверяю, что текст не пустой и выбран индекс
+        if let nickname = text, selectedIndexPath != nil && !nickname.isEmpty {
                 continueButton.isEnabled = true
             } else {
                 continueButton.isEnabled = false

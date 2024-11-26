@@ -17,21 +17,24 @@ class TeamViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setupCell()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
 
 //MARK: - Methods
 extension TeamViewCell {
     func setupCell () {
-        photoImageView.layer.cornerRadius = photoImageView.frame.width / 2
+        //обновляю все слои, чтоб изначально корректно округлялись углы
+        contentView.layoutIfNeeded()
+        photoImageView.layoutIfNeeded()
+    
+        photoImageView.layer.cornerRadius = photoImageView.frame.height / 2
+        
         roleLabel.backgroundColor = .gray
         roleLabel.textColor = .white
         roleLabel.font = .boldSystemFont(ofSize: 18)

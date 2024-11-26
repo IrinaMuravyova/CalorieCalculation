@@ -443,7 +443,7 @@
                                 <rect key="frame" x="20" y="84" width="280" height="464"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teamCell" rowHeight="151" id="7Nd-g0-R7D" customClass="TeamViewCell" customModule="CalorieCalculation" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="teamCell" rowHeight="151" id="7Nd-g0-R7D" customClass="TeamViewCell" customModule="CalorieCalculation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="280" height="151"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Nd-g0-R7D" id="oOg-jw-J6t">

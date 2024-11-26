@@ -13,9 +13,9 @@
 "title_for_parameters_label" = "Please fill in the fields: ";
 "edit_title" = "Edit";
 "sex_alert" = "Specify the female or male gender by birth. ";
-"age_alert" = "Specify how old you are (years).";
-"height_alert" = "Specify your height (centimeters).";
-"weight_alert" = "Specify your weight (kilograms).";
+"age_alert" = "Specify how old you are (years). The Benedict-Harris formula works best for people between the ages of 18 and 80. For older people or for children, it is recommended to use other methods for more accurate calculations.";
+"height_alert" = "Specify your height (centimeters). In general, the formula is suitable for people between 140-200 cm tall, but in extreme cases, for example, with extreme obesity or malnutrition, the results may be inaccurate.";
+"weight_alert" = "Specify your weight (kilograms). In general, the formula is suitable for people with a body weight in the range of 50-150 kg, but in extreme cases, for example, with extreme obesity or malnutrition, the results may be inaccurate.";
 "activity_alert" = "Choose how active you are usually.";
 "goal_alert" = "Choose your goal.";
 "parameters_title" = "My settings: ";
@@ -53,4 +53,5 @@
 "muscle_gain" = "Muscle gain";
 "maintenance" = "Maintenance";
 "choose_value" = "Choose value";
-
+"age_attention_title_alert" = "Attention";
+"age_attention_text_alert" = "The formula assumes that it is applicable for adults (18 years and older). It is not recommended for children and adolescents to use it, since their metabolism has features different from adults. It is recommended to use other methods for more accurate calculations.";

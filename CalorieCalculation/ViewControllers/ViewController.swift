@@ -343,49 +343,62 @@ extension ViewController {
             showAlert(message: message)
             return false
         }
+    
         
         guard let age = ageTextField.text else {
-            let message = NSLocalizedString("age_alert", comment: "")
-            showAlert(message: message)
+            showAlert(message: "age_alert")
             return false
         }
-        if Int(age) == nil {
-            let message = NSLocalizedString("age_alert", comment: "")
-            showAlert(message: message)
+        guard let age = Int(age) else {
+            showAlert(message: "age_alert")
             return false
         }
-        
+        if age < 14 || age > 80 {
+            showAlert(message: "age_alert")
+            return false
+        }
+
         guard let height = heightTextField.text else {
-            let message = NSLocalizedString("height_alert", comment: "")
-            showAlert(message: message)
+            showAlert(message: "height_alert")
             return false
         }
-        if Int(height) == nil {
-            let message = NSLocalizedString("height_alert", comment: "")
-            showAlert(message: message)
+        guard let height = Int(height) else {
+            showAlert(message: "height_alert")
+            return false
+        }
+        if height < 140 || height > 200 {
+            showAlert(message: "height_alert")
             return false
         }
         
         guard let weight = weightTextField.text else {
-            let message = NSLocalizedString("weight_alert", comment: "")
-            showAlert(message: message)
+            showAlert(message: "weight_alert")
             return false
         }
-        if Int(weight) == nil {
-            let message = NSLocalizedString("weight_alert", comment: "")
-            showAlert(message: message)
+        guard let weight = Int(weight) else {
+            showAlert(message: "weight_alert")
+            return false
+        }
+        if weight < 50 || weight > 150 {
+            showAlert(message: "weight_alert")
             return false
         }
         
         if selectedActivityLevel == nil {
-            let message = NSLocalizedString("activity_alert", comment: "")
-            showAlert(message: message)
+            showAlert(message: "activity_alert")
             return false
         }
         if selectedGoal == nil {
-            let message = NSLocalizedString("goal_alert", comment: "")
-            showAlert(message: message)
+            showAlert(message: "goal_alert")
             return false
+        }
+        
+        if age >= 14 && age < 18 {
+            let title = NSLocalizedString("age_attention_title_alert", comment: "")
+            let message = NSLocalizedString("age_attention_text_alert", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
         return true
     }
@@ -631,6 +644,7 @@ extension ViewController: StorageManagerDelegate {
     // Функция для показа предупреждения
     func showAlert(message: String) {
         let title = NSLocalizedString("error_title_alert", comment: "")
+        let message = NSLocalizedString(message, comment: "")
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)

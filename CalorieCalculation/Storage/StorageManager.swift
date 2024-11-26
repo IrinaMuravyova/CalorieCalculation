@@ -109,7 +109,7 @@ class StorageManager {
     }
     
     func deleteActiveProfile() {
-        defaults.set(nil, forKey: activeProfileKey)
+        defaults.removeObject(forKey: activeProfileKey)
     }
     
     func nickmaneIsUnique(nickname : String) -> Bool {

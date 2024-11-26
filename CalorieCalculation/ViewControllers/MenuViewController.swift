@@ -166,6 +166,7 @@ extension MenuViewController {
         let deleteTitle = NSLocalizedString("delete_title", comment: "")
         let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { (_, _, completionHandler) in
             StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
+            StorageManager.shared.deleteActiveProfile()
             
         // Обновляем таблицу после удаления
             tableView.performBatchUpdates({

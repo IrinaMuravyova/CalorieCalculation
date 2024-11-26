@@ -95,7 +95,6 @@ class ViewController: UIViewController {
         
         profiles = StorageManager.shared.fetchProfiles()
         profile = StorageManager.shared.fetchActiveProfile()
-
         
         configuring(button: profileButton, withImage: UIImage(named: profile.icon))
         configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
@@ -165,6 +164,12 @@ class ViewController: UIViewController {
         activityLevelTextView.layer.cornerRadius = 5
         activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+        profiles = StorageManager.shared.fetchProfiles()
+        profile = StorageManager.shared.fetchActiveProfile()
+        }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

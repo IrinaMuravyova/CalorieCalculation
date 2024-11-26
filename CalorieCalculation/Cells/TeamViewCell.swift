@@ -35,8 +35,10 @@ extension TeamViewCell {
     
         photoImageView.layer.cornerRadius = photoImageView.frame.height / 2
         
-        roleLabel.backgroundColor = .gray
-        roleLabel.textColor = .white
         roleLabel.font = .boldSystemFont(ofSize: 18)
+        roleLabel.layer.borderWidth  = 1.5
+        roleLabel.layer.cornerRadius = 5
+        roleLabel.textColor = .darkGray
+        roleLabel.layer.borderColor = UIColor.systemGray.cgColor
     }
 }

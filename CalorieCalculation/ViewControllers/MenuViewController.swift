@@ -116,6 +116,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
         if let image = UIImage(named: profile.icon) {
             content.image = image
             content.imageProperties.maximumSize = CGSize(width: 30, height: 30)
+            
         }
         cell.contentConfiguration = content
         return cell

@@ -31,8 +31,8 @@ extension TeamViewController: UITableViewDelegate, UITableViewDataSource {
         
         let teamMember = team[indexPath.row]
         cell.photoImageView.image = UIImage(named: teamMember.photo) ?? UIImage(systemName: "person")
-        cell.roleLabel.text = teamMember.role
-        cell.fullNameLabel.text = teamMember.fullname
+        cell.roleLabel.text = " " + teamMember.role
+        cell.fullNameLabel.text = " " + teamMember.fullname
         
         var attributedString = setupLinks(on: cell.linkedInTextView, withLink: teamMember.linkedIn!, andTitle: "LinkedIn", defaultLink: "https://github.com")
         cell.linkedInTextView.attributedText = attributedString

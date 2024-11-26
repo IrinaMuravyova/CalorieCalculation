@@ -263,9 +263,8 @@ extension ViewController {
             let age = profile.age,
             let height = profile.height,
             let weight = profile.weight,
-//            let activityLevel = profile.activityLevel?.rawValue,
             let activityLevel = profile.activityLevel?.localized,
-            let goal = profile.goal?.rawValue
+            let goal = profile.goal?.localized
         else { return }
         
         ageTextField.text = age.formatted()

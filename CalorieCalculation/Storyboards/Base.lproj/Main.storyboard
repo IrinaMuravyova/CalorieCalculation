@@ -459,49 +459,58 @@
                                                                 <constraint firstAttribute="width" secondItem="kkr-zi-e5d" secondAttribute="height" multiplier="1:1" id="UgK-QT-ZK2"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Jz4-gr-fHS">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Jz4-gr-fHS">
                                                             <rect key="frame" x="159" y="0.0" width="121" height="151"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="роль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zec-Yx-PT3">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="41"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="роль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zec-Yx-PT3">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="24.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Имя Фамилия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1B-mA-JA2">
-                                                                    <rect key="frame" x="0.0" y="48" width="111" height="20.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя Фамилия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1B-mA-JA2">
+                                                                    <rect key="frame" x="0.0" y="31.5" width="111" height="24.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="linkedIn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="123-Vz-lOr">
-                                                                    <rect key="frame" x="0.0" y="75.5" width="58.5" height="20.5"/>
-                                                                    <accessibility key="accessibilityConfiguration">
-                                                                        <accessibilityTraits key="traits" link="YES" staticText="YES"/>
-                                                                    </accessibility>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="gitHub" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBs-wV-iXt">
-                                                                    <rect key="frame" x="0.0" y="103" width="51.5" height="20.5"/>
-                                                                    <accessibility key="accessibilityConfiguration">
-                                                                        <accessibilityTraits key="traits" link="YES" staticText="YES"/>
-                                                                    </accessibility>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="telegram" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ja9-AM-YfJ">
-                                                                    <rect key="frame" x="0.0" y="130.5" width="67.5" height="20.5"/>
-                                                                    <accessibility key="accessibilityConfiguration">
-                                                                        <accessibilityTraits key="traits" link="YES" staticText="YES"/>
-                                                                    </accessibility>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-Ee-9H1" userLabel="LinkedIn">
+                                                                    <rect key="frame" x="0.0" y="63" width="121" height="25"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <color key="textColor" systemColor="labelColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                </textView>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="gitHubLink" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="HI8-CX-Qrr">
+                                                                    <rect key="frame" x="0.0" y="95" width="121" height="24.5"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <color key="textColor" systemColor="labelColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                                </textView>
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CZK-xx-MpK" userLabel="Telegram">
+                                                                    <rect key="frame" x="0.0" y="126.5" width="121" height="24.5"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    <color key="textColor" systemColor="labelColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                </textView>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="RpP-Ee-9H1" firstAttribute="top" secondItem="q1B-mA-JA2" secondAttribute="bottom" constant="7" id="9TP-eW-rHn"/>
+                                                                <constraint firstItem="HI8-CX-Qrr" firstAttribute="leading" secondItem="Jz4-gr-fHS" secondAttribute="leading" id="9yo-K7-v9G"/>
+                                                                <constraint firstAttribute="trailing" secondItem="CZK-xx-MpK" secondAttribute="trailing" id="B0z-P5-Hls"/>
+                                                                <constraint firstAttribute="trailing" secondItem="HI8-CX-Qrr" secondAttribute="trailing" id="Eri-gC-G51"/>
+                                                                <constraint firstItem="CZK-xx-MpK" firstAttribute="top" secondItem="HI8-CX-Qrr" secondAttribute="bottom" constant="7" id="GYl-13-t4x"/>
+                                                                <constraint firstItem="CZK-xx-MpK" firstAttribute="top" secondItem="HI8-CX-Qrr" secondAttribute="bottom" constant="7" id="Nsw-ed-vFV"/>
+                                                                <constraint firstItem="HI8-CX-Qrr" firstAttribute="top" secondItem="RpP-Ee-9H1" secondAttribute="bottom" constant="7" id="R6I-CZ-TNc"/>
+                                                                <constraint firstAttribute="trailing" secondItem="RpP-Ee-9H1" secondAttribute="trailing" id="TPa-Cc-BzO"/>
+                                                                <constraint firstItem="HI8-CX-Qrr" firstAttribute="top" secondItem="RpP-Ee-9H1" secondAttribute="bottom" constant="7" id="gqo-Tm-F8o"/>
+                                                                <constraint firstItem="RpP-Ee-9H1" firstAttribute="leading" secondItem="Jz4-gr-fHS" secondAttribute="leading" id="peb-VU-WQr"/>
+                                                                <constraint firstAttribute="bottom" secondItem="CZK-xx-MpK" secondAttribute="bottom" id="uDY-nt-NnB"/>
+                                                                <constraint firstItem="CZK-xx-MpK" firstAttribute="leading" secondItem="Jz4-gr-fHS" secondAttribute="leading" id="y2L-BX-ovn"/>
+                                                            </constraints>
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
@@ -516,11 +525,11 @@
                                         <accessibility key="accessibilityConfiguration" identifier="teamCell"/>
                                         <connections>
                                             <outlet property="fullNameLabel" destination="q1B-mA-JA2" id="g01-Mc-vmp"/>
-                                            <outlet property="gitHubLabel" destination="TBs-wV-iXt" id="JKj-79-MbX"/>
-                                            <outlet property="linkedInLabel" destination="123-Vz-lOr" id="Eit-6P-IRq"/>
+                                            <outlet property="gitHubLinkTextView" destination="HI8-CX-Qrr" id="xla-09-Xyy"/>
+                                            <outlet property="linkedInTextView" destination="RpP-Ee-9H1" id="N0q-Yx-S5E"/>
                                             <outlet property="photoImageView" destination="kkr-zi-e5d" id="5dl-LO-dUS"/>
                                             <outlet property="roleLabel" destination="zec-Yx-PT3" id="OS1-79-3zr"/>
-                                            <outlet property="telegramLabel" destination="Ja9-AM-YfJ" id="DVS-3Q-wa2"/>
+                                            <outlet property="telegramTextView" destination="CZK-xx-MpK" id="Bbw-0c-VhY"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -546,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCG-tZ-mo7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="1550"/>
+            <point key="canvasLocation" x="1102.5" y="1549.6478873239437"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="cMY-fE-XTI">

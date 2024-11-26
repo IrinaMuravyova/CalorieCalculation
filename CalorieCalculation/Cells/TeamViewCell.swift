@@ -11,9 +11,9 @@ class TeamViewCell: UITableViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!
-    @IBOutlet weak var linkedInLabel: UILabel!
-    @IBOutlet weak var gitHubLabel: UILabel!
-    @IBOutlet weak var telegramLabel: UILabel!
+    @IBOutlet weak var linkedInTextView: UITextView!
+    @IBOutlet weak var gitHubLinkTextView: UITextView!
+    @IBOutlet weak var telegramTextView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +35,5 @@ extension TeamViewCell {
         roleLabel.backgroundColor = .gray
         roleLabel.textColor = .white
         roleLabel.font = .boldSystemFont(ofSize: 18)
-        
     }
 }

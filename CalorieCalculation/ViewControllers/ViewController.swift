@@ -117,7 +117,6 @@ class ViewController: UIViewController {
         
         setupPickerView(activityLevelPickerView, tag: 1)
         setupPickerView(goalPickerView, tag: 2)
-//        activityLevelTextField.inputView = activityLevelPickerView
         activityLevelTextView.inputView = activityLevelPickerView
         goalTextField.inputView = goalPickerView
         
@@ -158,8 +157,6 @@ class ViewController: UIViewController {
         // Настройте параметры UITextView
         activityLevelTextView.isScrollEnabled = false
         activityLevelTextView.textContainer.lineBreakMode = .byWordWrapping
-//        activityLevelTextView.textContainerInset = .init(top: 10, left: 7, bottom: 10, right: 7)// Убираем отступы
-//        activityLevelTextView.textContainerInset = .zero
         activityLevelTextView.textContainerInset = .init(top: 0, left: 7, bottom: 0, right: 7)
         activityLevelTextView.textContainer.lineFragmentPadding = 0
          

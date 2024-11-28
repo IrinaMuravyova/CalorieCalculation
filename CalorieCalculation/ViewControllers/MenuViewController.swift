@@ -8,23 +8,34 @@
 import UIKit
 import MessageUI
 
+protocol MenuViewControllerDelegate: AnyObject {
+    func updateChooseProfileMenu()
+}
+
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emailToDeveloper: UIButton!
     @IBOutlet weak var aboutUs: UIButton!
     
-    let profiles = StorageManager.shared.fetchProfiles()
-    var data = ["Item 1", "Item 2", "Item 3", "Item 4"] //  для тестирования
+    var profiles = StorageManager.shared.fetchProfiles()
+    
+    var receivedProfile: Profile!
+//    var data = ["Item 1", "Item 2", "Item 3", "Item 4"] //  для тестирования
+    weak var delegate: MenuViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.reloadData()
         
         emailToDeveloper.setTitle(NSLocalizedString("email_to_developer_title", comment: ""), for: .normal)
         aboutUs.setTitle(NSLocalizedString("about_us_title", comment: ""), for: .normal)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -92,6 +103,9 @@ extension MenuViewController: GreetingViewControllerDelegate {
                 mainVC.didUpdateProfile(profile)
             }
     }
+    func hideChoosingProfileMenu() {
+        
+    }
 }
 
 //MARK: - UITableView
@@ -108,6 +122,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        profiles = StorageManager.shared.fetchProfiles()
         let cell = tableView.dequeueReusableCell(withIdentifier: "profileCell", for: indexPath)
         let profile = profiles[indexPath.row]
         
@@ -164,29 +179,69 @@ extension MenuViewController {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // Кнопка удаления
         let deleteTitle = NSLocalizedString("delete_title", comment: "")
-        let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { (_, _, completionHandler) in
-            StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
-            StorageManager.shared.deleteActiveProfile()
-            
-        // Обновляем таблицу после удаления
-            tableView.performBatchUpdates({
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }, completion: { _ in
-                // Если массив пуст, открываем GreetingViewController
-                if StorageManager.shared.fetchProfiles().isEmpty {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let greetingVC = storyboard.instantiateViewController(withIdentifier: "greetingViewController") as? GreetingViewController {
-                        greetingVC.modalPresentationStyle = .fullScreen
-                        greetingVC.delegate = self
-                        self.present(greetingVC, animated: true, completion: nil)
-                    }
-                }
-                
-            })
+        var deleteAction = UIContextualAction()
+    
 
+        deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { [self](_, _, completionHandler) in
+            
+            if profiles[indexPath.row].nickname == receivedProfile.nickname {
+                
+                let title = NSLocalizedString("delete_attention_title_alert", comment: "")
+                let message = NSLocalizedString("delete_attention_text_alert", comment: "")
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {_ in
+                    tableView.setEditing(false, animated: true)
+                }))
+                present(alert, animated: true, completion: nil)
+                
+                completionHandler(true) // Завершаем действие
+            }
+            
+            // Показать алерт для подтверждения
+            let title = NSLocalizedString("sure_to_delete_title", comment: "")
+            let message = NSLocalizedString("sure_to_delete_message", comment: "")
+            let titleCancel = NSLocalizedString("cancel", comment: "")
+            let titleDelete = NSLocalizedString("delete", comment: "")
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            // Кнопка отмены
+            alert.addAction(UIAlertAction(title: titleCancel, style: .cancel, handler: { _ in
+                // Отменяем редактирование строки
+                tableView.setEditing(false, animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: titleDelete, style: .destructive, handler: { _ in
+                
+                StorageManager.shared.deleteProfile(at: indexPath.row) // Удаляем элемент из массива
+                StorageManager.shared.deleteActiveProfile()
+                
+                // Обновляем таблицу после удаления
+                tableView.performBatchUpdates({
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }, completion: { _ in
+                    // Если массив пуст, открываем GreetingViewController
+                    if StorageManager.shared.fetchProfiles().isEmpty {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let greetingVC = storyboard.instantiateViewController(withIdentifier: "greetingViewController") as? GreetingViewController {
+                            greetingVC.modalPresentationStyle = .fullScreen
+                            greetingVC.delegate = self
+                            self.present(greetingVC, animated: true, completion: nil)
+                        }
+                    }
+                    
+                })
+                
+                if let navigationController = self.navigationController,
+                   let  mainVC = navigationController.viewControllers.first(where: { $0 is ViewController }) as? ViewController {
+                    mainVC.updateChooseProfileMenu()
+                    }
+                
+            }))
+            present(alert, animated: true, completion: nil)
+            
+            
+            
             completionHandler(true) // Завершаем действие
         }
-
+        
         // Кнопка редактирования
         let editTitle = NSLocalizedString("edit_title_menu", comment: "")
         let editAction = UIContextualAction(style: .normal, title: editTitle) { [weak self] (_, _, completionHandler) in
@@ -194,10 +249,11 @@ extension MenuViewController {
             performSegue(withIdentifier: "changeProfileSegue", sender: indexPath)
             completionHandler(true)
         }
-
+        
         editAction.backgroundColor = .blue // Настраиваем цвет кнопки редактирования
         
         return UISwipeActionsConfiguration(actions: [deleteAction, editAction]) // Возвращаем обе кнопки
+    
     }
 
     // Окно редактирования

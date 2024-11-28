@@ -19,7 +19,7 @@
 "activity_alert" = "Choose how active you are usually.";
 "goal_alert" = "Choose your goal.";
 "parameters_title" = "My settings: ";
-"error_title_alert" = "Error";
+"error_title_alert" = "Ooops!";
 "help_label" = "The Harris-Benedict formula, the most popular worldwide, is used to calculate the level of basal metabolism and determine the necessary calories.\n\nThe formula was derived by American physiologist Francis Gano Benedict and botanist James Arthur Harris at the beginning of the last century, but still remains relevant. It has a margin of error of only about 5%.\n\nTo calculate the calorie intake for weight loss, a calorie deficit of 20% is used with an adjustment of the proportions of proteins, fats and carbohydrates.\nAnd for weight gain, respectively, a calorie surplus of 20% with an adjustment in the proportions of proteins, fats and carbohydrates.";
 "mail_title" = "Feedback about the app";
 "mail_message" = "Hello! I would like to inform you the following:";
@@ -55,3 +55,9 @@
 "choose_value" = "Choose value";
 "age_attention_title_alert" = "Attention";
 "age_attention_text_alert" = "The formula assumes that it is applicable for adults (18 years and older). It is not recommended for children and adolescents to use it, since their metabolism has features different from adults. It is recommended to use other methods for more accurate calculations.";
+"delete_attention_title_alert" = "Oooops";
+"delete_attention_text_alert" = "You cannot delete the current profile. First, change the selected profile.";
+"sure_to_delete_title" = "Delete a line";
+"sure_to_delete_message" = "Are you sure you want to delete this line?";
+"cancel" = "Cancel";
+"delete" = "Delete";

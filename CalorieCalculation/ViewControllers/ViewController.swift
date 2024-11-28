@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var profiles: [Profile]!
-    var profile: Profile! // activeUser
+    var activeProfile: Profile! // activeUser
     let deficitCalorie = 0.2 // 20%
     let overageCalorie = 0.2 // 20%
     
@@ -67,7 +67,20 @@ class ViewController: UIViewController {
     private let menuWidth: CGFloat = 300 // Ширина бокового меню
     private let menuContainerView = UIView() // Контейнер для меню
     private let dimmingView = UIView() // Затемняющий фон для интерактивности
-
+    
+    
+    // для выезжающего view для смены профиля
+    private let choosingProfileView: UIView = {
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.clipsToBounds = true
+            view.alpha = 0 // Начальное состояние скрыто
+            return view
+        }()
+    private var menuViewHeightConstraint: NSLayoutConstraint!
+    private var isChooseProfileMenuVisible = false // Флаг состояния меню
+    
+    private var menuViewController: MenuViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,13 +107,13 @@ class ViewController: UIViewController {
         goalTextField.text = NSLocalizedString("choose_value", comment: "")
         
         profiles = StorageManager.shared.fetchProfiles()
-        profile = StorageManager.shared.fetchActiveProfile()
+        activeProfile = StorageManager.shared.fetchActiveProfile()
         
-        configuring(button: profileButton, withImage: UIImage(named: profile.icon))
+        configuring(button: profileButton, withImage: UIImage(named: activeProfile.icon))
         configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
         configuring(button: questionButton, withImage: UIImage(systemName: "questionmark.circle"))
         
-        if profile.age == nil { //TODO: change verify
+        if activeProfile.age == nil { //TODO: change verify
             titleForParametersLabel.text = NSLocalizedString("title_for_parameters_label", comment: "")
             
             editButton.style = .done
@@ -108,7 +121,7 @@ class ViewController: UIViewController {
         
             resultStackView.isHidden = true
         } else {
-            fillFields(for: profile)
+            fillFields(for: activeProfile)
         }
         
         maleButton.addTarget(self, action: #selector(sexDidChoose(_:)), for: .touchUpInside)
@@ -128,22 +141,21 @@ class ViewController: UIViewController {
         let tapGestureForMenu = UITapGestureRecognizer(target: self, action: #selector(hideMenu))
         dimmingView.addGestureRecognizer(tapGestureForMenu)
         
-        // Создаем распознаватель долгого нажатия
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        longPressGesture.minimumPressDuration = 0.5 // Время, после которого считается длительное нажатие (в секундах)
+        addToolbarToTextField(ageTextField)
+        addToolbarToTextField(heightTextField)
+        addToolbarToTextField(weightTextField)
         
-        // Добавляем распознаватель к кнопке
-        profileButton.addGestureRecognizer(longPressGesture)
-        
-        // Добавляем кнопку "OK" на панели инструментов
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "OK", style: .done, target: self, action: #selector(doneButtonTapped))
-        toolbar.setItems([doneButton], animated: true)
-        
-        ageTextField.inputAccessoryView = toolbar
-        heightTextField.inputAccessoryView = toolbar
-        weightTextField.inputAccessoryView = toolbar
+        // Метод для добавления панели инструментов на текстовые поля
+        func addToolbarToTextField(_ textField: UITextField) {
+            let toolbar = UIToolbar()
+            toolbar.sizeToFit()
+            
+            let doneButton = UIBarButtonItem(title: "OK", style: .done, target: self, action: #selector(doneButtonTapped))
+            toolbar.setItems([doneButton], animated: true)
+            
+            textField.inputAccessoryView = toolbar
+            textField.delegate = self  // Устанавливаем делегат для textField, если нужно
+        }
         
         sideMenuConfigure()
         
@@ -167,12 +179,15 @@ class ViewController: UIViewController {
         activityLevelTextView.layer.cornerRadius = 5
         activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
         
+        profileButton.addTarget(self, action: #selector(toggleChoosingProfileMenu), for: .touchUpInside)
+        setupChoosingProfileView()
+        setupMenuViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
         profiles = StorageManager.shared.fetchProfiles()
-        profile = StorageManager.shared.fetchActiveProfile()
+        activeProfile = StorageManager.shared.fetchActiveProfile()
         }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,7 +195,7 @@ class ViewController: UIViewController {
         
         profiles = StorageManager.shared.fetchProfiles()
         
-        if profiles == nil || profiles.isEmpty || profile == nil {
+        if profiles == nil || profiles.isEmpty || activeProfile == nil {
             performSegue(withIdentifier: "greetingSegue", sender: self)
         }
     }
@@ -205,18 +220,25 @@ class ViewController: UIViewController {
         
         isMenuOpen.toggle()
         editButton.isEnabled = false
+
+        menuViewController?.receivedProfile = activeProfile
+
         UIView.animate(withDuration: 0.3) {
             self.menuContainerView.frame.origin.x = self.isMenuOpen ? 0 : -self.menuWidth
             self.dimmingView.alpha = self.isMenuOpen ? 1 : 0
             self.view.layoutIfNeeded()
         }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "greetingSegue" {
-            if let greetingVC = segue.destination as? GreetingViewController {
+        if segue.identifier == "greetingSegue",
+            let greetingVC = segue.destination as? GreetingViewController {
                 greetingVC.delegate = self
-            }
+            if let senderTag = sender as? Int {
+                    greetingVC.senderTag = senderTag    
+                }
         }
     }
     
@@ -249,6 +271,26 @@ extension ViewController: UITextViewDelegate, UITextFieldDelegate {
 
 //MARK: - Setup methods
 extension ViewController {
+    private func setupMenuViewController() {
+
+        if menuViewController == nil {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let menuVC = storyboard.instantiateViewController(withIdentifier: "menuViewController") as? MenuViewController else {
+                    print("MenuViewController не найден!")
+                    return
+                }
+                
+                menuViewController = menuVC // Сохраняем экземпляр
+                
+                // Добавляем MenuViewController как дочерний
+                addChild(menuVC)
+            menuVC.view.frame = menuContainerView.bounds
+                menuContainerView.addSubview(menuVC.view)
+            menuVC.didMove(toParent: self)
+            
+        }
+    }
+        
     func configuring(button: UIButton, withImage: UIImage!) {
         let resizedImage = resizeImage(image: withImage, targetSize: CGSize(width: 50, height: 50))
             
@@ -337,8 +379,7 @@ extension ViewController {
     }
     
     @objc func doneButtonTapped() {
-        // Скрываем клавиатуру
-        activeTextField?.resignFirstResponder()
+        view.endEditing(true)
     }
     
     @objc func sexDidChoose(_ sender: UIButton) {
@@ -360,17 +401,8 @@ extension ViewController {
         }
     }
     
-    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-        // Проверяем состояние распознавателя
-        if gesture.state == .began {
-            print("Long press began")
-            // Добавить код, который выполняется при начале длительного нажатия
-        }
-    }
-    
     func checkFilling() -> Bool {
-//        let defaultButtonImage = UIImage(systemName: "circle")
-//        if maleButton.imageView?.image == defaultButtonImage && femaleButton.imageView?.image == defaultButtonImage
+
         if selectedSex == nil {
             let message = NSLocalizedString("sex_alert", comment: "")
             showAlert(message: message)
@@ -449,10 +481,10 @@ extension ViewController {
         
         calculateResult()
         
-        StorageManager.shared.save(changedProfile: profile)
-        StorageManager.shared.set(activeProfile: profile)
+        StorageManager.shared.save(changedProfile: activeProfile)
+        StorageManager.shared.set(activeProfile: activeProfile)
 
-        showResults(for: profile)
+        showResults(for: activeProfile)
     }
     
     func calculateResult() {
@@ -468,20 +500,20 @@ extension ViewController {
         
         let sex: Sex = selectedSex == maleButton ? .male : .female
         
-        profile.age = age
-        profile.sex = sex
-        profile.height = height
-        profile.weight = weight
-        profile.activityLevel = activityLevel
-        profile.goal = goal
-        profile.caloriesBMT = calculateBMR(weight: weight, height: height, age: age, sex: sex)
-        guard let bmt = profile.caloriesBMT  else { return }
+        activeProfile.age = age
+        activeProfile.sex = sex
+        activeProfile.height = height
+        activeProfile.weight = weight
+        activeProfile.activityLevel = activityLevel
+        activeProfile.goal = goal
+        activeProfile.caloriesBMT = calculateBMR(weight: weight, height: height, age: age, sex: sex)
+        guard let bmt = activeProfile.caloriesBMT  else { return }
         let tdee = calculateTDEE(bmr: bmt, activityLevel: activityLevel.value)
-        profile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
+        activeProfile.caloriesTDEEForGoal = calculateTDEEForGoal(tdee: tdee, goal: goal)
 
         self.selectedSex = selectedSex
-        selectedActivityLevel = profile.activityLevel
-        selectedGoal = profile.goal
+        selectedActivityLevel = activeProfile.activityLevel
+        selectedGoal = activeProfile.goal
     }
     
     func sideMenuConfigure() {
@@ -489,17 +521,19 @@ extension ViewController {
         // Подключаем ViewController по идентификатору
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let navigationController = storyboard.instantiateViewController(withIdentifier: "menuNavigationController") as? UINavigationController {
-            if let  menuViewController = navigationController.topViewController as? MenuViewController {
+            if let  menuVC = navigationController.topViewController as? MenuViewController {
+                menuViewController = menuVC
+                
                 // Настраиваем контейнер меню
                 menuContainerView.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
                 menuContainerView.backgroundColor = .white
                 view.addSubview(menuContainerView)
                 
                 // Добавляем меню как дочерний ViewController
-                addChild(menuViewController)
-                menuViewController.view.frame = menuContainerView.bounds
-                menuContainerView.addSubview(menuViewController.view)
-                menuViewController.didMove(toParent: self)
+                addChild(menuViewController!)
+                menuViewController!.view.frame = menuContainerView.bounds
+                menuContainerView.addSubview(menuViewController!.view)
+                menuViewController!.didMove(toParent: self)
                 
                 // Настройка затемняющего фона
                 dimmingView.frame = view.bounds
@@ -511,6 +545,108 @@ extension ViewController {
         }
         
         
+    }
+    
+    private func setupChoosingProfileView() {
+        view.addSubview(choosingProfileView)
+        
+        // Устанавливаем ограничения для меню
+        NSLayoutConstraint.activate([
+            choosingProfileView.widthAnchor.constraint(equalTo: profileButton.widthAnchor),
+            choosingProfileView.centerXAnchor.constraint(equalTo: profileButton.centerXAnchor),
+            choosingProfileView.bottomAnchor.constraint(equalTo: profileButton.topAnchor, constant: -10)
+        ])
+        
+        // Высота меню (изначально 0)
+        menuViewHeightConstraint = choosingProfileView.heightAnchor.constraint(equalToConstant: 0)
+        menuViewHeightConstraint.isActive = true
+        
+        // Добавляем круглые кнопки в меню
+        addButtonsToMenu()
+    }
+    
+    private func addButtonsToMenu() {
+        let buttonSize: CGFloat = 50
+        
+        // Создаем ScrollView
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        choosingProfileView.addSubview(scrollView)
+
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: choosingProfileView.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: choosingProfileView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: choosingProfileView.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: choosingProfileView.trailingAnchor)
+        ])
+
+        // Создаем StackView для вертикального размещения кнопок
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor) // Чтобы кнопки были выровнены по центру
+        ])
+        
+        // Добавляем кнопку "plus" в StackView
+        let addProfileButton = UIButton()
+        addProfileButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        addProfileButton.backgroundColor = .lightGray
+        addProfileButton.tintColor = .white
+        addProfileButton.layer.cornerRadius = buttonSize / 2
+        addProfileButton.translatesAutoresizingMaskIntoConstraints = false
+        addProfileButton.tag = -1 // Для идентификации кнопок
+        addProfileButton.addTarget(self, action: #selector(addProfileButtonTapped(_:)), for: .touchUpInside)
+        stackView.addArrangedSubview(addProfileButton)
+
+        NSLayoutConstraint.activate([
+            addProfileButton.widthAnchor.constraint(equalToConstant: buttonSize),
+            addProfileButton.heightAnchor.constraint(equalToConstant: buttonSize)
+        ])
+        
+        // Добавляем остальные кнопки в StackView
+        for (index, profileData) in profiles.enumerated() {
+            if profileData.nickname == activeProfile.nickname { continue }
+            let button = UIButton()
+            button.setImage(UIImage(named: profileData.icon), for: .normal)
+            button.layer.cornerRadius = buttonSize / 2
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.tag = index // Для идентификации кнопок
+            button.addTarget(self, action: #selector(ChooseProfileButtonTapped(_:)), for: .touchUpInside)
+            stackView.addArrangedSubview(button)
+
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: buttonSize),
+                button.heightAnchor.constraint(equalToConstant: buttonSize)
+            ])
+        }
+    }
+        
+    @objc private func toggleChoosingProfileMenu() {
+        isChooseProfileMenuVisible.toggle()
+        menuViewHeightConstraint.constant = isChooseProfileMenuVisible ? view.frame.height / 2 : 0 // Высота меню
+        UIView.animate(withDuration: 0.3, animations: {
+            self.choosingProfileView.alpha = self.isChooseProfileMenuVisible ? 1 : 0
+            self.dimmingView.alpha = self.isChooseProfileMenuVisible ? 1 : 0
+            self.editButton.isEnabled = self.isChooseProfileMenuVisible ? false : true
+            self.view.layoutIfNeeded()
+        })
+    }
+        
+    @objc private func ChooseProfileButtonTapped(_ sender: UIButton) {
+        print("Button \(sender.tag) tapped!")
+    }
+    
+    @objc private func addProfileButtonTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "greetingSegue", sender: sender.tag)
     }
 }
 
@@ -550,10 +686,10 @@ extension ViewController {
         var proteinRate = 1.5
         var fatRate = 1.0
         
-        if profile.goal == .weightLoss {
+        if activeProfile.goal == .weightLoss {
             proteinRate = 1.8
             fatRate = 0.8
-        } else if profile.goal == .weightGain {
+        } else if activeProfile.goal == .weightGain {
             proteinRate = 1.2
             fatRate = 1
         }
@@ -652,15 +788,20 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @objc func hideMenu() {
-        guard isMenuOpen else { return }
-        settingsButtonTapped(settingsButton)
-        editButton.isEnabled = true
+        if isMenuOpen {
+            settingsButtonTapped(settingsButton)
+            editButton.isEnabled = true
+            profiles = StorageManager.shared.fetchProfiles()
+        }
+        if isChooseProfileMenuVisible {
+            toggleChoosingProfileMenu()
+        }
     }
 }
 
 //MARK: - GreetingViewControllerDelegate
 extension ViewController: GreetingViewControllerDelegate {
-//    func didUpdateProfile(nickname: String, icon: String) {
+
     func didUpdateProfile(_ profile: Profile) {
 
         hideMenu()
@@ -670,6 +811,13 @@ extension ViewController: GreetingViewControllerDelegate {
         
         // Обновляю таблицу в side menu
         sideMenuConfigure()
+        
+        toggleChoosingProfileMenu()
+        
+        profiles = StorageManager.shared.fetchProfiles()
+        self.activeProfile = profile
+        view.reloadInputViews()
+        choosingProfileView.reloadInputViews()
     }
 }
 
@@ -681,6 +829,10 @@ extension ViewController: StorageManagerDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    func hideChoosingProfileMenu() {
+        toggleChoosingProfileMenu()
     }
 }
 
@@ -695,5 +847,17 @@ extension Bundle {
 
     static func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
         return bundle?.localizedString(forKey: key, value: value, table: tableName) ?? key
+    }
+}
+
+extension ViewController: MenuViewControllerDelegate {
+    func updateChooseProfileMenu() {
+        profiles = StorageManager.shared.fetchProfiles()
+        
+        // Удаляем все текущие кнопки из ChoosingProfileView
+        choosingProfileView.subviews.forEach { $0.removeFromSuperview() }
+        
+        // Заново добавляем кнопки на основе обновленных данных
+        addButtonsToMenu()
     }
 }

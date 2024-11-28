@@ -55,3 +55,9 @@
 "choose_value" = "选择价值";
 "age_attention_title_alert" = "注意事项";
 "age_attention_text_alert" = "该公式假设它适用于成人（18岁及以上）。 不建议儿童和青少年使用它，因为它们的新陈代谢具有与成人不同的特征。 建议使用其他方法进行更精确的计算。";
+"delete_attention_title_alert" = "错误";
+"delete_attention_text_alert" = "您无法删除当前帐户。 首先，更改所选帐户。";
+"sure_to_delete_title" = "删除一行？";
+"sure_to_delete_message" = "您确定要删除此行吗？";
+"cancel" = "取消";
+"delete" = "删除";

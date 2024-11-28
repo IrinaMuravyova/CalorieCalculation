@@ -9,6 +9,7 @@ import UIKit
 
 protocol GreetingViewControllerDelegate: AnyObject {
     func didUpdateProfile(_ profile: Profile)
+    func hideChoosingProfileMenu()
 }
 
 class GreetingViewController: UIViewController {
@@ -17,6 +18,7 @@ class GreetingViewController: UIViewController {
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: GreetingViewControllerDelegate?
     
@@ -29,6 +31,8 @@ class GreetingViewController: UIViewController {
     var changingProfile: Profile?
     var changingStarted = false
     
+    var senderTag: Int? // для скрытия/отображения кнопки отмена
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,13 +41,20 @@ class GreetingViewController: UIViewController {
         nicknameTextField.delegate = self
         
         continueButton.isEnabled = false
+        cancelButton.isHidden = senderTag == -1 ? false : true
+        cancelButton.isEnabled = senderTag == -1 ? true : false
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cancelButtonTapped))
+        cancelButton.addGestureRecognizer(tapGesture)
+    
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         // если окно вызвано для изменения профиля, то заполняю nickname
         if changingProfile != nil {
             nicknameTextField.text = changingProfile?.nickname
             imagesCollectionView.reloadData()
         }
-        
     }
     
     @IBAction func continueButtonTapped(_ sender: UIButton) {
@@ -89,6 +100,7 @@ class GreetingViewController: UIViewController {
             
             // Передача данных через делегат
             delegate?.didUpdateProfile(newProfile)
+            delegate?.hideChoosingProfileMenu()
             
             // Закрытие модального экрана
             dismiss(animated: true, completion: nil)
@@ -206,5 +218,13 @@ extension GreetingViewController {
             } else {
                 continueButton.isEnabled = false
             }
+    }
+    
+    @objc func cancelButtonTapped() {
+        dismiss(animated: true)
+        UIView.animate(withDuration: 0.35) {
+            self.delegate?.hideChoosingProfileMenu()
+        }
+        
     }
 }

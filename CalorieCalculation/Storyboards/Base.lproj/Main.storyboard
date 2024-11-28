@@ -285,7 +285,7 @@
                                                     <constraint firstAttribute="width" secondItem="3tc-ig-OcW" secondAttribute="height" multiplier="1:1" id="sf5-Oi-LmP"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="plus"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -359,7 +359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="-2"/>
+            <point key="canvasLocation" x="1102.5" y="-2.112676056338028"/>
         </scene>
         <!--Настройки-->
         <scene sceneID="SbB-yU-OWu">
@@ -635,7 +635,7 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lQy-yL-bw4">
-                                <rect key="frame" x="20" y="191.5" width="280" height="292"/>
+                                <rect key="frame" x="20" y="191.5" width="280" height="272"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vex-P0-YvD">
                                     <size key="itemSize" width="76" height="85"/>
@@ -664,33 +664,49 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQS-sj-9zK">
-                                <rect key="frame" x="50" y="503.5" width="220" height="34.5"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Идем дальше "/>
-                                <connections>
-                                    <action selector="continueButtonTapped:" destination="Tyh-hz-ycC" eventType="touchUpInside" id="IVa-qu-2Xw"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="G0q-Fk-jGD">
+                                <rect key="frame" x="50" y="483.5" width="220" height="54.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="zQS-sj-9zK">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="54.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Отмена">
+                                            <color key="baseBackgroundColor" red="0.81229864690721643" green="0.23490359380015285" blue="0.30470290527699273" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="continueButtonTapped:" destination="Tyh-hz-ycC" eventType="touchUpInside" id="IVa-qu-2Xw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLP-G1-1is">
+                                        <rect key="frame" x="120" y="0.0" width="100" height="54.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Идем дальше "/>
+                                        <connections>
+                                            <action selector="continueButtonTapped:" destination="Tyh-hz-ycC" eventType="touchUpInside" id="l4P-bI-Eqn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OYt-aF-jZJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="G0q-Fk-jGD" firstAttribute="top" secondItem="lQy-yL-bw4" secondAttribute="bottom" constant="20" id="9dT-qW-JHv"/>
                             <constraint firstItem="zBS-Wc-1Ed" firstAttribute="top" secondItem="OYt-aF-jZJ" secondAttribute="top" constant="40" id="C3j-9p-G50"/>
                             <constraint firstItem="lQy-yL-bw4" firstAttribute="leading" secondItem="OYt-aF-jZJ" secondAttribute="leading" constant="20" id="C5Y-DC-bq9"/>
-                            <constraint firstItem="OYt-aF-jZJ" firstAttribute="trailing" secondItem="zQS-sj-9zK" secondAttribute="trailing" constant="50" id="Fk5-Ph-gin"/>
+                            <constraint firstItem="OYt-aF-jZJ" firstAttribute="bottom" secondItem="G0q-Fk-jGD" secondAttribute="bottom" constant="30" id="Ll1-TP-Kfr"/>
                             <constraint firstItem="lQy-yL-bw4" firstAttribute="top" secondItem="zBS-Wc-1Ed" secondAttribute="bottom" constant="20" id="OIn-NW-rPa"/>
                             <constraint firstItem="zBS-Wc-1Ed" firstAttribute="leading" secondItem="OYt-aF-jZJ" secondAttribute="leading" constant="20" id="OgP-aG-JZv"/>
                             <constraint firstItem="OYt-aF-jZJ" firstAttribute="trailing" secondItem="lQy-yL-bw4" secondAttribute="trailing" constant="20" id="SCB-vy-KBN"/>
                             <constraint firstItem="OYt-aF-jZJ" firstAttribute="trailing" secondItem="zBS-Wc-1Ed" secondAttribute="trailing" constant="20" id="WRS-xe-d8P"/>
-                            <constraint firstItem="zQS-sj-9zK" firstAttribute="leading" secondItem="OYt-aF-jZJ" secondAttribute="leading" constant="50" id="aFb-QM-2XK"/>
-                            <constraint firstItem="zQS-sj-9zK" firstAttribute="top" secondItem="lQy-yL-bw4" secondAttribute="bottom" constant="20" id="d7B-8f-yKG"/>
-                            <constraint firstItem="OYt-aF-jZJ" firstAttribute="bottom" secondItem="zQS-sj-9zK" secondAttribute="bottom" constant="30" id="yp9-Lw-e8a"/>
+                            <constraint firstItem="G0q-Fk-jGD" firstAttribute="leading" secondItem="OYt-aF-jZJ" secondAttribute="leading" constant="50" id="kMP-Aj-AbD"/>
+                            <constraint firstAttribute="trailing" secondItem="G0q-Fk-jGD" secondAttribute="trailing" constant="50" id="vQ1-11-hxj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FBU-uA-m1a"/>
                     <connections>
-                        <outlet property="continueButton" destination="zQS-sj-9zK" id="cYt-ri-JMX"/>
+                        <outlet property="cancelButton" destination="zQS-sj-9zK" id="r41-yX-28l"/>
+                        <outlet property="continueButton" destination="qLP-G1-1is" id="SoQ-3F-Pf6"/>
                         <outlet property="imagesCollectionView" destination="lQy-yL-bw4" id="VBd-qq-kLW"/>
                         <outlet property="nicknameTextField" destination="74d-2H-no1" id="8jP-YE-2kt"/>
                         <outlet property="titleLabel" destination="39c-EP-0bG" id="Gse-Bb-8Kw"/>
@@ -743,6 +759,7 @@
     <resources>
         <image name="circle" catalog="system" width="128" height="123"/>
         <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="plus" width="128" height="128"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

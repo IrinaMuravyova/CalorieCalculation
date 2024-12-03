@@ -633,16 +633,26 @@ extension ViewController {
     @objc private func toggleChoosingProfileMenu() {
         isChooseProfileMenuVisible.toggle()
         menuViewHeightConstraint.constant = isChooseProfileMenuVisible ? view.frame.height / 2 : 0 // Высота меню
-        UIView.animate(withDuration: 0.3, animations: {
-            self.choosingProfileView.alpha = self.isChooseProfileMenuVisible ? 1 : 0
-            self.dimmingView.alpha = self.isChooseProfileMenuVisible ? 1 : 0
-            self.editButton.isEnabled = self.isChooseProfileMenuVisible ? false : true
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3, animations: { [self] in
+            choosingProfileView.alpha = isChooseProfileMenuVisible ? 1 : 0
+            dimmingView.alpha = isChooseProfileMenuVisible ? 1 : 0
+            editButton.isEnabled = isChooseProfileMenuVisible ? false : true
+            view.layoutIfNeeded()
         })
     }
         
     @objc private func ChooseProfileButtonTapped(_ sender: UIButton) {
-        print("Button \(sender.tag) tapped!")
+
+        activeProfile = profiles[sender.tag]
+        StorageManager.shared.set(activeProfile: activeProfile)
+
+        // Обновляю иконку у кнопки профиля
+        configuring(button: profileButton, withImage: UIImage(named: activeProfile.icon))
+        
+        toggleChoosingProfileMenu()
+        
+        // Обновляю главный экран
+        fillFields(for: activeProfile)
     }
     
     @objc private func addProfileButtonTapped(_ sender: UIButton) {

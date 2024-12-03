@@ -53,8 +53,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var carbsTitleLabel: UILabel!
     @IBOutlet weak var editBarButtonTitle: UIBarButtonItem!
     
-    
-    
     var activeTextField: UITextField?
     var activityLevelPickerView = UIPickerView()
     var goalPickerView = UIPickerView()
@@ -62,12 +60,10 @@ class ViewController: UIViewController {
     var selectedGoal: Goals?
     var selectedSex: UIButton?
     
-
     private var isMenuOpen = false // Флаг для отображения меню
     private let menuWidth: CGFloat = 300 // Ширина бокового меню
     private let menuContainerView = UIView() // Контейнер для меню
     private let dimmingView = UIView() // Затемняющий фон для интерактивности
-    
     
     // для выезжающего view для смены профиля
     private let choosingProfileView: UIView = {
@@ -108,7 +104,7 @@ class ViewController: UIViewController {
         
         profiles = StorageManager.shared.fetchProfiles()
         activeProfile = StorageManager.shared.fetchActiveProfile()
-        
+          
         configuring(button: profileButton, withImage: UIImage(named: activeProfile.icon))
         configuring(button: settingsButton, withImage: UIImage(systemName: "gear"))
         configuring(button: questionButton, withImage: UIImage(systemName: "questionmark.circle"))
@@ -228,8 +224,6 @@ class ViewController: UIViewController {
             self.dimmingView.alpha = self.isMenuOpen ? 1 : 0
             self.view.layoutIfNeeded()
         }
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -280,14 +274,13 @@ extension ViewController {
                     return
                 }
                 
-                menuViewController = menuVC // Сохраняем экземпляр
+        menuViewController = menuVC // Сохраняем экземпляр
                 
-                // Добавляем MenuViewController как дочерний
-                addChild(menuVC)
-            menuVC.view.frame = menuContainerView.bounds
-                menuContainerView.addSubview(menuVC.view)
-            menuVC.didMove(toParent: self)
-            
+        // Добавляем MenuViewController как дочерний
+        addChild(menuVC)
+        menuVC.view.frame = menuContainerView.bounds
+        menuContainerView.addSubview(menuVC.view)
+        menuVC.didMove(toParent: self)
         }
     }
         
@@ -332,8 +325,10 @@ extension ViewController {
         
         if profile.sex == .male {
             maleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
+            femaleButton.setImage(UIImage(systemName: "circle"), for: .normal)
         } else {
             femaleButton.setImage(UIImage(systemName: "circle.circle.fill"), for: .normal)
+            maleButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
         guard
             let age = profile.age,
@@ -349,7 +344,6 @@ extension ViewController {
         activityLevelTextView.text = activityLevel
 
         goalTextField.text = goal
-        
     }
     
     func fillNutritions(for profile: Profile){
@@ -539,11 +533,8 @@ extension ViewController {
                 dimmingView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
                 dimmingView.alpha = 0 // По умолчанию невидимый
                 view.insertSubview(dimmingView, belowSubview: menuContainerView)
-                
             }
         }
-        
-        
     }
     
     private func setupChoosingProfileView() {
@@ -647,11 +638,34 @@ extension ViewController {
 
         // Обновляю иконку у кнопки профиля
         configuring(button: profileButton, withImage: UIImage(named: activeProfile.icon))
-        
+        setupChoosingProfileView()
         toggleChoosingProfileMenu()
         
         // Обновляю главный экран
-        fillFields(for: activeProfile)
+        if activeProfile.age == nil { //TODO: change verify
+            titleForParametersLabel.text = NSLocalizedString("title_for_parameters_label", comment: "")
+            
+            editButton.style = .done
+            editButton.title = "OK"
+            
+            enableEditingMode()
+            
+            maleButton.setImage(UIImage(named: "circle"), for: .normal)
+            femaleButton.setImage(UIImage(named: "circle"), for: .normal)
+            ageTextField.text = nil
+            heightTextField.text = nil
+            weightTextField.text = nil
+            activityLevelTextView.text = NSLocalizedString("choose_value", comment: "")
+            goalTextField.text = NSLocalizedString("choose_value", comment: "")
+        
+            resultStackView.isHidden = true
+        } else {
+            resultStackView.isHidden = false
+            fillFields(for: activeProfile)
+            editButton.style = .plain
+            editButton.title = NSLocalizedString("edit_title", comment: "")
+            disableEditingMode()
+        }
     }
     
     @objc private func addProfileButtonTapped(_ sender: UIButton) {
@@ -721,18 +735,19 @@ extension ViewController {
         
         caloriesLabel.text = profile.caloriesTDEEForGoal?.formatted()
         guard let weight = profile.weight, let tdee = profile.caloriesTDEEForGoal else { return }
-        let nutritions = calculateNutritionalNeeds(weight: weight, calorieNeedsForGoal: tdee)
         fillNutritions(for: profile)
     }
     
     func settingsFieldsAvailableToggle() {
         titleForParametersLabel.text = NSLocalizedString("parameters_title", comment: "")
-        maleButton.isEnabled.toggle()
-        femaleButton.isEnabled.toggle()
-        ageTextField.isEnabled.toggle()
-        weightTextField.isEnabled.toggle()
-        heightTextField.isEnabled.toggle()
-        activityLevelTextView.isUserInteractionEnabled.toggle()
+        
+        let enabled = editButton.style == .done ? true : false
+        maleButton.isEnabled = enabled
+        femaleButton.isEnabled = enabled
+        ageTextField.isEnabled = enabled
+        weightTextField.isEnabled = enabled
+        heightTextField.isEnabled = enabled
+        activityLevelTextView.isUserInteractionEnabled = enabled
         if activityLevelTextView.isUserInteractionEnabled {
                 // Активное состояние
             activityLevelTextView.backgroundColor = UIColor.white
@@ -742,7 +757,7 @@ extension ViewController {
                 activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
                 activityLevelTextView.backgroundColor = UIColor.systemFill // не тот цвет
             }
-        goalTextField.isEnabled.toggle()
+        goalTextField.isEnabled = enabled
         settingsStackView.alpha = 0.6
     }
 }
@@ -776,7 +791,6 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1 {
-//            activityLevelTextField.text = ActivityLevel.allCases[row].rawValue 
             activityLevelTextView.text = ActivityLevel.allCases[row].localized
             activityLevelTextView.textAlignment = .left
             selectedActivityLevel = ActivityLevel.allCases[row]

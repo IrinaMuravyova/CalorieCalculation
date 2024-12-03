@@ -409,7 +409,6 @@ extension ViewController {
             return false
         }
     
-        
         guard let age = ageTextField.text else {
             showAlert(message: "age_alert")
             return false

@@ -13,6 +13,10 @@ class TeamViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(hex: "#7D9D9C", alpha: 1)
+        teamTableView.backgroundColor = UIColor(hex: "#7D9D9C", alpha: 1)
+        
         teamTableView.dataSource = self
         teamTableView.delegate = self
         

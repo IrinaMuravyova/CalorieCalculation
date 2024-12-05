@@ -10,4 +10,9 @@ import UIKit
 class ImageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.backgroundColor = UIColor(hex: "#8CA9AA", alpha: 1)
+    }
 }

@@ -14,8 +14,8 @@ protocol MenuViewControllerDelegate: AnyObject {
 
 class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var emailToDeveloper: UIButton!
-    @IBOutlet weak var aboutUs: UIButton!
+    @IBOutlet weak var emailToDeveloperButton: UIButton!
+    @IBOutlet weak var aboutUsButton: UIButton!
     
     var profiles = StorageManager.shared.fetchProfiles()
     
@@ -26,11 +26,20 @@ class MenuViewController: UIViewController, MFMailComposeViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor(hex: "#576F72", alpha: 1)
+        emailToDeveloperButton.backgroundColor = UIColor(hex: "#F8DAA8", alpha: 1)
+        emailToDeveloperButton.tintColor = UIColor(hex: "#3F5B62", alpha: 1)
+        emailToDeveloperButton.layer.cornerRadius = 10
+        aboutUsButton.backgroundColor = UIColor(hex: "#F8DAA8", alpha: 1)
+        aboutUsButton.tintColor = UIColor(hex: "#3F5B62", alpha: 1)
+        aboutUsButton.layer.cornerRadius = 10
+        tableView.backgroundColor = UIColor(hex: "#7D9D9C", alpha: 1)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
-        emailToDeveloper.setTitle(NSLocalizedString("email_to_developer_title", comment: ""), for: .normal)
-        aboutUs.setTitle(NSLocalizedString("about_us_title", comment: ""), for: .normal)
+        emailToDeveloperButton.setTitle(NSLocalizedString("email_to_developer_title", comment: ""), for: .normal)
+        aboutUsButton.setTitle(NSLocalizedString("about_us_title", comment: ""), for: .normal)
         
     }
     
@@ -128,17 +137,25 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
         
         var content = cell.defaultContentConfiguration()
         content.text = profile.nickname
+        content.textProperties.color = UIColor(hex: "#EEEEEE", alpha: 1)
         if let image = UIImage(named: profile.icon) {
             content.image = image
             content.imageProperties.maximumSize = CGSize(width: 30, height: 30)
-            
         }
         cell.contentConfiguration = content
+        cell.backgroundColor = UIColor(hex: "#8CA9AA", alpha: 1)
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         NSLocalizedString("section_title", comment: "")
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let header = view as? UITableViewHeaderFooterView {
+            header.textLabel?.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        }
     }
     
     // MARK: - Custom Footer View
@@ -150,7 +167,7 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource, Storag
         footerLabel.numberOfLines = 0 // Позволяет неограниченное количество строк
         footerLabel.text = NSLocalizedString("footer_text", comment: "")
         footerLabel.font = UIFont.systemFont(ofSize: 14)
-        footerLabel.textColor = .gray
+        footerLabel.textColor = UIColor(hex: "#F0EBE3", alpha: 1)
         footerLabel.textAlignment = .left
 
         footerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -180,9 +197,10 @@ extension MenuViewController {
         // Кнопка удаления
         let deleteTitle = NSLocalizedString("delete_title", comment: "")
         var deleteAction = UIContextualAction()
-    
 
-        deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { [self](_, _, completionHandler) in
+        deleteAction = UIContextualAction(style: .normal, title: deleteTitle) { [self](_, _, completionHandler) in
+            
+            deleteAction.backgroundColor = UIColor(hex: "#D69955", alpha: 1)
             
             if profiles[indexPath.row].nickname == receivedProfile.nickname {
                 
@@ -196,6 +214,7 @@ extension MenuViewController {
                 
                 completionHandler(true) // Завершаем действие
             }
+            
             
             // Показать алерт для подтверждения
             let title = NSLocalizedString("sure_to_delete_title", comment: "")
@@ -250,7 +269,7 @@ extension MenuViewController {
             completionHandler(true)
         }
         
-        editAction.backgroundColor = .blue // Настраиваем цвет кнопки редактирования
+        editAction.backgroundColor = UIColor(hex: "#F8DAA8", alpha: 1)// Настраиваем цвет кнопки редактирования
         
         return UISwipeActionsConfiguration(actions: [deleteAction, editAction]) // Возвращаем обе кнопки
     

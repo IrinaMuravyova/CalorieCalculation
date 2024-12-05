@@ -19,6 +19,8 @@ class GreetingViewController: UIViewController {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var inputNameTitleLabel: UILabel!
+    @IBOutlet weak var chooseImageTitleLabel: UILabel!
     
     weak var delegate: GreetingViewControllerDelegate?
     
@@ -35,6 +37,8 @@ class GreetingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupColor()
         
         imagesCollectionView.dataSource = self
         imagesCollectionView.delegate = self
@@ -131,7 +135,7 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
         } else {
             deleteShadow(for: cell.imageView)
         }
-        
+        cell.imageView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 20, right: 10))
         return cell
     }
     
@@ -153,20 +157,16 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
         }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Получаем предыдущий индекс выделенной ячейки, если он существует
-        let previousIndexPath = selectedIndexPath
-            
-        // Обновляем индекс новой выделенной ячейки
-        selectedIndexPath = indexPath
 
-        // Собираем массив ячеек для перезагрузки
-        var indexPathsToReload = [indexPath]
-        if let previousIndexPath = previousIndexPath, previousIndexPath != indexPath {
-            indexPathsToReload.append(previousIndexPath)
+        if let previousIndexPath = selectedIndexPath {
+                let previousCell = collectionView.cellForItem(at: previousIndexPath) as? ImageCollectionViewCell
+                deleteShadow(for: previousCell?.imageView)
         }
 
-        // Перезагружаем только текущую и предыдущую ячейки
-        collectionView.reloadItems(at: indexPathsToReload)
+        let currentCell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell
+        setShadow(for: currentCell?.imageView)
+
+        selectedIndexPath = indexPath
         checkContinueButtonEnable()
     }
 }
@@ -192,32 +192,36 @@ extension GreetingViewController: UITextFieldDelegate {
 extension GreetingViewController {
     private func setShadow(for object: Any?) {
         if let imageView = object as? UIImageView {
-            imageView.layer.shadowColor = UIColor(.black).cgColor
-            imageView.layer.shadowRadius = 5
-            imageView.layer.shadowOffset = CGSize(width: 3, height: 3)
-            imageView.layer.shadowOpacity = 0.6
-            
+            imageView.layer.masksToBounds = false
+            imageView.layer.shadowColor = UIColor(hex: "#3F5B62", alpha: 1).cgColor
+            imageView.layer.shadowOpacity = 1
+            imageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            imageView.layer.shadowRadius = 4
+        
             imageView.layer.cornerRadius = imageView.frame.width / 2
         }
     }
     
     private func deleteShadow(for object: Any?) {
         if let imageView = object as? UIImageView {
-            imageView.layer.shadowRadius = 0
-            imageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            imageView.layer.masksToBounds = false
+            imageView.layer.shadowColor = UIColor(hex: "#3F5B62", alpha: 1).cgColor
+            imageView.layer.shadowOpacity = 0.4
+            imageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            imageView.layer.shadowRadius = 2
         }
     }
     
     @objc private func checkContinueButtonEnable(_ updatedText: String? = nil){
         // Если текст был передан, проверяю его состояние, иначе использую текущее значение в textField
         let text = updatedText ?? nicknameTextField.text
-
+        
         // Проверяю, что текст не пустой и выбран индекс
         if let nickname = text, selectedIndexPath != nil && !nickname.isEmpty {
-                continueButton.isEnabled = true
-            } else {
-                continueButton.isEnabled = false
-            }
+            continueButton.isEnabled = true
+        } else {
+            continueButton.isEnabled = false
+        }
     }
     
     @objc func cancelButtonTapped() {
@@ -225,6 +229,58 @@ extension GreetingViewController {
         UIView.animate(withDuration: 0.35) {
             self.delegate?.hideChoosingProfileMenu()
         }
+    }
+    
+    private func setupColor() {
+        view.backgroundColor = UIColor(hex: "#8CA9AA", alpha: 1)
         
+        inputNameTitleLabel.layer.cornerRadius = 10
+        inputNameTitleLabel.layer.shadowColor = UIColor(hex: "#576F72", alpha: 1).cgColor
+        inputNameTitleLabel.layer.shadowOpacity = 0.4
+        inputNameTitleLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        inputNameTitleLabel.layer.shadowRadius = 4
+        
+        
+        chooseImageTitleLabel.layer.cornerRadius = 10
+        chooseImageTitleLabel.layer.shadowColor = UIColor(hex: "#576F72", alpha: 1).cgColor
+        chooseImageTitleLabel.layer.shadowOpacity = 0.4
+        chooseImageTitleLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        chooseImageTitleLabel.layer.shadowRadius = 4
+        
+        cancelButton.tintColor = UIColor(hex: "#D69955", alpha: 1)
+        cancelButton.layer.cornerRadius = 10
+        cancelButton.layer.shadowColor = UIColor(hex: "#576F72", alpha: 1).cgColor
+        cancelButton.layer.shadowOpacity = 0.4
+        cancelButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cancelButton.layer.shadowRadius = 4
+        
+        inputNameTitleLabel.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        titleLabel.textColor = UIColor(hex: "#D69955", alpha: 1)
+        titleLabel.shadowColor = UIColor(hex: "#3F5B62", alpha: 1)
+        titleLabel.layer.shadowOpacity = 0.4
+        titleLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
+        titleLabel.layer.shadowRadius = 4
+        chooseImageTitleLabel.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        
+        nicknameTextField.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        nicknameTextField.backgroundColor = UIColor(hex: "#E4DCCF", alpha: 1)
+        nicknameTextField.tintColor = UIColor(hex: "#D69955", alpha: 1)
+        nicknameTextField.layer.cornerRadius = 10
+        nicknameTextField.layer.shadowColor = UIColor(hex: "#576F72", alpha: 1).cgColor
+        nicknameTextField.layer.shadowOpacity = 0.4
+        nicknameTextField.layer.shadowOffset = CGSize(width: 0, height: 2)
+        nicknameTextField.layer.shadowRadius = 4
+        
+        imagesCollectionView.backgroundColor = UIColor(hex: "#8CA9AA", alpha: 1)
+        
+        continueButton.tintColor = continueButton.isEnabled ?
+        UIColor(hex: "#D69955", alpha: 1) : UIColor(hex: "#DCDCDC", alpha: 1)
+        continueButton.titleLabel?.textColor = continueButton.isEnabled ?
+        UIColor(hex: "#3F5B62", alpha: 1) : UIColor(hex: "#576F72", alpha: 1)
+        continueButton.layer.cornerRadius = 10
+        continueButton.layer.shadowColor = UIColor(hex: "#576F72", alpha: 1).cgColor
+        continueButton.layer.shadowOpacity = 0.4
+        continueButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        continueButton.layer.shadowRadius = 4
     }
 }

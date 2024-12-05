@@ -30,11 +30,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var titleForParametersLabel: UILabel!
     @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var resultStackView: UIStackView!
-    @IBOutlet weak var settingsStackView: UIStackView!
+    @IBOutlet weak var parametersView: UIView!
+    @IBOutlet weak var resultsView: UIView!
+    @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var questionButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var buttonsView: UIView!
     
     // For localize
     @IBOutlet weak var sexLabel: UILabel!
@@ -46,7 +48,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var maleLabel: UILabel!
     @IBOutlet weak var femaleLabel: UILabel!
     @IBOutlet weak var resultTitleLabel: UILabel!
-    @IBOutlet weak var dayliNormLabel: UILabel!
+    @IBOutlet weak var dailyNormLabel: UILabel!
     @IBOutlet weak var kcalLabel: UILabel!
     @IBOutlet weak var proteinTitleLabel: UILabel!
     @IBOutlet weak var fatTitleLabel: UILabel!
@@ -80,6 +82,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupColor()
+        
 //        if let localizedValue = Bundle.main.localizedString(forKey: "weight_loss", value: nil, table: nil) as? String {
 //            print("Localized Value: \(localizedValue)")
 //        }
@@ -93,7 +98,6 @@ class ViewController: UIViewController {
         maleLabel.text = NSLocalizedString("male_title_label", comment: "")
         femaleLabel.text = NSLocalizedString("female_title_label", comment: "")
         resultTitleLabel.text = NSLocalizedString("result_title_label", comment: "")
-        dayliNormLabel.text = NSLocalizedString("day_norm_title_label", comment: "")
         kcalLabel.text = NSLocalizedString("kcal_title_label", comment: "")
         proteinTitleLabel.text = NSLocalizedString("protein_title_label", comment: "")
         fatTitleLabel.text = NSLocalizedString("fat_title_label", comment: "")
@@ -115,7 +119,7 @@ class ViewController: UIViewController {
             editButton.style = .done
             editButton.title = "OK"
         
-            resultStackView.isHidden = true
+            resultsView.isHidden = true
         } else {
             fillFields(for: activeProfile)
         }
@@ -185,7 +189,7 @@ class ViewController: UIViewController {
         profiles = StorageManager.shared.fetchProfiles()
         activeProfile = StorageManager.shared.fetchActiveProfile()
         }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -194,6 +198,8 @@ class ViewController: UIViewController {
         if profiles == nil || profiles.isEmpty || activeProfile == nil {
             performSegue(withIdentifier: "greetingSegue", sender: self)
         }
+        
+        
     }
     
     @IBAction func editBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -463,14 +469,14 @@ extension ViewController {
     
     func enableEditingMode() {
         settingsFieldsAvailableToggle()
-        settingsStackView.alpha = 1
-        resultStackView.alpha = 0.6
+        parametersView.alpha = 1
+        resultsView.alpha = 0.6
     }
     
     func disableEditingMode() {
         settingsFieldsAvailableToggle()
-        settingsStackView.alpha = 0.6
-        resultStackView.alpha = 1
+        parametersView.alpha = 0.6
+        resultsView.alpha = 1
         
         calculateResult()
         
@@ -658,9 +664,9 @@ extension ViewController {
             activityLevelTextView.text = NSLocalizedString("choose_value", comment: "")
             goalTextField.text = NSLocalizedString("choose_value", comment: "")
         
-            resultStackView.isHidden = true
+            resultsView.isHidden = true
         } else {
-            resultStackView.isHidden = false
+            resultsView.isHidden = false
             fillFields(for: activeProfile)
             editButton.style = .plain
             editButton.title = NSLocalizedString("edit_title", comment: "")
@@ -670,6 +676,83 @@ extension ViewController {
     
     @objc private func addProfileButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "greetingSegue", sender: sender.tag)
+    }
+    
+    func setupColor() {
+        view.backgroundColor = UIColor(hex: "#576F72", alpha: 1)
+        parametersView.backgroundColor = UIColor(hex: "#7D9D9C", alpha: 1)
+        resultsView.backgroundColor = UIColor(hex: "#F8DAA8", alpha: 1)
+        buttonsStackView.backgroundColor = UIColor(hex: "#576F72", alpha: 1)
+        buttonsView.backgroundColor = UIColor(hex: "#576F72", alpha: 1)
+        
+        maleButton.tintColor = UIColor(hex: "#D69955", alpha: 1)
+        femaleButton.tintColor = UIColor(hex: "#D69955", alpha: 1)
+        
+        settingsButton.setImage(UIImage(named: "gear")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        settingsButton.tintColor = UIColor(hex: "#D69955", alpha: 1)
+        settingsButton.layer.shadowColor = UIColor(hex: "#F8DAA8", alpha: 1).cgColor //UIColor(.black).cgColor
+        settingsButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        settingsButton.layer.shadowRadius = 4
+        settingsButton.layer.shadowOpacity = 0.4
+        settingsButton.imageView?.backgroundColor = UIColor(hex: "#E4DCCF", alpha: 1)
+
+        questionButton.imageView?.backgroundColor = UIColor(hex: "#E4DCCF", alpha: 1)
+        questionButton.layer.shadowColor = UIColor(hex: "#F8DAA8", alpha: 1).cgColor //UIColor(.black).cgColor
+        questionButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        questionButton.layer.shadowRadius = 4
+        questionButton.layer.shadowOpacity = 0.4
+        
+        // Установим скругление после настройки фреймов
+        DispatchQueue.main.async {
+            self.settingsButton.imageView?.layer.cornerRadius = (self.settingsButton.imageView?.frame.height ?? 0) / 2
+            self.settingsButton.imageView?.layer.masksToBounds = true
+            
+            self.questionButton.imageView?.layer.cornerRadius = (self.questionButton.imageView?.frame.height ?? 0) / 2
+            self.questionButton.imageView?.layer.masksToBounds = true
+        }
+        
+        let titleForParametersTextColorUnactive = UIColor(hex: "#EEEEEE", alpha: 1)
+        let titleForParametersTextColorActive = UIColor(hex: "#D69955", alpha: 1)
+        let titleForParametersTextColor = editButton.style == .plain ? titleForParametersTextColorUnactive : titleForParametersTextColorActive
+        titleForParametersLabel.textColor = editButton.style == .plain ? titleForParametersTextColorUnactive : titleForParametersTextColorActive
+        resultTitleLabel.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        
+        let parametersTextColorUnactive = UIColor(hex: "#3F5B62", alpha: 1)
+        let parametersTextColorActive = UIColor(hex: "#EEEEEE", alpha: 1)
+        let parametersTextColor = editButton.style == .plain ? parametersTextColorUnactive : parametersTextColorActive
+        sexLabel.textColor = parametersTextColor
+        maleLabel.textColor = parametersTextColor
+        femaleLabel.textColor = parametersTextColor
+        ageLabel.textColor = parametersTextColor
+        heightLabel.textColor = parametersTextColor
+        weightLabel.textColor = parametersTextColor
+        lifeStyleLabel.textColor = parametersTextColor
+        goalLabel.textColor = parametersTextColor
+        ageTextField.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        weightTextField.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        heightTextField.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        activityLevelTextView.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+        goalTextField.textColor = UIColor(hex: "#3F5B62", alpha: 1)
+
+        let resultsTextColor = UIColor(hex: "#3F5B62", alpha: 1)
+        kcalLabel.textColor = resultsTextColor
+        caloriesLabel.textColor = resultsTextColor
+        proteinLabel.textColor = resultsTextColor
+        proteinTitleLabel.textColor = resultsTextColor
+        fatTitleLabel.textColor = resultsTextColor
+        fatLabel.textColor = resultsTextColor
+        carbsTitleLabel.textColor = resultsTextColor
+        carbLabel.textColor = resultsTextColor
+        
+        
+        
+        profileButton.layer.shadowColor = UIColor(hex: "#F8DAA8", alpha: 1).cgColor
+        profileButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        profileButton.layer.shadowRadius = 2
+        profileButton.layer.shadowOpacity = 0.8
+        
+        parametersView.layer.cornerRadius = 10
+        resultsView.layer.cornerRadius = 10
     }
 }
 
@@ -730,7 +813,7 @@ extension ViewController {
     }
     
     func showResults(for profile: Profile) {
-        resultStackView.isHidden = false
+        resultsView.isHidden = false
         editButton.isHidden = false
         
         caloriesLabel.text = profile.caloriesTDEEForGoal?.formatted()
@@ -755,10 +838,10 @@ extension ViewController {
             } else {
                 // Неактивное состояние
                 activityLevelTextView.layer.borderColor = UIColor.systemGray5.cgColor
-                activityLevelTextView.backgroundColor = UIColor.systemFill // не тот цвет
+//                activityLevelTextView.backgroundColor = UIColor.systemFill // не тот цвет
             }
         goalTextField.isEnabled = enabled
-        settingsStackView.alpha = 0.6
+        parametersView.alpha = 0.6
     }
 }
 
@@ -825,7 +908,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 //MARK: - GreetingViewControllerDelegate
 extension ViewController: GreetingViewControllerDelegate {
 
-    func didUpdateProfile(_ profile: Profile) {
+        func didUpdateProfile(_ profile: Profile) {
 
         hideMenu()
         
@@ -882,5 +965,28 @@ extension ViewController: MenuViewControllerDelegate {
         
         // Заново добавляем кнопки на основе обновленных данных
         addButtonsToMenu()
+    }
+}
+
+extension UIColor {
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+        Scanner(string: hexSanitized).scanHexInt64(&rgb)
+
+        let red = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+        let green = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+        let blue = CGFloat(rgb & 0x0000FF) / 255.0
+
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
+
+class NavigationViewController: UINavigationController {
+    override func viewDidLoad() {
+        let appearance = UINavigationBar.appearance()
+        appearance.tintColor = UIColor(hex: "#D69955", alpha: 1) // Устанавливаем цвет текста кнопки "Back"
     }
 }

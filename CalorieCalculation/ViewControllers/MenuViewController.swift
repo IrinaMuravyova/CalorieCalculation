@@ -113,7 +113,6 @@ extension MenuViewController: GreetingViewControllerDelegate {
             }
     }
     func hideChoosingProfileMenu() {
-        
     }
 }
 

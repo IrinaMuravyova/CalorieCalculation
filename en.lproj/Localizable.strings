@@ -61,3 +61,7 @@
 "sure_to_delete_message" = "Are you sure you want to delete this line?";
 "cancel" = "Cancel";
 "delete" = "Delete";
+"lets_greeting" = "Let's get know!";
+"input_nickname" = "Input your nickname:";
+"choose_icon" = "Choose your icon:";
+"go_on" = "Continue";

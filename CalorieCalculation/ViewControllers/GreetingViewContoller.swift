@@ -39,6 +39,7 @@ class GreetingViewController: UIViewController {
         super.viewDidLoad()
         
         setupColor()
+        setupLocalization()
         
         imagesCollectionView.dataSource = self
         imagesCollectionView.delegate = self
@@ -54,6 +55,7 @@ class GreetingViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // если окно вызвано для изменения профиля, то заполняю nickname
         if changingProfile != nil {
             nicknameTextField.text = changingProfile?.nickname
@@ -106,6 +108,7 @@ class GreetingViewController: UIViewController {
             delegate?.didUpdateProfile(newProfile)
             delegate?.hideChoosingProfileMenu()
             
+            
             // Закрытие модального экрана
             dismiss(animated: true, completion: nil)
         }
@@ -120,6 +123,7 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
         cell.imageView.image = UIImage(named: icons[indexPath.row])
         
@@ -166,8 +170,11 @@ extension GreetingViewController: UICollectionViewDataSource, UICollectionViewDe
         let currentCell = collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell
         setShadow(for: currentCell?.imageView)
 
+        // Обновляем выбранный индекс и значение icon
         selectedIndexPath = indexPath
-        checkContinueButtonEnable()
+        icon = icons[indexPath.row]
+
+        checkContinueButtonEnable() // Проверяем активность кнопки
     }
 }
 
@@ -282,5 +289,13 @@ extension GreetingViewController {
         continueButton.layer.shadowOpacity = 0.4
         continueButton.layer.shadowOffset = CGSize(width: 0, height: 2)
         continueButton.layer.shadowRadius = 4
+    }
+    
+    private func setupLocalization() {
+        titleLabel.text = NSLocalizedString("lets_greeting", comment: "")
+        inputNameTitleLabel.text = NSLocalizedString("input_nickname", comment: "")
+        chooseImageTitleLabel.text = NSLocalizedString("choose_icon", comment: "")
+        cancelButton.setTitle(NSLocalizedString("cancel", comment: ""), for: .normal)
+        continueButton.setTitle(NSLocalizedString("go_on", comment: ""), for: .normal)
     }
 }

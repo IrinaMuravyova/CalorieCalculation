@@ -238,6 +238,8 @@ class ViewController: UIViewController {
                 greetingVC.delegate = self
             if let senderTag = sender as? Int {
                     greetingVC.senderTag = senderTag    
+//                } else {
+//                    greetingVC.senderTag = -1 // иначе создаем новый
                 }
         }
     }
@@ -558,7 +560,8 @@ extension ViewController {
         menuViewHeightConstraint.isActive = true
         
         // Добавляем круглые кнопки в меню
-        addButtonsToMenu()
+//        addButtonsToMenu()
+        updateChooseProfileMenu()
     }
     
     private func addButtonsToMenu() {
@@ -635,6 +638,7 @@ extension ViewController {
             editButton.isEnabled = isChooseProfileMenuVisible ? false : true
             view.layoutIfNeeded()
         })
+        view.bringSubviewToFront(choosingProfileView)
     }
         
     @objc private func ChooseProfileButtonTapped(_ sender: UIButton) {
@@ -644,7 +648,7 @@ extension ViewController {
 
         // Обновляю иконку у кнопки профиля
         configuring(button: profileButton, withImage: UIImage(named: activeProfile.icon))
-        setupChoosingProfileView()
+//        setupChoosingProfileView()
         toggleChoosingProfileMenu()
         
         // Обновляю главный экран
@@ -675,6 +679,7 @@ extension ViewController {
     }
     
     @objc private func addProfileButtonTapped(_ sender: UIButton) {
+        toggleChoosingProfileMenu() // скрываю меню перед переходом
         performSegue(withIdentifier: "greetingSegue", sender: sender.tag)
     }
     
@@ -958,6 +963,7 @@ extension Bundle {
 
 extension ViewController: MenuViewControllerDelegate {
     func updateChooseProfileMenu() {
+        print("updateChooseProfileMenu")
         profiles = StorageManager.shared.fetchProfiles()
         
         // Удаляем все текущие кнопки из ChoosingProfileView

@@ -61,3 +61,7 @@
 "sure_to_delete_message" = "您确定要删除此行吗？";
 "cancel" = "取消";
 "delete" = "删除";
+"lets_greeting" = "让我们知道!";
+"input_nickname"="输入您的昵称:";
+"choose_icon"="选择你的图标:";
+"go_on"="继续";

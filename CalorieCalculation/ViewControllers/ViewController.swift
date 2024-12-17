@@ -822,7 +822,7 @@ extension ViewController {
         editButton.isHidden = false
         
         caloriesLabel.text = profile.caloriesTDEEForGoal?.formatted()
-        guard let weight = profile.weight, let tdee = profile.caloriesTDEEForGoal else { return }
+//        guard let weight = profile.weight, let tdee = profile.caloriesTDEEForGoal else { return }
         fillNutritions(for: profile)
     }
     
@@ -963,7 +963,6 @@ extension Bundle {
 
 extension ViewController: MenuViewControllerDelegate {
     func updateChooseProfileMenu() {
-        print("updateChooseProfileMenu")
         profiles = StorageManager.shared.fetchProfiles()
         
         // Удаляем все текущие кнопки из ChoosingProfileView

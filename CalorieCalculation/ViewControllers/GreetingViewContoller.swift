@@ -59,7 +59,7 @@ class GreetingViewController: UIViewController {
         // если окно вызвано для изменения профиля, то заполняю nickname
         if changingProfile != nil {
             nicknameTextField.text = changingProfile?.nickname
-            imagesCollectionView.reloadData()
+//            imagesCollectionView.reloadData()
         }
     }
     

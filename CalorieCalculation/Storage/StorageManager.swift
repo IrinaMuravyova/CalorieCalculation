@@ -11,7 +11,7 @@ protocol StorageManagerDelegate {
     func showAlert(message: String)
 }
 
-class StorageManager {
+final class StorageManager {
     
     static let shared = StorageManager()
     

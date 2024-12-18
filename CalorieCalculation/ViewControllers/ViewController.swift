@@ -131,6 +131,7 @@ class ViewController: UIViewController {
         setupPickerView(goalPickerView, tag: 2)
         activityLevelTextView.inputView = activityLevelPickerView
         goalTextField.inputView = goalPickerView
+        activityLevelPickerView.frame = CGRect(x: 0, y: 0, width: 200, height: 100)
         
         activityLevelTextView.delegate = self
         goalTextField.delegate = self
@@ -612,8 +613,8 @@ extension ViewController {
         ])
         
         // Добавляем остальные кнопки в StackView
-        for (index, profileData) in profiles.enumerated() {
-            if profileData.nickname == activeProfile.nickname { continue }
+        let profilesWithoutActive = profiles.filter({$0.nickname != activeProfile.nickname})
+        for (index, profileData) in profilesWithoutActive.enumerated() {
             let button = UIButton()
             button.setImage(UIImage(named: profileData.icon), for: .normal)
             button.layer.cornerRadius = buttonSize / 2
@@ -886,6 +887,10 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             goalTextField.text = Goals.allCases[row].localized
             selectedGoal = Goals.allCases[row]
         }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 28 // Установите нужную высоту строки
     }
     
     @objc func dismissPicker() {

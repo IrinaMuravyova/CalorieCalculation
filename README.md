@@ -1,5 +1,5 @@
 <p align="center">
-      <img src="https://i.ibb.co/qmqv7ZY/2024-04-13-17-42-50.png" width="726">
+      <img src="https://i.ibb.co/qmqv7ZY/2024-04-13-17-42-50.png" width="200">
 </p>
 
 <p align="center">
@@ -10,29 +10,29 @@
 
 ## About
 
-ПЭТ проект для отработки создания элементов интерфейса и практики прохождения этапов размещения приложения в App Strore.
-Многопользовательский режим. Локализация на трех языках.Расчет данных кбжу для пользователя.
+The PET project for practicing the creation of interface elements and the practice of going through the stages of app placement in the Appstore.
+Multi-user mode. Localization in three languages.Calculation of the bzhu data for the user.
 
 
-**В проекте используются:**
+**The project uses:**
 
 * UITableViewController
 * UserInterface
-* переход по segue
-* кастомные TableViewCell
-* локализация
-* делегирование
+* segue
+* custom TableViewCell
+* localization
+* delegation
 
 
 
-### Техническое задание к проекту:
+### Terms of reference for the project:
 
-Приложение содержит две части - калькулятор кбжу и результат.
-Несколько пользователей поочередно могут использовать приложение на одном устройстве.
-Смена пользователя происходит по нажатию ан иконку текущего пользователя.
-Редактирование списка пользователей - через боковое скрывающееся меню.
-При активации бокового меню другие действия элементы интерфейса для пользователя закрыты.
-Язык интерфейса определяется автоматически в зависимости от выбранного языка устройства.
+The application contains two parts - the BZHU calculator and the result.
+Multiple users can take turns using the app on the same device.
+The user changes by clicking on the icon of the current user.
+Editing the list of users is done via the side hiding menu.
+When activating the side menu, other actions and interface elements are closed to the user.
+The interface language is determined automatically depending on the selected device language.
 
 
 ![screenshot of sample](https://i.ibb.co/DfDxPxR/1734503008328-2.jpg)
@@ -41,24 +41,24 @@
 
 ### Models:
 
-      Profile - основная модель данных
-      TeamMember - для отображения команды разработчиков
+      Profile - the basic data model
+      TeamMember - to display the development team
 
 #### Managers:
 
-      StorageManager - для работы с UserDefaults
+      StorageManager - work with UserDefaults
 
 ### ViewControllers:
 
-      ViewController - основной экран приложения
-      HelpViewController - содержит информацию о способе рассчета
-      GreetingViewContoller - экран при добавлении нового пользователя
-      MenuViewController - скрывающееся боковое меню
-      TeamViewController - экран с командой разработчика
+      ViewController - the main screen of the application
+      HelpViewController - contains information about the calculation method
+      GreetingViewContoller - the screen when adding a new user
+      MenuViewController - drop-down side menu
+      TeamViewController - screen with the development team
 
 ### Cells:
-      ImageCollectionViewCell - для выбора иконки
-      TeamViewCell - информация по участнику команды разработчика
+      ImageCollectionViewCell - to select an icon
+      TeamViewCell - information about the developer's team member
   
 
 ## Developers
